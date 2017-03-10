@@ -162,40 +162,7 @@ class Synchro
         return $this->user;
     }
 
-         /**
-     * Add visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     * @return PointVente
-     */
-    public function addVisite(\AppBundle\Entity\Visite $visite)
-    {
-        $visite->setSynchro($this);
-         $visite->setUser($this->user);
-        $this->visites[] = $visite;
 
-        return $this;
-    }
-
-    /**
-     * Remove visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     */
-    public function removeVisite(\AppBundle\Entity\Visite $visites)
-    {
-        $this->visites->removeElement($visites);
-    }
-
-    /**
-     * Get visites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getVisites()
-    {
-        return $this->visites;
-    }
       /**
      * Add etapes
      *
