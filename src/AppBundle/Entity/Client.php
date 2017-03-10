@@ -339,7 +339,7 @@ class Client extends BaseUser
      * @param \AppBundle\Entity\Visite $synchros
      * @return Client
      */
-    public function addSynchro(\AppBundle\Entity\Visite $synchros)
+    public function addSynchro(\AppBundle\Entity\Synchro $synchros)
     {
         $this->synchros[] = $synchros;
 
@@ -351,7 +351,7 @@ class Client extends BaseUser
      *
      * @param \AppBundle\Entity\Visite $synchros
      */
-    public function removeSynchro(\AppBundle\Entity\Visite $synchros)
+    public function removeSynchro(\AppBundle\Entity\Synchro $synchros)
     {
         $this->synchros->removeElement($synchros);
     }
