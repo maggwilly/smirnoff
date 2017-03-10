@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>{% block title %}AllReport {% endblock %}</title>       
+        <title>{% block title %}Sminoff {% endblock %}</title>       
         <meta name="description" content="" />
         <meta name="Author" content="PENKA WILLIAMS MAGLOIRE" />
         <!-- mobile settings -->
@@ -18,21 +18,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/layout-datatable.css') }}"  />
         {% endblock %}
     </head>
-       {% if situations is defined %}
-               {% set totalStock=0 %} 
-               {% set totalStockSiat=0 %} 
-               {% set totalStockCon=0 %} 
-               {% for situation in situations  %}
-               {% if situation.dossier=='produit' %}
-               {% set totalStockSiat=totalStockSiat+situation.sd %}
-               {% elseif situation.dossier=='concurrence'  %}
-               {% set totalStockCon=totalStockCon+situation.sd %}
-               {% endif %}
-                {% set totalStock=totalStock+situation.sd %}
-               {%endfor%} 
 
-        {% endif %}         
-    <body>
         {% block fos_user_content %}
         <!-- WRAPPER -->
         <div id="wrapper">
@@ -41,16 +27,21 @@
                 <nav id="sideNav"><!-- MAIN MENU -->
                     <ul class="nav nav-list">
 
+  
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon fa fa-bar-chart-o"></i><span>Statistiques</span>
+                               <i class="main-icon fa fa-check-square"></i><span>Statistique</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('statistiques_dernier') }}">Derniere visite</a></li>
-                                 <li><a href="{{ path('statistiques_periode') }}">Toute la période</a></li>
+                                <li><a href="{{ path('rapport_index',{section:'sales'}) }}">Ventes</a></li>
+                                <li><a href="{{ path('rapport_index',{section:'shares'}) }}">Part</a></li>
+                                <li><a href="{{ path('rapport_index',{section:'visibilitie'}) }}">Visibilité</a></li>
+                                <li><a href="{{ path('rapport_index',{section:'prix'}) }}">Respet de prix</a></li>
+                                <li><a href="{{ path('rapport_index',{section:'rimanagement'}) }}">RI Management</a></li>
+                               
                             </ul>
-                        </li>                                              
+                        </li>                                                                    
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
@@ -58,21 +49,10 @@
                             </a>
                             <ul><!-- submenus -->
                                 <li><a href="{{ path('pointvente_index') }}">Les points de vente</a></li>
-                                 <li><a href="{{ path('pointvente_eligibles') }}">Eligibilités</a></li>
                                 <li><a href="{{ path('pointvente_map') }}">Geolocalisation</a></li>
                             </ul>
-                        </li>
+                        </li> 
 
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon fa fa-check-square"></i><span>Visite</span>
-                            </a>
-                            <ul><!-- submenus -->
-                                <li><a href="{{ path('visites') }}">Historique des visites</a></li>
-                                 <li><a href="{{ path('visite_par_pdv') }}">Dernieres vistes</a></li>
-                            </ul>
-                        </li>                                               
                        <li><!-- dashboard -->
                             <a class="dashboard" href="{{ path('etape_index') }}"><!-- warning - url used by default by ajax (if eneabled) -->
                                 <i class="main-icon fa fa-calendar"></i><span>Activités</span>
@@ -102,9 +82,9 @@ name="periode" data-format="dd/mm/yyyy"
                 <input type="hidden" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
                 <label></label>
                 <select class="" name="region" selected>
-                   <option value="" {% if not app.session.get('region')  %}selected="true"{% endif %}>Toutes régions</option>
-                   <option value="Brazaville"  {% if app.session.get('region')=='Brazaville'  %}selected="true"{% endif %}>Brazaville</option>
-                   <option value="Pointe Noir" {% if  app.session.get('region')=='Pointe Noir'  %}selected="true"{% endif %}>Pointe Noir</option>
+                   <option value="" {% if not app.session.get('region')  %}selected="true"{% endif %}>Toutes catégories</option>
+                   <option value="Rendez-vous des amis"  {% if app.session.get('region')=='Rendez-vous des amis'  %}selected="true"{% endif %}>Rendez-vous des amis</option>
+                   <option value="Boy's bar" {% if  app.session.get('region')=='Boys bar'  %}selected="true"{% endif %}>Boy's bar</option>
               </select>
                 <button type="submit" class="btn btn-primary btn-sm">Afficher les données</button>
                 </form>
@@ -168,105 +148,7 @@ name="periode" data-format="dd/mm/yyyy"
        <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
        <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
        <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
-
-       <script type="text/javascript">
-            /**
-                Chart.js
-                http://www.chartjs.org/
-            **/
- 
-
-     loadScript( "{{ asset('assets/Chart.min.js') }}", function() {
-
-         var data = {
-          labels: [
-            "SIAT CONGO",
-        {% for situation in situations if situation.dossier=='concurrence' %}
-          "{{situation.nom}}",
-         {%endfor%}
-           ],
-         datasets: [
-             {
-        data: [{%if totalStock>0 %}{{(totalStockSiat*100/totalStock)|number_format(0, '.', ' ')}},{%endif%}
-        {%if totalStock>0 %}     {% for situation in situations if situation.dossier=='concurrence' %}{{(situation.sd*100/totalStock)|number_format(0, '.', ' ')}},{%endfor%}{%endif%}],
-        backgroundColor: ["#F38823",{% for situation in situations if situation.dossier=='concurrence' %}"{{ attribute(colors, loop.index )}}",{%endfor%}],
-        hoverBackgroundColor: ["#F38584",{% for situation in situations if situation.dossier=='concurrence' %}"{{ attribute(colors, loop.index )}}",{%endfor%}]
-        }]
-      };      
-    var ctx = document.getElementById("pieChartCanvas").getContext("2d");
-            new Chart(ctx,{
-                type: 'pie',
-               data: data
-                });
-                
-
-
-
-var data = {
-    labels: [{% for stockSiat in stockSiatParSemaine %}"{{stockSiat.weektext}}:{{stockSiat.nombre}}",{% endfor%}],
-    datasets: [
-        {
-            label: "PART stock SIAT CONGO",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(255, 206, 86, 27)",
-            borderColor: "rgba(255, 206, 86, 27)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [{% for stockSiat in stockSiatParSemaine %}{{stockSiat.stock}},{% endfor%}],
-            spanGaps: false,
-        },
-         {
-            label: "Part concurrence",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(255, 99, 132, 27)",
-            borderColor: "rgba(255,99,132,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [{% for stockCon in stockConParSemaine %}{{stockCon.stock}},{% endfor%}],
-            spanGaps: false,
-        }
-
-       
-    ]
- };
-
-    var ctx2 = document.getElementById("barChartCanvas").getContext("2d");
-            new Chart(ctx2,{
-                type: 'bar',
-                data: data,
-               options: {
-                       scales: {
-                             xAxes: [{stacked: true}],
-                             yAxes: [{stacked: true}]
-                               }
-                           }
-            });
-      });
-        </script>
+     
        {% endblock %}
 
     </body>

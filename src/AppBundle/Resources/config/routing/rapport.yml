@@ -1,0 +1,12 @@
+rapport_index:
+    path:     /?section={section}
+    defaults: { _controller: "AppBundle:Rapport:index", section:'sales'}
+    methods:  GET
+
+rapport_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Rapport:show" }
+    methods:  GET
+
+
+

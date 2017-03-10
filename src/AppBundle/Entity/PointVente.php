@@ -131,14 +131,6 @@ class PointVente
      */
     private $createdAt;
 
-
-   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="pointVente", cascade={"persist","remove"})
-   *@ORM\OrderBy({"date" = "DESC"})
-   */
-    private $visites;
-    
-
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Secteur",inversedBy="pointVentes")
    * @ORM\JoinColumn(nullable=true)
@@ -146,12 +138,35 @@ class PointVente
     private $secteur;
   
 
-
+   /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="pointVente", cascade={"persist","remove"})
+   *@ORM\OrderBy({"date" = "DESC"})
+   */
+    private $rapports;
+    
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="pointVentes")
    * 
    */
     private $synchro;
+
+    /**
+     * Constructor
+     */
+    public function __construct($user=null,$nom=null,$id=null, $type=null,$longitude=null, $latitude=null,$description=null,$createdAt=null,$nomGerant=null,$ville=null)
+    {
+       $this->user=$user;
+      $this->nom=$nom;
+      $this->date=new \DateTime();
+      $this->id=$id;
+      $this->type=$type;
+      $this->longitude=$longitude;
+      $this->latitude=$latitude;
+      $this->description=$description;
+      $this->createdAt=$createdAt;
+      $this->nomGerant=$nomGerant;
+      $this->ville=$ville;
+    }
 
 
     public function getId()
@@ -498,59 +513,7 @@ class PointVente
     {
         return $this->user;
     }
-    /**
-     * Constructor
-     */
-    public function __construct($user=null,$nom=null,$id=null, $type=null,$longitude=null, $latitude=null,$description=null,$createdAt=null,$nomGerant=null,$ville=null)
-    {
-       $this->user=$user;
-      $this->nom=$nom;
-      $this->date=new \DateTime();
-      $this->id=$id;
-      $this->type=$type;
-      $this->longitude=$longitude;
-      $this->latitude=$latitude;
-      $this->description=$description;
-      $this->createdAt=$createdAt;
-      $this->nomGerant=$nomGerant;
-      $this->ville=$ville;
-      $this->visites = new ArrayCollection();
-    }
 
-    /**
-     * Add visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     * @return PointVente
-     */
-    public function addVisite(\AppBundle\Entity\Visite $visite)
-    {
-        $visite->setPointVente($this);
-        $this->visites[] = $visite;
-
-        return $this;
-    }
-
- 
-    /**
-     * Remove visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     */
-    public function removeVisite(\AppBundle\Entity\Visite $visites)
-    {
-        $this->visites->removeElement($visites);
-    }
-
-    /**
-     * Get visites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getVisites()
-    {
-        return $this->visites;
-    }
 
     /**
      * Set createdAt
@@ -629,5 +592,51 @@ class PointVente
     public function getSecteur()
     {
         return $this->secteur;
+    }
+
+    /**
+     * Set matricule
+     *
+     * @param string $matricule
+     * @return PointVente
+     */
+    public function setMatricule($matricule)
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * Add rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     * @return PointVente
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+        $this->rapports[] = $rapports;
+
+        return $this;
+    }
+
+    /**
+     * Remove rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     */
+    public function removeRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+        $this->rapports->removeElement($rapports);
+    }
+
+    /**
+     * Get rapports
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRapports()
+    {
+        return $this->rapports;
     }
 }

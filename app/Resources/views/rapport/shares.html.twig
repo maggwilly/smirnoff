@@ -1,0 +1,217 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}Shares{% endblock %}
+  {% block body %}
+   <!-- page title -->
+    <header id="page-header">
+    <h1>Shares <a>{{app.session.get('region')}}</a></h1>
+    </header>
+<div id="content" class="dashboard padding-20">
+<div class="panel panel-default ">
+            <div class="panel-body">
+<ul class="easypiecharts list-unstyled">
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|somme('nbreProduitGuiness')}}</span>
+                  <span class="stat-title">Produits Guines</span>
+
+                  <span class="easyPieChart" data-percent="{{ (rapports|somme('nbreProduitGuiness'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}" data-easing="easeOutBounce" data-barcolor="#F8CB00" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">
+                    {{ (rapports|somme('nbreProduitGuiness'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}
+                    </span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|somme('nbreProduitCon')}}</span>
+                  <span class="stat-title">Produits de la concurrence</span>
+
+                  <span class="easyPieChart" data-percent="{{ (rapports|somme('nbreProduitCon'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">
+               {{ (rapports|somme('nbreProduitCon'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}
+                    </span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|somme('nbreProduitSminoff')}}</span>
+                  <span class="stat-title">Boutielles sminoff</span>
+
+                  <span class="easyPieChart" data-percent="{{ (rapports|somme('nbreProduitSminoff'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">{{ (rapports|somme('nbreProduitSminoff'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}</span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|somme('posRealDay')}}</span>
+                  <span class="stat-title">Sminoff Blue</span>
+                  <span class="easyPieChart" data-percent="{{ (rapports|somme('posRealDay'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}" data-easing="easeOutBounce" data-barcolor="#0058AA" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">{{ (rapports|somme('posRealDay'))*100/((rapports|somme('nbreProduitCon',1))+(rapports|somme('nbreProduitGuiness',1)))}}</span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+              </ul>
+            </div>
+        </div>
+
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading">
+                           <span class="title elipsis">
+                        <strong>Shares</strong> ({{ rapports|length}} points de vente)
+                        </span>
+                            <!-- right options -->
+                            <ul class="options pull-right list-inline">
+                                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
+                                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
+                                <li class=""><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Close"><i class="fa fa-times"></i></a></li>
+                            </ul>
+                            <!-- /right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">  
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample">
+                                                  <thead>
+                                                      <tr>
+                                                          <th><i class="fa fa-eye"></i></th> 
+                                                           <th class="col-md-6">Point de vente</th>
+                                                           <th>Consommateurs</th>
+                                                           <th>Concurrence</th>
+                                                           <th>GCSA</th>
+                                                           <th>Sminoff</th>
+                                                           <th>% GCSA</th> 
+                                                           <th>% Sminoff</th> 
+                                                           <th>% Blue</th>                               
+                                                       </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX"> 
+                                                        <td class="col-md-1">
+                                                         <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        </td>   
+                                                         <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
+                                                          <td>{{rapport.nbreConsomateur}}</td>
+                                                          <td>{{rapport.nbreProduitCon}}</td>
+                                                          <td>{{rapport.nbreProduitGuiness}}</td>
+                                                          <td>{{rapport.nbreProduitSminoff}}</td>
+                                                          <td>
+                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.nbreProduitGuiness*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                         </td>
+                                                          <td>
+                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.nbreProduitSminoff*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                         </td>
+                                                          <td>
+                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.posRealDay*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                         </td>                                                         
+                                                        </tr>
+                                                        {%endfor%}
+
+                                                    </tbody>
+                                                </table>
+                                                <a class="btn btn-xs btn-info"  href="#">
+                                                    <i class="fa fa-arrow-right"></i> 
+                                                    Exporter vers (.xls)
+                                                </a>
+                                         </div>
+                                <!-- /panel content -->
+                         </div>
+                  </div>
+     
+ {% endblock %}
+
+        {% block javascripts %}
+       <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
+       <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
+       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
+        <script type="text/javascript">
+         loadScript( plugin_path + "datatables/js/jquery.dataTables.min.js", function() {
+             loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
+            if (jQuery().dataTable) {
+            var table = jQuery('#datatable_sample');
+            table.dataTable({
+                    "columns": [
+                             {
+                                "orderable": false
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            }, {
+                                "orderable": false
+                            }, {
+                                "orderable": false
+                            }, {
+                                "orderable": false
+                            }, {
+                                "orderable": true
+                            }, {
+                                "orderable": true
+                            }],
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });      
+               }
+             });
+            });
+        </script>
+<!-- PAGE LEVEL SCRIPT -->
+    <script type="text/javascript">
+      _toastr("Share","top-right","success",false);
+
+      /** SALES CHART
+      ******************************************* **/
+      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+
+
+
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      </script>
+       {% endblock %}

@@ -16,7 +16,7 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
   */
   public function visitesParUser ( $region=null, $startDate=null, $endDate=null){
 
-       $qb = $this->createQueryBuilder('u')->leftJoin('u.visites','v')->leftJoin('v.pointVente','pv');
+       $qb = $this->createQueryBuilder('u')->leftJoin('u.rapports','v')->leftJoin('v.pointVente','pv');
   
         if($region!=null){
            $qb->where('pv.ville=:ville')

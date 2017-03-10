@@ -56,11 +56,11 @@ class Client extends BaseUser
     protected $plainPassword;
 
 
-    /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="user", cascade={"persist","remove"})
+   /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="user", cascade={"persist","remove"})
    *@ORM\OrderBy({"date" = "DESC"})
    */
-    private $visites;
+    private $rapports;
 
    /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Synchro", mappedBy="user", cascade={"persist","remove"})
@@ -321,39 +321,7 @@ class Client extends BaseUser
         return $this->credentialsExpireAt;
     }
 
-        /**
-     * Add visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     * @return PointVente
-     */
-    public function addVisite(\AppBundle\Entity\Visite $visite)
-    {
-        $visite->setPointVente($this);
-        $this->visites[] = $visite;
 
-        return $this;
-    }
-
-    /**
-     * Remove visites
-     *
-     * @param \AppBundle\Entity\Visite $visites
-     */
-    public function removeVisite(\AppBundle\Entity\Visite $visites)
-    {
-        $this->visites->removeElement($visites);
-    }
-
-    /**
-     * Get visites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getVisites()
-    {
-        return $this->visites;
-    }
 
 
     /**
@@ -419,5 +387,61 @@ class Client extends BaseUser
     public function getVille()
     {
         return $this->ville;
+    }
+
+    /**
+     * Add rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     * @return Client
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+        $this->rapports[] = $rapports;
+
+        return $this;
+    }
+
+    /**
+     * Remove rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     */
+    public function removeRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+        $this->rapports->removeElement($rapports);
+    }
+
+    /**
+     * Get rapports
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRapports()
+    {
+        return $this->rapports;
+    }
+
+    /**
+     * Add etapes
+     *
+     * @param \AppBundle\Entity\Etape $etapes
+     * @return Client
+     */
+    public function addEtape(\AppBundle\Entity\Etape $etapes)
+    {
+        $this->etapes[] = $etapes;
+
+        return $this;
+    }
+
+    /**
+     * Remove etapes
+     *
+     * @param \AppBundle\Entity\Etape $etapes
+     */
+    public function removeEtape(\AppBundle\Entity\Etape $etapes)
+    {
+        $this->etapes->removeElement($etapes);
     }
 }

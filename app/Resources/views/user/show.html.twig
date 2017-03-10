@@ -102,14 +102,14 @@
                                                         <tr>
                                                          <th><i class="fa fa-eye"></i></th> 
                                                           <th>Point vente</th>
-                                                            <th>Date de visite</th>
+                                                            <th>Date du rapport</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for visiteParUser in visitesParUser %}
                                                         <tr>
                                                             <td class="col-md-1">
-                                                             <a href="{{ path('visite_show',{'id':visiteParUser.id}) }}" class="btn btn-default btn-xs">
+                                                             <a href="" class="btn btn-default btn-xs">
                                                               <i class="fa fa-eye"></i>
                                                              </a>
                                                               </td>
@@ -118,7 +118,7 @@
                                                          {% if visiteParUser.date %}
                                                         {{visiteParUser.date |date('d/m/Y')}}
                                                          {% else %}
-                                                           Aucune visite
+                                                           Aucune rapport
                                                          {% endif %}
                                                             </td>
                                                         </tr>
@@ -126,7 +126,7 @@
 
                                                     </tbody>
                                                 </table>
-                                                <a class="btn btn-xs btn-info"  href="#">
+                                                <a class="btn btn-xs btn-info disabled"  href="#">
                                                     <i class="fa fa-arrow-right"></i> 
                                                     Exporter vers (.xls)
                                                 </a>

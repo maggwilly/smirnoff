@@ -40,11 +40,7 @@ class Synchro
      * @var User
      */
     protected $user;
-   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="synchro", cascade={"persist","remove"})
-   *@ORM\OrderBy({"date" = "DESC"})
-   */
-    private $visites;
+
 
     /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\PointVente", mappedBy="synchro", cascade={"persist","remove"})
@@ -69,10 +65,11 @@ class Synchro
     public function __construct($user=null, $date=null)
     {
        $this->user=$user;
-      $this->date=$date;
+       $this->date=$date;
        $this->pointVentes = new \Doctrine\Common\Collections\ArrayCollection();
        $this->etapes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->quartiers = new \Doctrine\Common\Collections\ArrayCollection();
+       $this->quartiers = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
     /**
      * Get id

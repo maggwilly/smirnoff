@@ -149,7 +149,7 @@ class PointVenteController extends Controller
         // adding headers
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'liste-des-points-de-vente.xls'
+            'liste-des-'.$region.'-pdv.xls'
         );
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
         $response->headers->set('Pragma', 'public');

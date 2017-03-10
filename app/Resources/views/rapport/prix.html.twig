@@ -1,18 +1,43 @@
- {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Les points de vente {% endblock %}
-{% block body %}
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}Respect de prix{% endblock %}
+  {% block body %}
 
    <!-- page title -->
     <header id="page-header">
-    <h1>Les points de ventes <a>{{app.session.get('region')}}</a></h1>
+    <h1>Respect de prix <a>{{app.session.get('region')}}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
+<div class="panel panel-default ">
+            <div class="panel-body">
+<ul class="easypiecharts list-unstyled">
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|length}}</span>
+                  <span class="stat-title">Pointd de vente</span>
+                </li>
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|percent('sminoffBlue')}}</span>
+                  <span class="stat-title">Respet de prix Blue</span>
 
+                  <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlue')}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">{{ rapports|percent('sminoffBlue')}}</span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+                <li class="clearfix">
+                  <span class="stat-number">{{ rapports|percent('sminoffBlack')}}</span>
+                  <span class="stat-title">Respect de prix Black</span>
 
+                  <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlack')}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+                    <span class="percent">{{ rapports|percent('sminoffBlack')}}</span>
+                  <canvas height="60" width="60"></canvas></span> 
+                </li>
+
+              </ul>
+            </div>
+        </div>
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
-                                    <span class="title elipsis">
-                        <strong>Points de vente recencés</strong> ({{nombrePointVente}} points de vente)
+                           <span class="title elipsis">
+                        <strong>Respect de prix</strong> ({{ rapports|length}} points de vente)
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -27,66 +52,41 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                             <th><i class="fa fa-eye"></i></th> 
-                                                            <th>#Nom du PDV</th>
-                                                            <th>Matricule</th>
-                                                             <th>Catégorie</th>
-                                                            <th>Region</th>
-                                                            <th>Quartier</th>
-                                                            <th>Description</th>
-                                                            <th>Gérant</th>
-                                                            <th>Mois de création</th>                             
+                                                            <th><i class="fa fa-eye"></i></th> 
+                                                            <th class="col-md-6">Point de vente</th>
+                                                            <th>Blue</th>
+                                                            <th>Black</th>
+                    
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {% for pointVente in pointVentes %}
+                                                    {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
-                                                          <td>{{pointVente.nom}}</td>                                                                                    
-                                                            <td>{{pointVente.matricule}}</td>
-                                                            <td>{{pointVente.type}}</td>
-                                                            <td>{{pointVente.ville}}</td>
-                                                            <td>{{pointVente.quartier}}</td>
-                                                            <td>{{pointVente.description}}</td>
-                                                            <td>
-                                                            {{pointVente.nomGerant}}<br>
-                                                             {{pointVente.telGerant}}
-                                                            </td>
-                                                            <td>
-                                                         {% if pointVente.createdAt %}
-                                                        {{pointVente.createdAt |date('M Y')}}
-                                                         {% else %}
-                                                           --
-                                                         {% endif %}
-                                                            </td>
+                                                            <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
+                                                             <td>{% if rapport.sminoffBlue%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlack%}OUI{% else %}NON{% endif %}</td>
                                                         </tr>
                                                         {%endfor%}
-
                                                     </tbody>
                                                 </table>
-                                                <a class="btn btn-xs btn-info"  href="{{ path('pointvente_excel') }}">
+                                                <a class="btn btn-xs btn-info"  href="#">
                                                     <i class="fa fa-arrow-right"></i> 
                                                     Exporter vers (.xls)
                                                 </a>
-                                     
                                 </div>
                                 <!-- /panel content -->
-
                     </div>
-   </div>
-    
-{% endblock %}
-       {% block javascripts %}
+                 </div>
+ {% endblock %}
+
+        {% block javascripts %}
        <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
        <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
        <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
         <script type="text/javascript">
-            /**
-                Chart.js
-                http://www.chartjs.org/
-            **/
          loadScript( plugin_path + "datatables/js/jquery.dataTables.min.js", function() {
              loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
             if (jQuery().dataTable) {
@@ -141,14 +141,33 @@
                             "order": [
                                 [1, "asc"]
                             ] // set first column as a default sort by asc
-                        });
-
-                        
+                        });      
                }
              });
-
-                
             });
         </script>
+<!-- PAGE LEVEL SCRIPT -->
+    <script type="text/javascript">
+      _toastr("Respect de prix","top-right","success",false);
 
+      /** SALES CHART
+      ******************************************* **/
+      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+
+
+
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      </script>
        {% endblock %}

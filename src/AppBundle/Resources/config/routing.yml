@@ -1,14 +1,8 @@
-app_situation:
-    resource: "@AppBundle/Resources/config/routing/situation.yml"
-    prefix:   /situation
 
 app_produit:
-    resource: "@AppBundle/Resources/config/routing/produit.yml"
-    prefix:   /produit
+    resource: "@AppBundle/Resources/config/routing/rapport.yml"
+    prefix:   /rapport
 
-app_visite:
-    resource: "@AppBundle/Resources/config/routing/visite.yml"
-    prefix:   /visite
 
 app_point_vente:
     resource: "@AppBundle/Resources/config/routing/pointvente.yml"
