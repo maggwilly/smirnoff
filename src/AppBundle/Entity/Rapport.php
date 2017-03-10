@@ -289,18 +289,6 @@ class Rapport
         return $this->synchro;
     }
 
-    /**
-     * Set sale
-     *
-     * @param \AppBundle\Entity\Sale $sale
-     * @return Rapport
-     */
-    public function setSale(\AppBundle\Entity\Sale $sale)
-    {
-        $this->sale = $sale;
-
-        return $this;
-    }
 
     /**
      * Get sale
@@ -312,98 +300,7 @@ class Rapport
         return $this->sale;
     }
 
-    /**
-     * Set share
-     *
-     * @param \AppBundle\Entity\Share $share
-     * @return Rapport
-     */
-    public function setShare(\AppBundle\Entity\Share $share)
-    {
-        $this->share = $share;
-
-        return $this;
-    }
-
-    /**
-     * Get share
-     *
-     * @return \AppBundle\Entity\Share 
-     */
-    public function getShare()
-    {
-        return $this->share;
-    }
-
-    /**
-     * Set visiblity
-     *
-     * @param \AppBundle\Entity\Visibility $visiblity
-     * @return Rapport
-     */
-    public function setVisiblity(\AppBundle\Entity\Visibility $visiblity)
-    {
-        $this->visiblity = $visiblity;
-
-        return $this;
-    }
-
-    /**
-     * Get visiblity
-     *
-     * @return \AppBundle\Entity\Visibility 
-     */
-    public function getVisiblity()
-    {
-        return $this->visiblity;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param \AppBundle\Entity\Prix $prix
-     * @return Rapport
-     */
-    public function setPrix(\AppBundle\Entity\Prix $prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return \AppBundle\Entity\Prix 
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set rimangement
-     *
-     * @param \AppBundle\Entity\RIManagement $rimangement
-     * @return Rapport
-     */
-    public function setRimangement(\AppBundle\Entity\RIManagement $rimangement)
-    {
-        $this->rimangement = $rimangement;
-
-        return $this;
-    }
-
-    /**
-     * Get rimangement
-     *
-     * @return \AppBundle\Entity\RIManagement 
-     */
-    public function getRimangement()
-    {
-        return $this->rimangement;
-    }
-
+   
     /**
      * Set pointVente
      *
