@@ -16,8 +16,7 @@ class AppExtension extends \Twig_Extension
 
         $somme=$default;
        foreach ($list as  $value) {
-          $value=(array) $value;
-           $somme+=$value[$attr];
+           $somme+=$value[0][$attr];
        }
 
         return $somme;
@@ -28,8 +27,7 @@ class AppExtension extends \Twig_Extension
 
         $count=0;
        foreach ($list as  $value) {
-        $value=(array) $value;
-        if($value[$attr])
+        if($value[0][$attr])
            $somme+=1;
        }
 
@@ -38,13 +36,11 @@ class AppExtension extends \Twig_Extension
 
       public function percentFilter($list, $attr)
     {
-
         $somme=0;
        foreach ($list as  $value) {
-        $value=(array) $value;
-        if($value[$attr])
+        if($value[0][$attr])
            $somme+=1;
        }
-        return count($list)>0?$somme/count($list):0;
+        return count($list)>0?$somme*100/count($list):0;
     }  
 }

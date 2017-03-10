@@ -77,13 +77,13 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
-                                                            <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
-                                                             <td>{% if rapport.el1%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.el2%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.el3%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.el4%}OUI{% else %}NON{% endif %}</td>
+                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
+                                                             <td>{% if rapport.0.el1%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.0.el2%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.0.el3%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.0.el4%}OUI{% else %}NON{% endif %}</td>
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>

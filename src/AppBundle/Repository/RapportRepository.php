@@ -30,8 +30,10 @@ Nombre de point de vente visités
           if($endDate!=null){
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
-          } 
-         return $qb->getQuery()->getResult();  
+          }
+           $qb->select('r'); 
+          $qb->addSelect('p.nom')->addSelect('p.id');
+         return $qb->getQuery()->getArrayResult();  
    
   }
 }

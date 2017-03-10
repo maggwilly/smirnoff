@@ -18,7 +18,6 @@
                 <li class="clearfix">
                   <span class="stat-number">{{ rapports|somme('posRealTarget')}}</span>
                   <span class="stat-title">POS Real BA </span>
-
                   <span class="easyPieChart" data-percent="{{ (rapports|somme('posRealTarget'))*100/(rapports|somme('posTarget',1))}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
                     <span class="percent">{{ (rapports|somme('posRealTarget'))*100/(rapports|somme('posTarget',1))}}</span>
                   <canvas height="60" width="60"></canvas></span> 
@@ -26,19 +25,17 @@
                 <li class="clearfix">
                   <span class="stat-number">{{ rapports|somme('posRealDay')}}</span>
                   <span class="stat-title">POS Real Day </span>
-
-                  <span class="easyPieChart" data-percent="{{ (rapports|somme('posRealDay'))*100/(rapports|somme('posTarget',1))}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
+               <span class="easyPieChart" data-percent="{{ (rapports|somme('posRealDay'))*100/(rapports|somme('posTarget',1))}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
                     <span class="percent">{{ (rapports|somme('posRealDay'))*100/(rapports|somme('posTarget',1))}}</span>
                   <canvas height="60" width="60"></canvas></span> 
                 </li>
-
               </ul>
             </div>
         </div>
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                          <span class="title elipsis">
-                        <strong>Sales</strong>
+                        <strong>Sales</strong> ({{ rapports|length}} points de vente)
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -66,22 +63,22 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
-                                                            <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
-                                                            <td>{{rapport.posTarget}}</td>
-                                                            <td>{{rapport.posRealTarget}}</td>
-                                                            <td>{{rapport.posRealDay}}</td>
+                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
+                                                            <td>{{rapport.0.posTarget}}</td>
+                                                            <td>{{rapport.0.posRealTarget}}</td>
+                                                            <td>{{rapport.0.posRealDay}}</td>
                                                           <td>
-                                                         {% if rapport.posTarget>0 %}
-                                                          {{( rapport.posRealTarget*100/rapport.posTarget) |number_format(0, ',', '.')}}%
+                                                         {% if rapport.0.posTarget>0 %}
+                                                          {{( rapport.0.posRealTarget*100/rapport.0.posTarget) |number_format(0, ',', '.')}}%
                                                          {% else %}
                                                            --
                                                          {% endif %}
                                                          </td>
                                                           <td>
-                                                         {% if rapport.posTarget>0 %}
-                                                          {{( rapport.posRealDay*100/rapport.posTarget) |number_format(0, ',', '.')}}%
+                                                         {% if rapport.0.posTarget>0 %}
+                                                          {{( rapport.0.posRealDay*100/rapport.0.posTarget) |number_format(0, ',', '.')}}%
                                                          {% else %}
                                                            --
                                                          {% endif %}

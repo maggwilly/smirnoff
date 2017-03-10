@@ -70,14 +70,14 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
-                                                            <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
-                                                             <td>{{rapport.r1}}</td>
-                                                             <td>{{rapport.r2}}</td>
-                                                             <td>{{rapport.r3}}</td>
-                                                             <td>{{rapport.r4}}</td>
-                                                             <td>{{rapport.r5}}</td>
+                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
+                                                             <td>{{rapport.0.r1}}</td>
+                                                             <td>{{rapport.0.r2}}</td>
+                                                             <td>{{rapport.0.r3}}</td>
+                                                             <td>{{rapport.0.r4}}</td>
+                                                             <td>{{rapport.0.r5}}</td>
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>

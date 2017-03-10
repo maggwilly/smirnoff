@@ -15,7 +15,7 @@
                   <span class="stat-title">Pointd de vente</span>
                 </li>
                 <li class="clearfix">
-                  <span class="stat-number">{{ rapports|percent('sminoffBlue')}}</span>
+                  <span class="stat-number">{{ rapports|percent('sminoffBlue')}}%</span>
                   <span class="stat-title">Respet de prix Blue</span>
 
                   <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlue')}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
@@ -23,7 +23,7 @@
                   <canvas height="60" width="60"></canvas></span> 
                 </li>
                 <li class="clearfix">
-                  <span class="stat-number">{{ rapports|percent('sminoffBlack')}}</span>
+                  <span class="stat-number">{{ rapports|percent('sminoffBlack')}}%</span>
                   <span class="stat-title">Respect de prix Black</span>
 
                   <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlack')}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
@@ -63,11 +63,11 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
-                                                            <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
-                                                             <td>{% if rapport.sminoffBlue%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.sminoffBlack%}OUI{% else %}NON{% endif %}</td>
+                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
+                                                             <td>{% if rapport.0.sminoffBlue%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.0.sminoffBlack%}OUI{% else %}NON{% endif %}</td>
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>

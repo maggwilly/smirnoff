@@ -81,31 +81,31 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                         <td class="col-md-1">
-                                                         <a href="{{ path('pointvente_show',{'id':rapport.pointVente.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i>
+                                                         <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i>
                                                         </a>
                                                         </td>   
-                                                         <td class="col-md-6">{{rapport.pointVente.nom}}</td>                                   
-                                                          <td>{{rapport.nbreConsomateur}}</td>
-                                                          <td>{{rapport.nbreProduitCon}}</td>
-                                                          <td>{{rapport.nbreProduitGuiness}}</td>
-                                                          <td>{{rapport.nbreProduitSminoff}}</td>
+                                                         <td class="col-md-6">{{rapport.nom}}</td>                                   
+                                                          <td>{{rapport.0.nbreConsomateur}}</td>
+                                                          <td>{{rapport.0.nbreProduitCon}}</td>
+                                                          <td>{{rapport.0.nbreProduitGuiness}}</td>
+                                                          <td>{{rapport.0.nbreProduitSminoff}}</td>
                                                           <td>
-                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
-                                                          {{( rapport.nbreProduitGuiness*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                        {% if (rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.0.nbreProduitGuiness*100/(rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
                                                          {% else %}
                                                            --
                                                          {% endif %}
                                                          </td>
                                                           <td>
-                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
-                                                          {{( rapport.nbreProduitSminoff*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                        {% if (rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.0.nbreProduitSminoff*100/(rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
                                                          {% else %}
                                                            --
                                                          {% endif %}
                                                          </td>
                                                           <td>
-                                                        {% if (rapport.nbreProduitCon+rapport.nbreProduitGuiness)>0 %}
-                                                          {{( rapport.posRealDay*100/(rapport.nbreProduitCon+rapport.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
+                                                        {% if (rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)>0 %}
+                                                          {{( rapport.0.posRealDay*100/(rapport.0.nbreProduitCon+rapport.0.nbreProduitGuiness)) |number_format(0, ',', '.')}}%
                                                          {% else %}
                                                            --
                                                          {% endif %}
