@@ -41,6 +41,6 @@ class AppExtension extends \Twig_Extension
         if($value[0][$attr])
            $somme+=1;
        }
-        return number_format(count($list)>0?$somme*100/count($list), 0, '.', ','):0;
+        return count($list)>0?number_format($somme*100/count($list), 0, '.', ','):0;
     }  
 }
