@@ -63,7 +63,7 @@
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
                                                    <td class="col-md-1">
-                                                    <a href="{{ path('pointvente_show',{'id':rapport.id}) }}" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
+                                                    <a href="" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
                                                     </td>   
                                                             <td class="col-md-6">{{rapport.nom}}</td>                                   
                                                              <td>{% if rapport.0.sminoffBlue%}OUI{% else %}NON{% endif %}</td>
@@ -103,16 +103,6 @@
                                 "orderable": true
                             },
                              {
-                                "orderable": true
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": true
-                            }, {
                                 "orderable": true
                             }],
                             "lengthMenu": [
