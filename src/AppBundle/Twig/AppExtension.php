@@ -11,8 +11,9 @@ class AppExtension extends \Twig_Extension
         );
     }
 
-    public function sommeFilter($list, $attr,$default=0)
+    public function sommeFilter($listObj, $attr,$default=0)
     {
+        $list=$listObj->toArray();
         $somme=$default;
        foreach ($list as  $value) {
            $somme+=$value[$attr];
@@ -21,8 +22,9 @@ class AppExtension extends \Twig_Extension
         return $somme;
     }
 
-    public function countFilter($list, $attr)
+    public function countFilter($listObj, $attr)
     {
+      $list=$listObj->toArray();
         $count=0;
        foreach ($list as  $value) {
         if($value[$attr])
@@ -32,8 +34,9 @@ class AppExtension extends \Twig_Extension
         return $count;
     }
 
-      public function percentFilter($list, $attr)
+      public function percentFilter($listObj, $attr)
     {
+      $list=$listObj->toArray();
         $somme=0;
        foreach ($list as  $value) {
         if($value[$attr])
