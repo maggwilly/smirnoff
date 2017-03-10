@@ -11,22 +11,24 @@ class AppExtension extends \Twig_Extension
         );
     }
 
-    public function sommeFilter($listObj, $attr,$default=0)
+    public function sommeFilter($list, $attr,$default=0)
     {
-        $list=$listObj->toArray();
+
         $somme=$default;
        foreach ($list as  $value) {
+          $value=(array) $value;
            $somme+=$value[$attr];
        }
 
         return $somme;
     }
 
-    public function countFilter($listObj, $attr)
+    public function countFilter($list, $attr)
     {
-      $list=$listObj->toArray();
+
         $count=0;
        foreach ($list as  $value) {
+        $value=(array) $value;
         if($value[$attr])
            $somme+=1;
        }
@@ -34,11 +36,12 @@ class AppExtension extends \Twig_Extension
         return $count;
     }
 
-      public function percentFilter($listObj, $attr)
+      public function percentFilter($list, $attr)
     {
-      $list=$listObj->toArray();
+
         $somme=0;
        foreach ($list as  $value) {
+        $value=(array) $value;
         if($value[$attr])
            $somme+=1;
        }
