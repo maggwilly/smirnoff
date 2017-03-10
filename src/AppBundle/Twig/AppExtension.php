@@ -28,7 +28,7 @@ class AppExtension extends \Twig_Extension
         $count=0;
        foreach ($list as  $value) {
         if($value[0][$attr])
-           $somme+=1;
+           $count+=1;
        }
 
         return $count;
