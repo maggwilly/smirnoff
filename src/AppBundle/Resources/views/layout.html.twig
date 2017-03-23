@@ -26,38 +26,39 @@
 
                 <nav id="sideNav"><!-- MAIN MENU -->
                     <ul class="nav nav-list">
-
-  
+                        <li><!-- dashboard -->
+                            <a class="dashboard" href="{{ path('rapport_apercu') }}"><!-- warning - url used by default by ajax (if eneabled) -->
+                                <i class="main-icon fa fa-bar-chart-o"></i> <span>Apperçu</span>
+                            </a>
+                        </li> 
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon fa fa-check-square"></i><span>Statistique</span>
+                               <i class="main-icon fa fa-check-square"></i><span>GCSA</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('rapport_index',{section:'sales'}) }}">Ventes</a></li>
-                                <li><a href="{{ path('rapport_index',{section:'shares'}) }}">Part</a></li>
-                                <li><a href="{{ path('rapport_index',{section:'visibilitie'}) }}">Visibilité</a></li>
-                                <li><a href="{{ path('rapport_index',{section:'prix'}) }}">Respet de prix</a></li>
-                                <li><a href="{{ path('rapport_index',{section:'rimanagement'}) }}">RI Management</a></li>
-                               
+                                <li><a href="{{ path('rapport_sales') }}">Sales target</a></li>
+                                <li><a href="{{ path('rapport_shares') }}">Share table</a></li>
+                                <li><a href="{{ path('rapport_visibilitie') }}">Visibility & price</a></li>
                             </ul>
-                        </li>                                                                    
+                        </li>
+                       
+                        <li><!-- dashboard -->
+                            <a class="dashboard" href="{{ path('rapport_gagnants') }}"><!-- warning - url used by default by ajax (if eneabled) -->
+                                <i class="main-icon fa fa-bar-chart-o"></i> <span>Les gagnants</span>
+                            </a>
+                        </li>                                                                                             
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                                <i class="main-icon fa fa-dot-circle-o"></i> <span>Points de vente</span>
+                                <i class="main-icon fa fa-dot-circle-o"></i> <span>POS & RH</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('pointvente_index') }}">Les points de vente</a></li>
+                                <li><a href="{{ path('rapport_posrhs') }}">RH par POS</a></li>
                                 <li><a href="{{ path('pointvente_map') }}">Geolocalisation</a></li>
                             </ul>
                         </li> 
-
-                       <li><!-- dashboard -->
-                            <a class="dashboard" href="{{ path('etape_index') }}"><!-- warning - url used by default by ajax (if eneabled) -->
-                                <i class="main-icon fa fa-calendar"></i><span>Activités</span>
-                            </a>
-                        </li>                   
+                   
                     </ul>
                 </nav>
                 <span id="asidebg"><!-- aside fixed background --></span>
@@ -71,20 +72,21 @@
                 </span>
                 <form method="post" action="{{ path('set_periode') }}" class="search form-inline  pull-left hidden-xs">
                  <label></label>
-    {% set start_date_formated=app.session.get('start_date_formated')?app.session.get('start_date_formated'):'01/01/2017'  %}
-    {% set end_date_formated=app.session.get('end_date_formated') ?app.session.get('end_date_formated'):'31/12/2017'   %}
+                 <label><strong>Periode:  </strong> </label>
+    {% set start_date_formated=app.session.get('start_date_formated')?app.session.get('start_date_formated'):app.session.get('start_date_formated')|date('01/01/Y') %}
+    {% set end_date_formated=app.session.get('end_date_formated')? app.session.get('end_date_formated'):app.session.get('end_date_formated')|date('31/12/Y')  %}
     {% set periode=app.session.get('periode')%}
 <input type="text" class="form-control rangepicker" 
 name="periode" data-format="dd/mm/yyyy" 
- {%if periode %}value="{{ periode }}"{% endif %}  placeholder="Selectionnez une période"
- data-from="{{ start_date_formated }}" data-to="{{ end_date_formated }}" required="">
+ value="{{start_date_formated}} - {{end_date_formated}}"  placeholder="Selectionnez une période" 
+ data-from="{{ start_date_formated}}" data-to="{{ end_date_formated }}" required="">
 
                 <input type="hidden" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
-                <label></label>
+                <label>Catégorie: </label>
                 <select class="" name="region" selected>
                    <option value="" {% if not app.session.get('region')  %}selected="true"{% endif %}>Toutes catégories</option>
-                   <option value="Rendez-vous des amis"  {% if app.session.get('region')=='Rendez-vous des amis'  %}selected="true"{% endif %}>Rendez-vous des amis</option>
-                   <option value="Boy's bar" {% if  app.session.get('region')=='Boys bar'  %}selected="true"{% endif %}>Boy's bar</option>
+                   <option value="Rdv des amis"  {% if app.session.get('region')=="Rdv des amis"  %}selected="true"{% endif %}>Rdv des amis</option>
+                   <option value="Boy's bar" {% if  app.session.get('region')=="Boy's bar"  %}selected="true"{% endif %}>Boy's bar</option>
               </select>
                 <button type="submit" class="btn btn-primary btn-sm">Afficher les données</button>
                 </form>

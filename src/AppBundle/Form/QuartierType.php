@@ -25,7 +25,7 @@ class QuartierType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Quartier',
              'csrf_protection' => false,
-            'allow_extra_fields' => true
+             'allow_extra_fields' => true
         ));
     }
 

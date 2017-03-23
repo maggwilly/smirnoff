@@ -1,5 +1,5 @@
 {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Visibilitie{% endblock %}
+{% block title %}Visibilitie & prices{% endblock %}
   {% block body %}
 
    <!-- page title -->
@@ -7,87 +7,289 @@
     <h1>Visibilitie <a>{{app.session.get('region')}}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
-
-<div class="panel panel-default ">
-            <div class="panel-body">
-<ul class="easypiecharts list-unstyled">
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|count('el1')}}</span>
-                  <span class="stat-title">Element 1</span>
-
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('el1') }}" data-easing="easeOutBounce" data-barcolor="#F8CB00" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('el1') }}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|count('el2')}}</span>
-                  <span class="stat-title">Element 2</span>
-
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('el2') }}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('el2') }}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|count('el3')}}</span>
-                  <span class="stat-title">Element 3</span>
-
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('el3') }}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('el3') }}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|count('el4')}}</span>
-                  <span class="stat-title">Element 4</span>
-
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('el3') }}" data-easing="easeOutBounce" data-barcolor="#0058AA" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('el3') }}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-              </ul>
-            </div>
-        </div>
-
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
-                           <span class="title elipsis">
-                        <strong>Visibilitie</strong> ({{ rapports|length}} points de vente)
-                        </span>
-                            <!-- right options -->
-                            <ul class="options pull-right list-inline">
-                                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
-                                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
-                                <li class=""><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Close"><i class="fa fa-times"></i></a></li>
-                            </ul>
+                  <!-- tabs nav -->
+                  <ul class="nav nav-tabs pull-left">
+                    <li class="active"><!-- TAB 1 -->
+                      <a href="#ice_red" data-toggle="tab" aria-expanded="true">Sminoff Ice Red</a>
+                    </li>
+                    <li class=""><!-- TAB 2 -->
+                      <a href="#ice_black" data-toggle="tab" aria-expanded="true">Sminoff Ice Black</a>
+                    </li>                    
+                    <li class=""><!-- TAB 2 -->
+                      <a href="#ice_blue" data-toggle="tab" aria-expanded="false">Sminoff Ice<span class="label label-danger">Blue</span></a></a>
+                    </li>
+                    <li class=""><!-- TAB 2 -->
+                      <a href="#heineken" data-toggle="tab" aria-expanded="true">Heineken</a>
+                    </li> 
+
+                     <li class=""><!-- TAB 2 -->
+                      <a href="#boostrer" data-toggle="tab" aria-expanded="true">Booster</a>
+                    </li> 
+                    <li class=""><!-- TAB 2 -->
+                      <a href="#voodka" data-toggle="tab" aria-expanded="true">Voodka</a>
+                    </li> 
+                     <li class=""><!-- TAB 2 -->
+                      <a href="#sabc1664" data-toggle="tab" aria-expanded="true">1664</a>
+                    </li> 
+                     <li class=""><!-- TAB 2 -->
+                      <a href="#sabc" data-toggle="tab" aria-expanded="true">Autre SABC</a>
+                    </li>                                                                                   
+                  </ul>
                             <!-- /right options -->
-                                </div>
+                            </div>
                                 <!-- panel content -->
                                 <div class="panel-body">  
+                    <!-- tabs content -->
+                    <div class="tab-content transparent"> 
+                      <div id="ice_red" class="tab-pane active"><!-- TAB 1 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                            <th><i class="fa fa-eye"></i></th> 
-                                                            <th class="col-md-6">Point de vente</th>
-                                                            <th>Element 1</th>
-                                                            <th>Element 2</th>
-                                                            <th>Element 3</th>
-                                                            <th>Element 4</th>                       
+                                                            <th class="col-md-3">POS</th>
+                                                        <th class="col-md-2">Categorie</th>       
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for rapport in rapports %}
-                                                        <tr class="odd gradeX"> 
-                                                   <td class="col-md-1">
-                                                    <a href="" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
-                                                    </td>   
-                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
-                                                             <td>{% if rapport.0.el1%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.0.el2%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.0.el3%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.0.el4%}OUI{% else %}NON{% endif %}</td>
+                                                        <tr class="odd gradeX">  
+                                                            <td >{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                 
+                                                             <td>{% if rapport.sminoffRed.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffRed.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffRed.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.sminoffRed.price}} Fcfa</td>
+                                                             <td>{% if rapport.sminoffRed.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffRed.inBar%}OUI{% else %}NON{% endif %}</td>
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
+                                   </div><!-- /TAB 1 CONTENT -->
+
+
+                      <div id="ice_black" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                          <th class="col-md-2">Categorie</th>     
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                   
+                                                             <td>{% if rapport.sminoffBlack.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlack.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlack.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.sminoffBlack.price}} Fcfa</td>
+                                                             <td>{% if rapport.sminoffBlack.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlack.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT -->   
+                      <div id="ice_blue" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                            <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                   
+                                                             <td>{% if rapport.sminoffBlue.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlue.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlue.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.sminoffBlue.price}} Fcfa</td>
+                                                             <td>{% if rapport.sminoffBlue.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sminoffBlue.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT -->
+
+                      <div id="heineken" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                            <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                   
+                                                             <td>{% if rapport.heineken.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.heineken.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.heineken.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.heineken.price}} Fcfa</td>
+                                                             <td>{% if rapport.heineken.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.heineken.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT -->                                                                                                                         
+                      <div id="boostrer" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                              <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                   
+                                                             <td>{% if rapport.boostrer.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.boostrer.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.boostrer.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.boostrer.price}} Fcfa</td>
+                                                             <td>{% if rapport.boostrer.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.boostrer.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT-->   
+
+                      <div id="voodka" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample6">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                            <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                  
+                                                             <td>{% if rapport.voodka.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.voodka.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.voodka.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.voodka.price}} Fcfa</td>
+                                                             <td>{% if rapport.voodka.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.voodka.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT-->  
+
+                      <div id="sabc1664" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample7">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                            <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                    
+                                                             <td>{% if rapport.sabc1664.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc1664.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc1664.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.sabc1664.price}} Fcfa</td>
+                                                             <td>{% if rapport.sabc1664.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc1664.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT-->   
+
+                      <div id="sabc" class="tab-pane "><!-- TAB 2 CONTENT -->                               
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample8">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-3">POS</th>
+                                                            <th class="col-md-2">Categorie</th>
+                                                            <th>Frigo</th>
+                                                            <th>Potence</th>
+                                                            <th>Affiche</th> 
+                                                            <th>Prix</th> 
+                                                            <th>NC Promo</th>   
+                                                            <th>In Bar Promo</th>                     
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for rapport in rapports %}
+                                                        <tr class="odd gradeX">  
+                                                            <td class="col-md-3">{{rapport.pointVente.nom}}</td>
+                                                           <td class="col-md-2"><i>{{rapport.pointVente.type}}</i></td>                                  
+                                                             <td>{% if rapport.sabc.frigo%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc.potence%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc.affiche%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{{rapport.sabc.price}} Fcfa</td>
+                                                             <td>{% if rapport.sabc.ncp%}OUI{% else %}NON{% endif %}</td>
+                                                             <td>{% if rapport.sabc.inBar%}OUI{% else %}NON{% endif %}</td>
+                                                        </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                   </div><!-- /TAB 1 CONTENT-->                                                                                                                                                                                                                                
+                        </div><!-- /TAB 1 CONTENT -->                                                                     
                                                 <a class="btn btn-xs btn-info"  href="#">
                                                     <i class="fa fa-arrow-right"></i> 
                                                     Exporter vers (.xls)
@@ -106,25 +308,38 @@
          loadScript( plugin_path + "datatables/js/jquery.dataTables.min.js", function() {
              loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
             if (jQuery().dataTable) {
+            var columns=[
+                             {
+                                "orderable": true
+                            },                    
+                             {
+                                "orderable": false
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            }, {
+                                "orderable": true
+                            }, {
+                                "orderable": true
+                            }, {
+                                "orderable": true
+                            }];
             var table = jQuery('#datatable_sample');
+             var table2 = jQuery('#datatable_sample2');
+              var table3 = jQuery('#datatable_sample3');
+               var table4 = jQuery('#datatable_sample4');
+                var table5 = jQuery('#datatable_sample5');
+                 var table6 = jQuery('#datatable_sample6');
+                  var table7 = jQuery('#datatable_sample7');
+                   var table8 = jQuery('#datatable_sample8');
             table.dataTable({
-                    "columns": [
-                             {
-                                "orderable": false
-                            },
-                             {
-                                "orderable": true
-                            },
-                             {
-                                "orderable": true
-                            },
-                             {
-                                "orderable": true
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
-                            }],
+                    "columns": columns,
                             "lengthMenu": [
                                 [20, 50, 100, -1],
                                 [20, 50, 100, "Tous"] // change per page values here
@@ -151,14 +366,219 @@
                             "order": [
                                 [1, "asc"]
                             ] // set first column as a default sort by asc
-                        });      
+                        });  
+            table2.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+            table3.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+            table4.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+
+            table5.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+            table6.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        }); 
+            table7.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+
+            table8.dataTable({
+                    "columns": columns,
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': false,
+                                'targets': [0]
+                            }, {
+                                "searchable": false,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [1, "asc"]
+                            ] // set first column as a default sort by asc
+                        });                                                                                                                       
                }
              });
             });
         </script>
 <!-- PAGE LEVEL SCRIPT -->
     <script type="text/javascript">
-      _toastr("Visibilité","top-right","success",false);
+      _toastr("Visibilitie and prices","top-right","success",false);
 
       /** SALES CHART
       ******************************************* **/

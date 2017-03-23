@@ -1,0 +1,13 @@
+AppBundle\Entity\PointVente:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['pointVente']
+        nom:    
+            groups: ['pointVente']
+        type:    
+            groups: ['pointVente']
+        quartier:    
+            groups: ['pointVente']      
+        telGerant:    
+            groups: ['pointVente']       

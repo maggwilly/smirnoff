@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use AppBundle\Entity\Client;
 use AppBundle\Entity\PointVente;
 /**
  * RapportRepository
@@ -13,10 +12,11 @@ use AppBundle\Entity\PointVente;
  */
 class RapportRepository extends EntityRepository
 {
+
 	/**
 Nombre de point de vente visités
  */
-  public function findByType(Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+  public function findByTypeSales(Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){
@@ -31,9 +31,73 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-           $qb->select('r'); 
-          $qb->addSelect('p.nom')->addSelect('p.id');
+           $qb->select('avg(r.posTarget) as posTarget')
+             ->addSelect('avg(r.posRealTarget) as posRealTarget')
+             ->addSelect('avg(r.posRealDay) as posRealDay')
+             ->addSelect('p.nom')
+             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id');
          return $qb->getQuery()->getArrayResult();  
    
   }
+
+   public function findByTypeShares(Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+
+        $qb = $this->createQueryBuilder('r')
+        ->join('r.pointVente','p')
+         ->join('r.boostrer','bo')
+          ->join('r.heineken','he')
+           ->join('r.voodka','vo')
+            ->join('r.sabc','sa')
+             ->join('r.sabc1664','sa16')
+              ->join('r.sminoffRed','sRed')
+               ->join('r.sminoffBlue','sBlue')
+                ->join('r.sminoffBlack','sBlack');
+        if($region!=null){
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
+          }
+      if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
+          ->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('r.date<=:endDate')
+          ->setParameter('endDate',new \DateTime($endDate));
+          }
+             $qb->select('avg(bo.bnreBlle) as boostrer')
+             ->addSelect('avg(he.bnreBlle) as heineken')
+             ->addSelect('avg(vo.bnreBlle) as voodka')
+             ->addSelect('avg(sa.bnreBlle) as sabc')
+             ->addSelect('avg(sa16.bnreBlle) as sabc1664')
+             ->addSelect('avg(sRed.bnreBlle) as sminoffRed')
+             ->addSelect('avg(sBlue.bnreBlle) as sminoffBlue')
+             ->addSelect('avg(sBlack.bnreBlle) as sminoffBlack')
+             ->addSelect('p.nom')
+             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id');
+         return $qb->getQuery()->getArrayResult();  
+   
+  } 
+
+ 	   /**
+  *Nombre visite effectue par utilisateur par journee
+  */
+  public function findByType (Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+  
+         $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
+        if($region!=null){
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
+          }
+      if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
+          ->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('r.date<=:endDate')
+          ->setParameter('endDate',new \DateTime($endDate));
+          }
+
+ 
+          return $qb->getQuery()->getResult();
+  } 
 }

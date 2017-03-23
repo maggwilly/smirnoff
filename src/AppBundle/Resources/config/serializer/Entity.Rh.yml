@@ -1,0 +1,7 @@
+AppBundle\Entity\RH:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['rh']
+        nom:    
+            groups: ['rh']

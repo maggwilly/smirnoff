@@ -1,7 +1,6 @@
 <?php
 
 namespace AppBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,7 +34,7 @@ class Synchro
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client",inversedBy="synchros")
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client",inversedBy="synchros")
       @ORM\JoinColumn(nullable=true)
      * @var User
      */
@@ -50,10 +49,10 @@ class Synchro
 
 
     /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Etape", mappedBy="synchro", cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="synchro", cascade={"persist","remove"})
    *@ORM\OrderBy({"date" = "DESC"})
    */
-    private $etapes;
+    private $rapports;
 
    /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quartier", mappedBy="synchro", cascade={"persist","remove"})
@@ -67,7 +66,7 @@ class Synchro
        $this->user=$user;
        $this->date=$date;
        $this->pointVentes = new \Doctrine\Common\Collections\ArrayCollection();
-       $this->etapes = new \Doctrine\Common\Collections\ArrayCollection();
+       $this->rapports = new \Doctrine\Common\Collections\ArrayCollection();
        $this->quartiers = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
@@ -163,21 +162,7 @@ class Synchro
     }
 
 
-      /**
-     * Add etapes
-     *
-     * @param \AppBundle\Entity\Etape $etapes
-     * @return User
-     */
-    public function addEtape(\AppBundle\Entity\Etape $etapes)
-    {
-        $etapes->setSynchro($this);
-        $this->etapes[] = $etapes;
-             if($etapes->getSuivant()!=null)
-              return $this->addEtape($etapes->getSuivant());
 
-        return $this;
-    }
 
     /**
      * Add quartiers
@@ -211,25 +196,7 @@ class Synchro
     {
         return $this->quartiers;
     }
-    /**
-     * Remove etapes
-     *
-     * @param \AppBundle\Entity\Etape $etapes
-     */
-    public function removeEtape(\AppBundle\Entity\Etape $etapes)
-    {
-        $this->etapes->removeElement($etapes);
-    }
-
-    /**
-     * Get etapes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEtapes()
-    {
-        return $this->etapes;
-    } 
+  
 
       /**
      * Add pointVentes
@@ -265,4 +232,39 @@ class Synchro
     {
         return $this->pointVentes;
     }    
+
+    /**
+     * Add rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     * @return Synchro
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+  
+         $rapports->setUser($this->user);
+        $this->rapports[] = $rapports;
+        $rapports->setSynchro($this);
+        return $this;
+    }
+
+    /**
+     * Remove rapports
+     *
+     * @param \AppBundle\Entity\Rapport $rapports
+     */
+    public function removeRapport(\AppBundle\Entity\Rapport $rapports)
+    {
+        $this->rapports->removeElement($rapports);
+    }
+
+    /**
+     * Get rapports
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRapports()
+    {
+        return $this->rapports;
+    }
 }

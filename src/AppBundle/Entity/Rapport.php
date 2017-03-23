@@ -20,7 +20,6 @@ class Rapport
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var \DateTime
      *
@@ -28,17 +27,16 @@ class Rapport
      */
     private $date;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="commentaire", type="string", length=255)
-     */
-    private $commentaire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\RH")
+     * @var User
+     */
+    protected $rh;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client",inversedBy="rapports")
-     * @var User
+    * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
 
@@ -53,11 +51,11 @@ class Rapport
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="rapports")
-   * 
+   *  @ORM\JoinColumn( nullable=true)
    */
     private $synchro;
-    
-   /**
+
+    /**
      * @var int
      *
      * @ORM\Column(name="posTarget", type="integer")
@@ -73,7 +71,6 @@ class Rapport
 
     /**
      * @var int
-     *
      * @ORM\Column(name="posRealDay", type="integer")
      */
     private $posRealDay;
@@ -81,112 +78,75 @@ class Rapport
     /**
      * @var int
      *
-     * @ORM\Column(name="nbreConsomateur", type="integer")
+     * @ORM\Column(name="nbreConsomateur", type="integer",nullable=true)
      */
     private $nbreConsomateur;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbreProduitCon", type="integer")
+   /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gagnant", mappedBy="rapport", cascade={"persist","remove"})
+   */
+    private $gagnants;
+
+
+      /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
      */
-    private $nbreProduitCon;
+    protected $boostrer;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbreProduitGuiness", type="integer")
+      /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
      */
-    private $nbreProduitGuiness;
+    protected $heineken;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nbreProduitSminoff", type="integer")
+      /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
      */
-    private $nbreProduitSminoff;
-
-
-
-/**
-     * @var bool
-     *
-     * @ORM\Column(name="el1", type="boolean")
-     */
-    private $el1;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="el2", type="boolean")
-     */
-    private $el2;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="el3", type="boolean")
-     */
-    private $el3;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="el4", type="boolean")
-     */
-    private $el4;
+    protected $voodka;
 
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="sminoffBlue", type="boolean")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
      */
-    private $sminoffBlue;
+    protected $sabc; 
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="sminoffBlack", type="boolean")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
      */
-    private $sminoffBlack;
+    protected $sabc1664; 
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     */
+    protected $sminoffRed; 
+
+        /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     */
+    protected $sminoffBlue; 
+
+
+     /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     */
+    protected $sminoffBlack;
 
   /**
-     * @var int
-     *
-     * @ORM\Column(name="r1", type="integer")
+     * Constructor
      */
-    private $r1;
+    public function __construct()
+    {
+        $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="r2", type="integer")
-     */
-    private $r2;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="r3", type="integer")
-     */
-    private $r3;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="r4", type="integer")
-     */
-    private $r4;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="r5", type="integer")
-     */
-    private $r5;
-    
     /**
      * Get id
      *
@@ -195,133 +155,6 @@ class Rapport
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     * @return Rapport
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime 
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set commentaire
-     *
-     * @param string $commentaire
-     * @return Rapport
-     */
-    public function setCommentaire($commentaire)
-    {
-        $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    /**
-     * Get commentaire
-     *
-     * @return string 
-     */
-    public function getCommentaire()
-    {
-        return $this->commentaire;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\Client $user
-     * @return Rapport
-     */
-    public function setUser(\AppBundle\Entity\Client $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\Client 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set synchro
-     *
-     * @param \AppBundle\Entity\Synchro $synchro
-     * @return Rapport
-     */
-    public function setSynchro(\AppBundle\Entity\Synchro $synchro = null)
-    {
-        $this->synchro = $synchro;
-
-        return $this;
-    }
-
-    /**
-     * Get synchro
-     *
-     * @return \AppBundle\Entity\Synchro 
-     */
-    public function getSynchro()
-    {
-        return $this->synchro;
-    }
-
-
-    /**
-     * Get sale
-     *
-     * @return \AppBundle\Entity\Sale 
-     */
-    public function getSale()
-    {
-        return $this->sale;
-    }
-
-   
-    /**
-     * Set pointVente
-     *
-     * @param \AppBundle\Entity\PointVente $pointVente
-     * @return Rapport
-     */
-    public function setPointVente(\AppBundle\Entity\PointVente $pointVente)
-    {
-        $this->pointVente = $pointVente;
-
-        return $this;
-    }
-
-    /**
-     * Get pointVente
-     *
-     * @return \AppBundle\Entity\PointVente 
-     */
-    public function getPointVente()
-    {
-        return $this->pointVente;
     }
 
     /**
@@ -417,174 +250,180 @@ class Rapport
     }
 
     /**
-     * Set nbreProduitCon
+     * Set fi
      *
-     * @param integer $nbreProduitCon
+     * @param integer $fi
      * @return Rapport
      */
-    public function setNbreProduitCon($nbreProduitCon)
+    public function setFi($fi)
     {
-        $this->nbreProduitCon = $nbreProduitCon;
+        $this->fi = $fi;
 
         return $this;
     }
 
     /**
-     * Get nbreProduitCon
+     * Get fi
      *
      * @return integer 
      */
-    public function getNbreProduitCon()
+    public function getFi()
     {
-        return $this->nbreProduitCon;
+        return $this->fi;
     }
 
     /**
-     * Set nbreProduitGuiness
+     * Set boostrer
      *
-     * @param integer $nbreProduitGuiness
+     * @param \AppBundle\Entity\Situation $boostrer
      * @return Rapport
      */
-    public function setNbreProduitGuiness($nbreProduitGuiness)
+    public function setBoostrer(\AppBundle\Entity\Situation $boostrer = null)
     {
-        $this->nbreProduitGuiness = $nbreProduitGuiness;
+        $boostrer->setRapport($this);
+        $this->boostrer = $boostrer;
 
         return $this;
     }
 
     /**
-     * Get nbreProduitGuiness
+     * Get boostrer
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getNbreProduitGuiness()
+    public function getBoostrer()
     {
-        return $this->nbreProduitGuiness;
+        return $this->boostrer;
     }
 
     /**
-     * Set nbreProduitSminoff
+     * Set heineken
      *
-     * @param integer $nbreProduitSminoff
+     * @param \AppBundle\Entity\Situation $heineken
      * @return Rapport
      */
-    public function setNbreProduitSminoff($nbreProduitSminoff)
+    public function setHeineken(\AppBundle\Entity\Situation $heineken = null)
     {
-        $this->nbreProduitSminoff = $nbreProduitSminoff;
+        $heineken->setRapport($this);
+        $this->heineken = $heineken;
 
         return $this;
     }
 
     /**
-     * Get nbreProduitSminoff
+     * Get heineken
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getNbreProduitSminoff()
+    public function getHeineken()
     {
-        return $this->nbreProduitSminoff;
+        return $this->heineken;
     }
 
     /**
-     * Set el1
+     * Set voodka
      *
-     * @param boolean $el1
+     * @param \AppBundle\Entity\Situation $voodka
      * @return Rapport
      */
-    public function setEl1($el1)
+    public function setVoodka(\AppBundle\Entity\Situation $voodka = null)
     {
-        $this->el1 = $el1;
+         $voodka->setRapport($this);
+        $this->voodka = $voodka;
 
         return $this;
     }
 
     /**
-     * Get el1
+     * Get voodka
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getEl1()
+    public function getVoodka()
     {
-        return $this->el1;
+        return $this->voodka;
     }
 
     /**
-     * Set el2
+     * Set sabc
      *
-     * @param boolean $el2
+     * @param \AppBundle\Entity\Situation $sabc
      * @return Rapport
      */
-    public function setEl2($el2)
+    public function setSabc(\AppBundle\Entity\Situation $sabc = null)
     {
-        $this->el2 = $el2;
+         $sabc->setRapport($this);
+        $this->sabc = $sabc;
 
         return $this;
     }
 
     /**
-     * Get el2
+     * Get sabc
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getEl2()
+    public function getSabc()
     {
-        return $this->el2;
+        return $this->sabc;
     }
 
     /**
-     * Set el3
+     * Set sabc1664
      *
-     * @param boolean $el3
+     * @param \AppBundle\Entity\Situation $sabc1664
      * @return Rapport
      */
-    public function setEl3($el3)
+    public function setSabc1664(\AppBundle\Entity\Situation $sabc1664 = null)
     {
-        $this->el3 = $el3;
+          $sabc1664->setRapport($this);
+        $this->sabc1664 = $sabc1664;
 
         return $this;
     }
 
     /**
-     * Get el3
+     * Get sabc1664
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getEl3()
+    public function getSabc1664()
     {
-        return $this->el3;
+        return $this->sabc1664;
     }
 
     /**
-     * Set el4
+     * Set sminoffRed
      *
-     * @param boolean $el4
+     * @param \AppBundle\Entity\Situation $sminoffRed
      * @return Rapport
      */
-    public function setEl4($el4)
-    {
-        $this->el4 = $el4;
+    public function setSminoffRed(\AppBundle\Entity\Situation $sminoffRed = null)
+    {    $sminoffRed->setRapport($this);
+        $this->sminoffRed = $sminoffRed;
 
         return $this;
     }
 
     /**
-     * Get el4
+     * Get sminoffRed
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
-    public function getEl4()
+    public function getSminoffRed()
     {
-        return $this->el4;
+        return $this->sminoffRed;
     }
 
     /**
      * Set sminoffBlue
      *
-     * @param boolean $sminoffBlue
+     * @param \AppBundle\Entity\Situation $sminoffBlue
      * @return Rapport
      */
-    public function setSminoffBlue($sminoffBlue)
+    public function setSminoffBlue(\AppBundle\Entity\Situation $sminoffBlue = null)
     {
+        $sminoffBlue->setRapport($this);
         $this->sminoffBlue = $sminoffBlue;
 
         return $this;
@@ -593,7 +432,7 @@ class Rapport
     /**
      * Get sminoffBlue
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
     public function getSminoffBlue()
     {
@@ -603,20 +442,21 @@ class Rapport
     /**
      * Set sminoffBlack
      *
-     * @param boolean $sminoffBlack
+     * @param \AppBundle\Entity\Situation $sminoffBlack
      * @return Rapport
      */
-    public function setSminoffBlack($sminoffBlack)
+    public function setSminoffBlack(\AppBundle\Entity\Situation $sminoffBlack = null)
     {
+        $sminoffBlack->setRapport($this);
         $this->sminoffBlack = $sminoffBlack;
-
+ 
         return $this;
     }
 
     /**
      * Get sminoffBlack
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\Situation 
      */
     public function getSminoffBlack()
     {
@@ -624,117 +464,151 @@ class Rapport
     }
 
     /**
-     * Set r1
+     * Set date
      *
-     * @param integer $r1
+     * @param \DateTime $date
      * @return Rapport
      */
-    public function setR1($r1)
+    public function setDate($date)
     {
-        $this->r1 = $r1;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get r1
+     * Get date
      *
-     * @return integer 
+     * @return \DateTime 
      */
-    public function getR1()
+    public function getDate()
     {
-        return $this->r1;
+        return $this->date;
     }
 
     /**
-     * Set r2
+     * Set user
      *
-     * @param integer $r2
+     * @param \AppBundle\Entity\Client $user
      * @return Rapport
      */
-    public function setR2($r2)
+    public function setUser(\AppBundle\Entity\Client $user = null)
     {
-        $this->r2 = $r2;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get r2
+     * Get user
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Client 
      */
-    public function getR2()
+    public function getUser()
     {
-        return $this->r2;
+        return $this->user;
     }
 
     /**
-     * Set r3
+     * Set pointVente
      *
-     * @param integer $r3
+     * @param \AppBundle\Entity\PointVente $pointVente
      * @return Rapport
      */
-    public function setR3($r3)
+    public function setPointVente(\AppBundle\Entity\PointVente $pointVente)
     {
-        $this->r3 = $r3;
+        $this->pointVente = $pointVente;
 
         return $this;
     }
 
     /**
-     * Get r3
+     * Get pointVente
      *
-     * @return integer 
+     * @return \AppBundle\Entity\PointVente 
      */
-    public function getR3()
+    public function getPointVente()
     {
-        return $this->r3;
+        return $this->pointVente;
     }
 
     /**
-     * Set r4
+     * Set synchro
      *
-     * @param integer $r4
+     * @param \AppBundle\Entity\Synchro $synchro
      * @return Rapport
      */
-    public function setR4($r4)
+    public function setSynchro(\AppBundle\Entity\Synchro $synchro = null)
     {
-        $this->r4 = $r4;
+        $this->synchro = $synchro;
 
         return $this;
     }
 
     /**
-     * Get r4
+     * Get synchro
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Synchro 
      */
-    public function getR4()
+    public function getSynchro()
     {
-        return $this->r4;
+        return $this->synchro;
     }
-
+  
     /**
-     * Set r5
+     * Add gagnants
      *
-     * @param integer $r5
+     * @param \AppBundle\Entity\Gagnant $gagnants
      * @return Rapport
      */
-    public function setR5($r5)
+    public function addGagnant(\AppBundle\Entity\Gagnant $gagnants)
     {
-        $this->r5 = $r5;
+        $gagnants->setRapport($this);
+        $this->gagnants[] = $gagnants;
 
         return $this;
     }
 
     /**
-     * Get r5
+     * Remove gagnants
      *
-     * @return integer 
+     * @param \AppBundle\Entity\Gagnant $gagnants
      */
-    public function getR5()
+    public function removeGagnant(\AppBundle\Entity\Gagnant $gagnants)
     {
-        return $this->r5;
+        $this->gagnants->removeElement($gagnants);
+    }
+
+    /**
+     * Get gagnants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGagnants()
+    {
+        return $this->gagnants;
+    }
+
+    /**
+     * Set rh
+     *
+     * @param \AppBundle\Entity\RH $rh
+     * @return Rapport
+     */
+    public function setRh(\AppBundle\Entity\RH $rh = null)
+    {
+        $this->rh = $rh;
+
+        return $this;
+    }
+
+    /**
+     * Get rh
+     *
+     * @return \AppBundle\Entity\RH 
+     */
+    public function getRh()
+    {
+        return $this->rh;
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use AppBundle\Form\VisiteType;
+use AppBundle\Form\RapportType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class PointVenteType extends AbstractType
 {
@@ -22,15 +22,11 @@ class PointVenteType extends AbstractType
         ->add('nomGerant')
         ->add('telGerant')
         ->add('tel')
-        ->add('pays')
         ->add('ville')
-        ->add('adresse')
         ->add('quartier')
         ->add('description')
         ->add('latitude')
         ->add('longitude')
-        ->add('secteur', EntityType::class, array('class' => 'AppBundle:Secteur')) 
-         ->add('visites', CollectionType::class, array('entry_type'=> VisiteType::class,'allow_add' => true))
         ->add('user', EntityType::class, array('class' => 'AppBundle:Client'))
         ->add('date','datetime', array(
               'widget' => 'single_text',

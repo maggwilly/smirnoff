@@ -13,7 +13,7 @@ app_etape:
     prefix:   /etape
 
 point_ventes:
-    path:      /mobile/points/ventes/{region}
+    path:      /mobile/points/ventes
     defaults: { _controller: "AppBundle:Mobile:pointVentes" }
     methods:  GET
 
@@ -46,7 +46,12 @@ quartiers:
     path:      /mobile/quartiers
     defaults: { _controller: "AppBundle:Mobile:quartiers" }
     methods:  GET 
-    
+
+rhs:
+    path:      /mobile/rhs
+    defaults: { _controller: "AppBundle:Mobile:rhs" }
+    methods:  GET
+
 create_token:
     path:      /mobile/create/auth-token
     defaults: { _controller: "AppBundle:Mobile:postAuthTokens" }

@@ -69,11 +69,7 @@ class Client extends BaseUser
     private $synchros;
 
 
-       /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Etape", mappedBy="user", cascade={"persist","remove"})
-   *@ORM\OrderBy({"date" = "DESC"})
-   */
-    private $etapes;
+ 
      /**
      * @var string
      *
@@ -324,15 +320,7 @@ class Client extends BaseUser
 
 
 
-    /**
-     * Get visites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEtapes()
-    {
-        return $this->etapes;
-    }
+  
     /**
      * Add synchros
      *
@@ -422,26 +410,5 @@ class Client extends BaseUser
         return $this->rapports;
     }
 
-    /**
-     * Add etapes
-     *
-     * @param \AppBundle\Entity\Etape $etapes
-     * @return Client
-     */
-    public function addEtape(\AppBundle\Entity\Etape $etapes)
-    {
-        $this->etapes[] = $etapes;
 
-        return $this;
-    }
-
-    /**
-     * Remove etapes
-     *
-     * @param \AppBundle\Entity\Etape $etapes
-     */
-    public function removeEtape(\AppBundle\Entity\Etape $etapes)
-    {
-        $this->etapes->removeElement($etapes);
-    }
 }

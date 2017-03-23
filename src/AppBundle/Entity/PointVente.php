@@ -131,13 +131,7 @@ class PointVente
      */
     private $createdAt;
 
-    /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Secteur",inversedBy="pointVentes")
-   * @ORM\JoinColumn(nullable=true)
-   */
-    private $secteur;
   
-
    /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="pointVente", cascade={"persist","remove"})
    *@ORM\OrderBy({"date" = "DESC"})
@@ -541,13 +535,8 @@ class PointVente
   * @ORM\PrePersist
  */
  public function prePersist(){
-    if ($this->secteur) {   
-   $number=rand($this->secteur->getPointVentes()->count(),1000);
-     
-   $code= substr($this->getSecteur()->getVille(), 0,2);
-   $number=str_pad((string)$number, 4, "0", STR_PAD_LEFT);
-   $this->matricule=strtoupper($code.$this->getSecteur()->getNumero().$number);
-    }
+ 
+    
 
  }
     /**
@@ -572,27 +561,7 @@ class PointVente
         return $this->synchro;
     }
 
-        /**
-     * Set secteur
-     *
-     * @param \AppBundle\Entity\Secteur $secteur
-     * @return Quartier
-     */
-    public function setSecteur(\AppBundle\Entity\Secteur $secteur)
-    {
-        $this->secteur = $secteur;
-        return $this;
-    }
 
-    /**
-     * Get secteur
-     *
-     * @return \AppBundle\Entity\Secteur 
-     */
-    public function getSecteur()
-    {
-        return $this->secteur;
-    }
 
     /**
      * Set matricule

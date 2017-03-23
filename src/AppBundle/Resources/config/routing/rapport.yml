@@ -3,6 +3,36 @@ rapport_index:
     defaults: { _controller: "AppBundle:Rapport:index", section:'sales'}
     methods:  GET
 
+rapport_sales:
+    path:     /sales
+    defaults: { _controller: "AppBundle:Rapport:sales"}
+    methods:  GET
+
+rapport_shares:
+    path:     /shares
+    defaults: { _controller: "AppBundle:Rapport:shares"}
+    methods:  GET
+
+rapport_visibilitie:
+    path:     /visibilitie
+    defaults: { _controller: "AppBundle:Rapport:visibilitie"}
+    methods:  GET
+
+rapport_gagnants:
+    path:     /gagnants
+    defaults: { _controller: "AppBundle:Rapport:gagnants"}
+    methods:  GET
+    
+rapport_posrhs:
+    path:     /posrhs
+    defaults: { _controller: "AppBundle:Rapport:posRhs"}
+    methods:  GET
+
+rapport_apercu:
+    path:     /apercu
+    defaults: { _controller: "AppBundle:Rapport:apercu"}
+    methods:  GET
+
 rapport_show:
     path:     /{id}/show
     defaults: { _controller: "AppBundle:Rapport:show" }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SituationType extends AbstractType
+class ConcurrenceType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,15 +14,11 @@ class SituationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('frigo')
-        ->add('affiche')
-        ->add('potence')
-        ->add('ncp')
-        ->add('inbar')
-        ->add('nbreRh')
-         ->add('marque')       
-        ->add('price')
-        ->add('bnreBlle') ;
+        ->add('aff')
+        ->add('map')
+        ->add('rp')
+        ->add('promo')
+        ->add('promoPrix')        ;
     }
     
     /**
@@ -31,7 +27,7 @@ class SituationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Situation',
+            'data_class' => 'AppBundle\Entity\Concurrence',
             'csrf_protection' => false,
             'allow_extra_fields' => true
         ));
@@ -42,7 +38,7 @@ class SituationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_situation';
+        return 'appbundle_concurrence';
     }
 
 

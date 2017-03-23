@@ -47,73 +47,24 @@ Nombre de point de vente visités
 /**
 Nombre de point de vente visités
  */
-  public function nombrePointVenteVisite($region=null, $startDate=null, $endDate=null){
+  public function findPosRhs($region=null, $startDate=null, $endDate=null){
 
-        $qb = $this->createQueryBuilder('p')->join('p.rapports','v');
+        $qb = $this->createQueryBuilder('p')->leftJoin('p.rapports','r')->leftJoin('r.rh','rh');
         if($region!=null){
-           $qb->where('p.ville=:ville')
-          ->setParameter('ville', $region);
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
           }
-    if($startDate!=null){
-           $qb->andWhere('v.date>=:startDate')
+     if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
           ->setParameter('startDate', new \DateTime($startDate));
           }
           if($endDate!=null){
-           $qb->andWhere('v.date<=:endDate')
+           $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
-          } 
-
-   try {
-     $qb->select('count( distinct p.id) as nombrePointVenteVisite');
-
-         return $qb->getQuery()->getSingleScalarResult();  
-   } catch (NoResultException $e) {
-        return 0;
-     }
-  }
-
-
-
-  /**
-  *Repartition des visites effectuees par semaine 
-  */
-  public function visitesParSemaine ($region=null, $startDate=null, $endDate=null){
-
-       $qb = $this->createQueryBuilder('pv')->leftJoin('pv.rapports','v');
-        if($region!=null){
-           $qb->where('pv.ville=:ville')
-          ->setParameter('ville', $region);
           }
-          if($startDate!=null){
-           $qb->andWhere('v.date>=:startDate')->setParameter('startDate', new \DateTime($startDate));
-          }
-          if($endDate!=null){
-           $qb->andWhere('v.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
-          }
-          $qb->select('v.weekText'); 
-          $qb->addGroupBy('v.weekText');
-          $qb->addSelect('count(v.id) as nombre'); 
-
-
-          return $qb->getQuery()->getArrayResult();
-     
-  }
-
-
-
-  
-
-
-/*
-for mobile
-*/
-  public function pdvs ($region=null){
-  $em = $this->_em; //and pv.ville=:region
-  $RAW_QUERY ='select u.id,u.nom, u.date as lastvisitedate, nombre ,u.ville,u.secteur_id, type,u.quartier,u.matricule from (select distinct pv.id ,pv.nom,pv.type,pv.quartier,pv.matricule, max(v.date) as date, count(v.id) as nombre,pv.secteur_id,pv.ville from point_vente pv left join visite v  on pv.id=v.point_vente_id  group by  pv.id, pv.nom,pv.type ,pv.ville ,pv.quartier,pv.matricule,pv.secteur_id order by date asc) u where u.ville=:region;';
-      $statement = $em->getConnection()->prepare($RAW_QUERY);
-   $statement->bindValue('region', $region);
-
-    $statement->execute();
-      return  $result = $statement->fetchAll();
+           $qb->select('p.nom')->addSelect('p.quartier')->addSelect('p.description')->addSelect('p.type')->addSelect('p.tel')
+             ->addSelect('rh.nom as nomrh');
+         return $qb->getQuery()->getArrayResult();  
+   
   }
 }

@@ -1,47 +1,16 @@
 {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Sales{% endblock %}
+{% block title %}Gagnants{% endblock %}
   {% block body %}
 
    <!-- page title -->
     <header id="page-header">
-    <h1>Sales <a>{{app.session.get('region')}}</a></h1>
+    <h1>Les gagnants </h1>
     </header>
 <div id="content" class="dashboard padding-20">
-
-<div class="panel panel-default ">
-            <div class="panel-body">
-<ul class="easypiecharts list-unstyled">
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|somme('posTarget')}}</span>
-                  <span class="stat-title">POS Target</span>
-                </li>
-                <li class="clearfix">
-                 {% set percent=  (rapports|somme('posRealTarget'))/(rapports|somme('posTarget')) %}
-                  <span class="stat-number">{{ rapports|somme('posRealTarget')}}</span>
-                  <span class="stat-title">POS Real BA </span>
-                  
-                  <span class="easyPieChart" data-percent="{{percent*100}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-
-                    <span class="percent">{{ percent*100}}</span>
-                  
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-                <li class="clearfix">
-                 {% set percent= (rapports|somme('posRealDay'))/(rapports|somme('posTarget')) %}
-                  <span class="stat-number">{{ rapports|somme('posRealDay')}}</span>
-                  <span class="stat-title">POS Real Day </span>
-                  
-               <span class="easyPieChart" data-percent="{{percent*100}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{percent*100}}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-              </ul>
-            </div>
-        </div>
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
-                         <span class="title elipsis">
-                        <strong>Sales</strong> ({{ rapports|length}} points de vente)
+                           <span class="title elipsis">
+                        <strong>Les gagnants</strong> ({{ gagnants|length}} )
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -56,35 +25,21 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                            <th class="col-md-6">Point de vente</th>
-                                                            <th>POS Target</th>
-                                                            <th>POS Real BA</th>
-                                                            <th>POS Real Day</th>
-                                                            <th>Real BA</th>
-                                                            <th>%</th>                             
+                                                            <th class="col-md-3">Nom</th>
+                                                            <th>Telephone</th>
+                                                            <th>Objet</th>
+                                                            <th>POS</th>
+                                                            <th>Date</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {% for rapport in rapports %}
-                                                        <tr class="odd gradeX">   
-                                                            <td class="col-md-4">{{rapport.nom}}</td>                                   
-                                                            <td>{{rapport.posTarget |number_format(0, ',', '.')}}</td>
-                                                            <td>{{rapport.posRealTarget |number_format(0, ',', '.')}}</td>
-                                                            <td>{{rapport.posRealDay |number_format(0, ',', '.')}}</td>
-                                                          <td>
-                                                         {% if rapport.posTarget>0 %}
-                                                          {{( rapport.posRealTarget*100/rapport.posTarget) |number_format(0, ',', '.')}}%
-                                                         {% else %}
-                                                           --
-                                                         {% endif %}
-                                                         </td>
-                                                          <td>
-                                                         {% if rapport.posTarget>0 %}
-                                                          {{( rapport.posRealDay*100/rapport.posTarget) |number_format(0, ',', '.')}}%
-                                                         {% else %}
-                                                           --
-                                                         {% endif %}
-                                                         </td>
+                                                    {% for gagnant in gagnants %}
+                                                        <tr class="odd gradeX">  
+                                                            <td >{{gagnant.nom}}</td>                                   
+                                                            <td >{{gagnant.tel}}</td>  
+                                                            <td >{{gagnant.object}}</td>
+                                                            <td >{{gagnant.rapport.pointVente.nom}}</td> 
+                                                            <td >{{gagnant.rapport.date|date('d/m/Y')}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -96,7 +51,7 @@
                                 </div>
                                 <!-- /panel content -->
                     </div>
-   </div>
+                 </div>
  {% endblock %}
 
         {% block javascripts %}
@@ -110,7 +65,12 @@
             var table = jQuery('#datatable_sample');
             table.dataTable({
                     "columns": [
-
+                             {
+                                "orderable": false
+                            },
+                             {
+                                "orderable": true
+                            },
                              {
                                 "orderable": true
                             },
@@ -119,12 +79,6 @@
                             },
                              {
                                 "orderable": true
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
                             }],
                             "lengthMenu": [
                                 [20, 50, 100, -1],
@@ -159,7 +113,7 @@
         </script>
 <!-- PAGE LEVEL SCRIPT -->
     <script type="text/javascript">
-      _toastr("Sales","top-right","success",false);
+      _toastr("Liste des gagnants","top-right","success",false);
 
       /** SALES CHART
       ******************************************* **/

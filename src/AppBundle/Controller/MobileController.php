@@ -35,7 +35,9 @@ class MobileController extends Controller
         $produits= $em->getRepository('AppBundle:Produit')->findAll(); 
        return $produits;
     }
-   
+ 
+
+
        /**
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"secteur"})
@@ -48,7 +50,18 @@ class MobileController extends Controller
 
         return  $secteurs;
     }
+       /**
+     * Lists all Rh entities.
+     *@Rest\View(serializerGroups={"rh"})
+     */
+      public function rhsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $rhs = $em->getRepository('AppBundle:RH')->findAll();
+
+        return  $rhs;
+    }
        /**
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"quartier"})
@@ -63,13 +76,12 @@ class MobileController extends Controller
     }
     /**
      * Lists all Produit entities.
-     *@Rest\View()
+     *@Rest\View(serializerGroups={"pointVente"})
      */
     public function pointVentesAction(Request $request)
     {
           $em = $this->getDoctrine()->getManager();
-//$request->get('region')
-        $pointVentes= $em->getRepository('AppBundle:PointVente')->pdvs('BRAZAVILLE'); 
+        $pointVentes= $em->getRepository('AppBundle:PointVente')->findAll(); 
 
        return $pointVentes;
     }
@@ -87,7 +99,6 @@ class MobileController extends Controller
         'pointVentes'=>$request->request->all()['pointVentes'],
         'id'=>$request->request->all()['id'],
         'user'=>$request->request->all()['user'],
-        'etapes'=>$request->request->all()['etapes'],
         'quartiers'=>$request->request->all()['quartiers']),false); // Validation des d
          $em = $this->getDoctrine()->getManager();
            $failedSynchro=$em->getRepository('AppBundle:Synchro')->find($entity->getId());      
@@ -102,7 +113,7 @@ class MobileController extends Controller
         $failedSynchro=$em->getRepository('AppBundle:Synchro')->find($entity->getId());
 
         $form2 = $this->createCreateForm($failedSynchro);
-        $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
+        $form2->submit(array('rapports'=>$request->request->all()['rapports']),false); // 
          if ($form2->isValid()) {
             $em->flush();
              return ['success'=>true];

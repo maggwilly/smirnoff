@@ -11,20 +11,20 @@ class AppExtension extends \Twig_Extension
         );
     }
 
+
     public function sommeFilter($list, $attr,$default=0)
     {
 
         $somme=$default;
-       foreach ($list as  $value) {
-           $somme+=$value[0][$attr];
-       }
-
-        return $somme;
+        foreach ($list as  $value) {
+           $somme+=$value[$attr];
+        }
+        return $somme>0?$somme:1;
     }
+
 
     public function countFilter($list, $attr)
     {
-
         $count=0;
        foreach ($list as  $value) {
         if($value[0][$attr])
