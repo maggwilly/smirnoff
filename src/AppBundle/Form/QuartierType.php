@@ -13,8 +13,7 @@ class QuartierType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id')
-        ->add('secteur', EntityType::class, array('class' => 'AppBundle:Secteur')) ;
+        $builder->add('id');
     }
     
     /**

@@ -22,7 +22,7 @@ class Quartier
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Secteur", inversedBy="quartiers")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $secteur;
 
@@ -71,7 +71,7 @@ class Quartier
      * @param \AppBundle\Entity\Secteur $secteur
      * @return Quartier
      */
-    public function setSecteur(\AppBundle\Entity\Secteur $secteur)
+    public function setSecteur(\AppBundle\Entity\Secteur $secteur=null)
     {
         $this->secteur = $secteur;
 
