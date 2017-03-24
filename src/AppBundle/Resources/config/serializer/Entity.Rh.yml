@@ -2,6 +2,6 @@ AppBundle\Entity\RH:
     exclusion_policy: none
     properties:
         id:
-            groups: ['rh']
+            groups: ['rh','full']
         nom:    
             groups: ['rh']

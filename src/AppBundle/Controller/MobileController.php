@@ -51,7 +51,7 @@ class MobileController extends Controller
         return  $secteurs;
     }
        /**
-     * Lists all Rh entities.
+     * Lists all Rhentities.
      *@Rest\View(serializerGroups={"rh"})
      */
       public function rhsAction()
