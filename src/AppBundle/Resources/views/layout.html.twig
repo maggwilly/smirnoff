@@ -86,7 +86,7 @@ name="periode" data-format="dd/mm/yyyy"
                 <select class="" name="region" selected>
                    <option value="" {% if not app.session.get('region')  %}selected="true"{% endif %}>Toutes catégories</option>
                    <option value="Rdv des amis"  {% if app.session.get('region')=="Rdv des amis"  %}selected="true"{% endif %}>Rdv des amis</option>
-                   <option value="Boy's bar" {% if  app.session.get('region')=="Boy's bar"  %}selected="true"{% endif %}>Boy's bar</option>
+                   <option value="Boys bar" {% if  app.session.get('region')=="Boys bar"  %}selected="true"{% endif %}>Boy's bar</option>
               </select>
                 <button type="submit" class="btn btn-primary btn-sm">Afficher les données</button>
                 </form>
