@@ -30,7 +30,8 @@
                                                             <th>Quartier</th>
                                                             <th>Description</th>
                                                             <th>Telephone</th> 
-                                                            <th>RH présente</th>   
+                                                            <th>RH présente</th>
+                                                            <th>Date</th>      
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -42,6 +43,7 @@
                                                           <td>{{posrh.description}}</td>
                                                           <td>{{posrh.tel}}</td>
                                                           <td>{{posrh.nomrh}}</td>
+                                                          <td>{{posrh.date|date('d/m/Y')}}</td>
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -68,7 +70,10 @@
             table.dataTable({
                     "columns": [
                              {
-                                "orderable": false
+                                "orderable": true
+                            },                    
+                             {
+                                "orderable": true
                             },
                              {
                                 "orderable": true

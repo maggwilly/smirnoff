@@ -62,7 +62,7 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-           $qb->select('p.nom')->addSelect('p.quartier')->addSelect('p.description')->addSelect('p.type')->addSelect('p.tel')
+           $qb->select('p.nom')->addSelect('p.quartier')->addSelect('p.description')->addSelect('p.type')->addSelect('p.tel')->addSelect('r.date')
              ->addSelect('rh.nom as nomrh');
          return $qb->getQuery()->getArrayResult();  
    
