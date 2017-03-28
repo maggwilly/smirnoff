@@ -104,52 +104,52 @@ class Rapport
 
       /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $boostrer;
 
       /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $heineken;
 
       /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $voodka;
 
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $sabc; 
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $sabc1664; 
 
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $sminoffRed; 
 
         /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $sminoffBlue; 
 
 
      /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
-     * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn( nullable=true)
      */
     protected $sminoffBlack;
 
