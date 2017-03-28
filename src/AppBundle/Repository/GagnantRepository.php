@@ -31,7 +31,6 @@ class GagnantRepository extends EntityRepository
           ->setParameter('endDate',new \DateTime($endDate));
           }
 
- 
           return $qb->getQuery()->getResult();
   } 
 

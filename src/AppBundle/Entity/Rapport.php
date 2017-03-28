@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="rapport")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RapportRepository")
+   *@ORM\HasLifecycleCallbacks()
  */
 class Rapport
 {
@@ -48,6 +49,19 @@ class Rapport
   
     private $pointVente;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="week", type="integer", nullable=true)
+     */
+    private $week;
+
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="week_text", type="string", length=255, nullable=true)
+     */
+    private $weekText;
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="rapports")
@@ -146,7 +160,52 @@ class Rapport
     {
         $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
     }
+/**
+* @ORM\PrePersist
+*/
+ public function prePersist(){
+     $this->week =$this->date->format("W");
+     $year=$this->date->format("Y");
+    $date = new \DateTime();
+    $date->setISODate($year, $this->week);
+    $startDate=$date->format('d/m/Y');
+    $date->modify('+6 days');
+    $endDate=$date->format('d/m/Y');
+    $this->weekText=$startDate.' - '.$endDate;
+  }
 
+      /**
+     * Get week
+     *
+     * @return integer 
+     */
+    public function getWeek()
+    {
+        return $this->week;
+    }
+
+    /**
+     * Set weekText
+     *
+     * @param string $weekText
+     * @return Visite
+     */
+    public function setWeekText($weekText)
+    {
+        $this->weekText = $weekText;
+
+        return $this;
+    }
+
+    /**
+     * Get weekText
+     *
+     * @return string 
+     */
+    public function getWeekText()
+    {
+        return $this->weekText;
+    }
     /**
      * Get id
      *

@@ -28,34 +28,42 @@
                     <ul class="nav nav-list">
                         <li><!-- dashboard -->
                             <a class="dashboard" href="{{ path('rapport_apercu') }}"><!-- warning - url used by default by ajax (if eneabled) -->
-                                <i class="main-icon fa fa-bar-chart-o"></i> <span>Apperçu</span>
+                                <i class="main-icon  fa fa-dashboard "></i> <span>Overview</span>
                             </a>
                         </li> 
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon fa fa-check-square"></i><span>GCSA</span>
+                               <i class="main-icon fa fa-bar-chart-o"></i><span>Activities analysis</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('rapport_sales') }}">Sales target</a></li>
-                                <li><a href="{{ path('rapport_shares') }}">Share table</a></li>
-                                <li><a href="{{ path('rapport_visibilitie') }}">Visibility & price</a></li>
+                                <li><a href="{{ path('rapport_sales') }}">Sminoff Ice sales analisys</a></li>
+                                <li><a href="{{ path('rapport_shares') }}">Share of table</a></li>
+                                <li><a href="{{ path('rapport_prices') }}">Prices </a></li>
                             </ul>
                         </li>
-                       
-                        <li><!-- dashboard -->
-                            <a class="dashboard" href="{{ path('rapport_gagnants') }}"><!-- warning - url used by default by ajax (if eneabled) -->
-                                <i class="main-icon fa fa-bar-chart-o"></i> <span>Les gagnants</span>
-                            </a>
-                        </li>                                                                                             
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                                <i class="main-icon fa fa-dot-circle-o"></i> <span>POS & RH</span>
+                               <i class="main-icon  fa fa-edit"></i><span>Repports</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('rapport_posrhs') }}">RH par POS</a></li>
-                                <li><a href="{{ path('pointvente_map') }}">Geolocalisation</a></li>
+                               <li><a href="{{ path('rapport_index',{'section':'sales'}) }}">Sales of sminoff </a></li>
+                                <li><a href="{{ path('rapport_index',{'section':'shares'}) }}">Share of table</a></li>
+                                <li><a href="{{ path('rapport_index',{'section':'visibilitie'}) }}">Visibilities</a></li>
+                                <li><a href="{{ path('rapport_index',{'section':'prices'}) }}">prices</a></li>
+                                 <li><a href="{{ path('rapport_index',{'section':'promotion'}) }}">Promotions</a></li>
+                                 <li><a href="{{ path('rapport_gagnants') }}">Winers</a></li>
+                            </ul>
+                        </li>                                                                                                                                            
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-menu-arrow pull-right"></i>
+                                <i class="main-icon fa  fa-bookmark-o"></i> <span>POS</span>
+                            </a>
+                            <ul><!-- submenus -->
+                                <li><a href="{{ path('pointvente_index') }}">POS list</a></li>
+                                <li><a href="{{ path('pointvente_map') }}">POS map</a></li>
                             </ul>
                         </li> 
                    

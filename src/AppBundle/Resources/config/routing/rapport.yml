@@ -8,6 +8,11 @@ rapport_sales:
     defaults: { _controller: "AppBundle:Rapport:sales"}
     methods:  GET
 
+rapport_prices:
+    path:     /prices
+    defaults: { _controller: "AppBundle:Rapport:prices"}
+    methods:  GET
+
 rapport_shares:
     path:     /shares
     defaults: { _controller: "AppBundle:Rapport:shares"}

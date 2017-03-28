@@ -23,7 +23,7 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeSales(null,$region, $startDate, $endDate,null);
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
 
         return $this->render('rapport/'.$section.'.html.twig', array(
             'rapports' => $rapports,
@@ -40,10 +40,10 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeSales(null,$region, $startDate, $endDate,null);
-
-        return $this->render('rapport/sales.html.twig', array(
-            'rapports' => $rapports,
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
+        $salesweek = $em->getRepository('AppBundle:Rapport')->findSalesWeek($region, $startDate, $endDate);
+        return $this->render('analyse/sales.html.twig', array(
+            'rapports' => $rapports,'salesweek' => $salesweek,
         ));
     }
 
@@ -58,11 +58,30 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeShares(null,$region, $startDate, $endDate,null);
-        return $this->render('rapport/shares.html.twig', array(
-            'rapports' => $rapports,
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
+        $sharesweek = $em->getRepository('AppBundle:Rapport')->findSharesWeek($region, $startDate, $endDate);
+        return $this->render('analyse/shares.html.twig', array(
+            'rapports' => $rapports,'sharesweek' => $sharesweek,
         ));
     }
+
+    /**
+     * Lists all rapport entities.
+     *
+     */
+    public function pricesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $region=$session->get('region');
+        $startDate=$session->get('startDate',date('Y').'-01-01');
+        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
+        return $this->render('analyse/prices.html.twig', array(
+            'rapports' => $rapports
+        ));
+    }
+
 
  public function gagnantsAction()
     {
@@ -98,7 +117,7 @@ public function posRhsAction()
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByType(null,$region, $startDate, $endDate,null);
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
         return $this->render('rapport/visibilitie.html.twig', array(
             'rapports' => $rapports,
         ));
@@ -113,10 +132,13 @@ public function posRhsAction()
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $marques = $em->getRepository('AppBundle:Situation')->findApercu($region, $startDate, $endDate,null);
-
-        return $this->render('rapport/apercu.html.twig', array(
-            'marques' => $marques,
+        $marques = $em->getRepository('AppBundle:Situation')->findApercu($region, $startDate, $endDate);
+        $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
+        $shares = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
+        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
+        return $this->render('analyse/apercu.html.twig', array(
+            'marques' => $marques,'sales' => $sales,'shares' => $shares,  'gagnants' => $gagnants, 'rapports' => $rapports,
         ));
     }
 

@@ -1,43 +1,17 @@
 {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Respect de prix{% endblock %}
+{% block title %}Prix par marque{% endblock %}
   {% block body %}
 
    <!-- page title -->
     <header id="page-header">
-    <h1>Respect de prix <a>{{app.session.get('region')}}</a></h1>
+    <h1>Prix moyen par marque<a>{{app.session.get('region')}}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
-<div class="panel panel-default ">
-            <div class="panel-body">
-<ul class="easypiecharts list-unstyled">
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|length}}</span>
-                  <span class="stat-title">Pointd de vente</span>
-                </li>
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|percent('sminoffBlue')}}%</span>
-                  <span class="stat-title">Respet de prix Blue</span>
 
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlue')}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('sminoffBlue')}}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-                <li class="clearfix">
-                  <span class="stat-number">{{ rapports|percent('sminoffBlack')}}%</span>
-                  <span class="stat-title">Respect de prix Black</span>
-
-                  <span class="easyPieChart" data-percent="{{ rapports|percent('sminoffBlack')}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
-                    <span class="percent">{{ rapports|percent('sminoffBlack')}}</span>
-                  <canvas height="60" width="60"></canvas></span> 
-                </li>
-
-              </ul>
-            </div>
-        </div>
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                            <span class="title elipsis">
-                        <strong>Respect de prix</strong> ({{ rapports|length}} points de vente)
+                        <strong>Prix moyens</strong>: Aucours de la période
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -52,22 +26,33 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                            <th><i class="fa fa-eye"></i></th> 
-                                                            <th class="col-md-6">Point de vente</th>
-                                                            <th>Blue</th>
-                                                            <th>Black</th>
-                    
+                                                          <th class="col-md-3">Nom du POS</th>
+                                                          <th >Catégorie</th>
+                                                          <th >Quartier</th>
+                                                           <th class="warning col-md-1">SIRed</th>
+                                                           <th class="warning col-md-1">SIBlack</th> 
+                                                           <th class="danger col-md-1">SIBlue</th>
+                                                           <th class="info col-md-1">Heineken</th>
+                                                           <th class="info col-md-1">VK</th> 
+                                                           <th class="info col-md-1">BCola</th> 
+                                                           <th class="info col-md-1">BCider</th>
+                                                           <th class="info col-md-1">1664</th> 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
-                                                   <td class="col-md-1">
-                                                    <a href="" class="btn btn-default btn-xs" target="_blank"> <i class="fa fa-eye"></i></a>
-                                                    </td>   
-                                                            <td class="col-md-6">{{rapport.nom}}</td>                                   
-                                                             <td>{% if rapport.0.sminoffBlue%}OUI{% else %}NON{% endif %}</td>
-                                                             <td>{% if rapport.0.sminoffBlack%}OUI{% else %}NON{% endif %}</td>
+                                                          <td >{{rapport.nom}}</td> 
+                                                          <td >{{rapport.type}}</td>    
+                                                          <td >{{rapport.quartier}}</td>                                   
+                                                          <td class="warning">{{rapport.sminoffRed|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="warning">{{rapport.sminoffBlack|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="danger">{{rapport.sminoffBlue|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="info">{{rapport.heineken|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="info">{{rapport.voodka|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="info">{{rapport.boostrer|number_format(0, ',', '.')}} FCFA</td>
+                                                          <td class="info">{{rapport.sabc|number_format(0, ',', '.')}} FCFA</td>   
+                                                          <td class="info">{{rapport.sabc1664|number_format(0, ',', '.')}} FCFA</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -94,7 +79,28 @@
             table.dataTable({
                     "columns": [
                              {
-                                "orderable": false
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
                             },
                              {
                                 "orderable": true
@@ -122,11 +128,11 @@
                                 }
                             },
                             "columnDefs": [{  // set default column settings
-                                'orderable': false,
-                                'targets': [0]
+                                'orderable': true,
+                                'targets': [1]
                             }, {
-                                "searchable": false,
-                                "targets": [0]
+                                "searchable": true,
+                                "targets": [1]
                             }],
                             "order": [
                                 [1, "asc"]

@@ -1190,12 +1190,12 @@
 								endDate: 		_t.attr('data-to'),
 
 								ranges: {
-								   'Today': [moment(), moment()],
-								   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-								   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-								   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-								   'This Month': [moment().startOf('month'), moment().endOf('month')],
-								   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+								   'Aujourd\'hui': [moment(), moment()],
+								   'La journée d\'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+								   'les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
+								   'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
+								   'Ce mois': [moment().startOf('month'), moment().endOf('month')],
+								   'Le mois passé': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 								}
 							}, 
 							function(start, end, label) {

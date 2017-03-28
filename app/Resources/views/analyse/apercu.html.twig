@@ -1,0 +1,281 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}Overview{% endblock %}
+  {% block body %}
+   <!-- page title -->
+    <header id="page-header">
+    <h1>Overview <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    </header>
+<div id="content" class="dashboard padding-20">
+
+                    <!-- BOXES -->
+                    <div class="row">
+
+                        <!-- Feedback Box -->
+                        <div class="col-md-2 col-sm-6">
+
+                            <!-- BOX -->
+                            <div class="box danger"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+            <h4><a>{{rapports|length}} POS activés au total</a></h4>
+            <small class="block"></small>
+                                    <i class="fa fa-comments"></i>
+                                </div>
+                                <div class="box-body text-center">
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+                        </div>
+
+                        <!-- Profit Box -->
+                        <div class="col-md-2 col-sm-6">
+
+                            <!-- BOX -->
+                            <div class="box warning"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{((sales|somme('posRealTarget'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real BA in POS vs  Target</h4>
+                                <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                        
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box default"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{((sales|somme('posRealDay'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real Day in POS vs  Target</h4>
+                               <small class="block"></small>
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                        {% set fi=0%}
+                          {% for gagnant in gagnants if gagnant.object=='Bouteille' %}
+                          {% set fi=fi+1%}
+                           {%endfor%}
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box info"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{fi}} : Bouteilles gratuites</h4>
+                          <small class="block"></small>
+                                    <i class="fa fa-globe"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+{% set sminoffBlue=shares|somme('sminoffBlue') %}
+{% set sminoff=(shares|somme('sminoffRed')+shares|somme('sminoffBlack')+shares|somme('sminoffBlue')) %}
+{% set univers=(sminoff+shares|somme('heineken')+shares|somme('voodka')+shares|somme('boostrer')+shares|somme('sabc1664')+shares|somme('sabc')) %}
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box warning"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{(sminoffBlue*100/sminoff)|number_format(0, ',', '.') }}% : Part de SIBlue sur SI</h4>
+                          <small class="block"></small>
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <div class="box-body text-center">
+
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+                        </div>
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box success"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>
+                                    {{(sminoffBlue*100/univers)|number_format(0, ',', '.') }} %: Part de SIBlue sur l'univers
+                                    </h4>
+                           <small class="block"> </small>
+                                    <i class="fa fa-globe"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                    </div>
+
+
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading">
+                           <span class="title elipsis">
+                        <strong>Overview</strong> 
+                        </span>
+                            <ul class="options pull-right list-inline">
+                                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
+                                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
+                                <li class=""><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Close"><i class="fa fa-times"></i></a></li>
+                            </ul>
+                            <!-- /right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">  
+                                {% set total= marques|somme('bnreblle')%}
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-4">Marque</th>
+                                                            <th class="col-md-1">Affiche</th>
+                                                            <th class="col-md-1">Potence</th>
+                                                            <th class="col-md-1">Frigo</th>
+                                                            <th class="col-md-1">Prix moyen</th>
+                                                            <th class="col-md-1">Nbre Btlles</th> 
+                                                            <th class="col-md-1">Part</th>                       
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for marque in marques if marque.nom starts with 'Sminoff'%}
+                                                        <tr class="odd gradeX">    
+                                                     <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}warning {%endif%}">
+                                                     {{marque.nom}}
+                                                     </td>                                   
+                                                          <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}" >
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.affiche/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>
+                                                             <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}">
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.potence/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>
+                                                              <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}">
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.frigo/marque.nombre*100) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td> 
+                                                        <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}">
+                                                        {{marque.prixmoyen|number_format(0, ',', '.')}} fcfa
+                                                        </td>  
+                                                          <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}">
+                                                          {{marque.bnreblle}}
+                                                          </td>  
+                                                             <td class="{% if marque.nom=='Sminoff Ice Blue'%}danger{% else %}default{%endif%}">
+                                                        {% if (total)>0 %}
+                                                          {{( marque.bnreblle/total*100) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>                                                                                     
+                                                             </tr>
+                                                        {%endfor%}
+
+                                                    {% for marque in marques if not ( marque.nom starts  with 'Sminoff') %}
+                                                        <tr class="odd gradeX">    
+                                                     <td class="info">{{marque.nom}}</td>                                   
+                                                          <td>
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.affiche/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>
+                                                             <td>
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.potence/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>
+                                                              <td>
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.frigo/marque.nombre*100) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td> 
+                                                        <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>  
+                                                          <td >{{marque.bnreblle}}</td>  
+                                                             <td>
+                                                        {% if (total)>0 %}
+                                                          {{( marque.bnreblle/total*100) |number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>                                                                                     
+                                                             </tr>
+                                                        {%endfor%}                                                    </tbody>
+                                                </table>
+                                                <a class="btn btn-xs btn-info"  href="#">
+                                                    <i class="fa fa-arrow-right"></i> 
+                                                    Exporter vers (.xls)
+                                          </a>
+                                </div>
+                        <!-- /panel content -->
+                    </div>
+     {% include 'legende.html.twig' %}                   
+                 </div>
+ {% endblock %}
+
+        {% block javascripts %}
+       <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
+       <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
+       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
+
+    <script type="text/javascript">
+      _toastr("Aperçu général","top-right","success",false);
+
+      /** SALES CHART
+      ******************************************* **/
+      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+
+
+
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      </script>
+       {% endblock %}

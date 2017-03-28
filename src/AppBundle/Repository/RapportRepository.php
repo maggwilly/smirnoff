@@ -16,7 +16,7 @@ class RapportRepository extends EntityRepository
 	/**
 Nombre de point de vente visités
  */
-  public function findByTypeSales(Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+  public function findByTypeSales($region=null, $startDate=null, $endDate=null){
 
         $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){
@@ -31,16 +31,99 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-           $qb->select('avg(r.posTarget) as posTarget')
-             ->addSelect('avg(r.posRealTarget) as posRealTarget')
-             ->addSelect('avg(r.posRealDay) as posRealDay')
+           $qb->select('sum(r.posTarget) as posTarget')
+             ->addSelect('sum(r.posRealTarget) as posRealTarget')
+             ->addSelect('sum(r.posRealDay) as posRealDay')
              ->addSelect('p.nom')
-             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id');
+             ->addSelect('p.quartier')
+             ->addSelect('p.type')
+             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id')->addGroupBy('p.quartier')->addGroupBy('p.type');
          return $qb->getQuery()->getArrayResult();  
    
   }
 
-   public function findByTypeShares(Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+   public function findByTypeShares($region=null, $startDate=null, $endDate=null){
+
+        $qb = $this->createQueryBuilder('r')
+        ->join('r.pointVente','p')
+         ->join('r.boostrer','bo')
+          ->join('r.heineken','he')
+           ->join('r.voodka','vo')
+            ->join('r.sabc','sa')
+             ->join('r.sabc1664','sa16')
+              ->join('r.sminoffRed','sRed')
+               ->join('r.sminoffBlue','sBlue')
+                ->join('r.sminoffBlack','sBlack');
+        if($region!=null){
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
+          }
+      if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
+          ->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('r.date<=:endDate')
+          ->setParameter('endDate',new \DateTime($endDate));
+          }
+             $qb->select('sum(bo.bnreBlle) as boostrer')
+             ->addSelect('sum(he.bnreBlle) as heineken')
+             ->addSelect('sum(vo.bnreBlle) as voodka')
+             ->addSelect('sum(sa.bnreBlle) as sabc')
+             ->addSelect('sum(sa16.bnreBlle) as sabc1664')
+             ->addSelect('sum(sRed.bnreBlle) as sminoffRed')
+             ->addSelect('sum(sBlue.bnreBlle) as sminoffBlue')
+             ->addSelect('sum(sBlack.bnreBlle) as sminoffBlack')
+             ->addSelect('p.nom')
+              ->addSelect('p.quartier')
+             ->addSelect('p.type')            
+             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id')->addGroupBy('p.quartier')->addGroupBy('p.type');
+         return $qb->getQuery()->getArrayResult();  
+   
+  } 
+
+   public function findByTypePrices($region=null, $startDate=null, $endDate=null){
+
+        $qb = $this->createQueryBuilder('r')
+        ->join('r.pointVente','p')
+         ->join('r.boostrer','bo')
+          ->join('r.heineken','he')
+           ->join('r.voodka','vo')
+            ->join('r.sabc','sa')
+             ->join('r.sabc1664','sa16')
+              ->join('r.sminoffRed','sRed')
+               ->join('r.sminoffBlue','sBlue')
+                ->join('r.sminoffBlack','sBlack');
+        if($region!=null){
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
+          }
+      if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
+          ->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('r.date<=:endDate')
+          ->setParameter('endDate',new \DateTime($endDate));
+          }
+             $qb->select('avg(bo.price) as boostrer')
+             ->addSelect('avg(he.price) as heineken')
+             ->addSelect('avg(vo.price) as voodka')
+             ->addSelect('avg(sa.price) as sabc')
+             ->addSelect('avg(sa16.price) as sabc1664')
+             ->addSelect('avg(sRed.price) as sminoffRed')
+             ->addSelect('avg(sBlue.price) as sminoffBlue')
+             ->addSelect('avg(sBlack.price) as sminoffBlack')
+             ->addSelect('p.nom')
+              ->addSelect('p.quartier')
+             ->addSelect('p.type')            
+             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id')->addGroupBy('p.quartier')->addGroupBy('p.type');
+         return $qb->getQuery()->getArrayResult();  
+   
+  }
+
+
+     public function findSharesWeek($region=null, $startDate=null, $endDate=null){
 
         $qb = $this->createQueryBuilder('r')
         ->join('r.pointVente','p')
@@ -72,16 +155,44 @@ Nombre de point de vente visités
              ->addSelect('avg(sRed.bnreBlle) as sminoffRed')
              ->addSelect('avg(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('avg(sBlack.bnreBlle) as sminoffBlack')
-             ->addSelect('p.nom')
-             ->addSelect('p.id')->groupBy('p.nom')->addGroupBy('p.id');
+             ->addSelect('r.weekText')
+             ->groupBy('r.weekText');
          return $qb->getQuery()->getArrayResult();  
    
   } 
 
+
+    /**
+Nombre de point de vente visités
+ */
+  public function findSalesWeek($region=null, $startDate=null, $endDate=null){
+
+        $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
+        if($region!=null){
+           $qb->where('p.type=:type')
+          ->setParameter('type', $region);
+          }
+      if($startDate!=null){
+           $qb->andWhere('r.date>=:startDate')
+          ->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('r.date<=:endDate')
+          ->setParameter('endDate',new \DateTime($endDate));
+          }
+           $qb->select('sum(r.posTarget) as posTarget')
+             ->addSelect('sum(r.posRealTarget) as posRealTarget')
+             ->addSelect('sum(r.posRealDay) as posRealDay')
+             ->addSelect('r.weekText')
+             ->groupBy('r.weekText');
+         return $qb->getQuery()->getArrayResult();  
+   
+  }
+
  	   /**
   *Nombre visite effectue par utilisateur par journee
   */
-  public function findByType (Client $client=null,$region=null, $startDate=null, $endDate=null,PointVente $pointVente=null){
+  public function findByType ($region=null, $startDate=null, $endDate=null){
   
          $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){

@@ -3,7 +3,7 @@
   {% block body %}
    <!-- page title -->
     <header id="page-header">
-    <h1>POS & RH</h1>
+    <h1>POS & RH {% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</h1>
     </header>
 <div id="content" class="dashboard padding-20">
 

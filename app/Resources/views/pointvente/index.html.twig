@@ -27,19 +27,19 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                            <th>#Nom du POS</th>
-                                                             <th>Catégorie</th>
-                                                            <th>Quartier</th>
+                                                            <th class="col-md-3 success">#Nom du POS</th>
+                                                            <th class="success">Catégorie</th>
+                                                            <th class="success">Quartier</th>
                                                             <th>Description</th>
-                                                            <th>Tel</th>                            
+                                                            <th>Telélephone</th>                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for pointVente in pointVentes %}
-                                                      <tr class="odd gradeX"> 
-                                                      <td>{{pointVente.nom}}</td>
-                                                     <td>{{pointVente.type}}</td>
-                                                     <td>{{pointVente.quartier}}</td>
+                                                    <tr class="odd gradeX "> 
+                                                    <td class="success">{{pointVente.nom}}</td>
+                                                     <td  class="success">{{pointVente.type}}</td>
+                                                     <td class="success">{{pointVente.quartier}}</td>
                                                      <td>{{pointVente.description}}</td>
                                                      <td> {{pointVente.telGerant}}</td>
                                                         </tr>
@@ -75,9 +75,6 @@
             table.dataTable({
                     "columns": [
                              {
-                                "orderable": false
-                            },
-                             {
                                 "orderable": true
                             },
                              {
@@ -85,12 +82,6 @@
                             },
                              {
                                 "orderable": true
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
-                            }, {
-                                "orderable": false
                             }, {
                                 "orderable": true
                             }, {
@@ -113,11 +104,11 @@
                                 }
                             },
                             "columnDefs": [{  // set default column settings
-                                'orderable': false,
-                                'targets': [0]
+                                'orderable': true,
+                                'targets': [1]
                             }, {
-                                "searchable": false,
-                                "targets": [0]
+                                "searchable": true,
+                                "targets": [1]
                             }],
                             "order": [
                                 [1, "asc"]
