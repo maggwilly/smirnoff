@@ -11,7 +11,7 @@
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                            <span class="title elipsis">
-                        <strong>Prix moyens de la bouteille</strong>: Aucours de la période
+                        <strong>Prix moyens de la bouteille en FCFA</strong>: Aucours de la période
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -45,14 +45,14 @@
                                                           <td >{{rapport.nom}}</td> 
                                                           <td >{{rapport.type}}</td>    
                                                           <td >{{rapport.quartier}}</td>                                   
-                                                          <td class="warning">{{rapport.sminoffRed|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="warning">{{rapport.sminoffBlack|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="danger">{{rapport.sminoffBlue|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="info">{{rapport.heineken|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="info">{{rapport.voodka|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="info">{{rapport.boostrer|number_format(0, ',', '.')}} FCFA</td>
-                                                          <td class="info">{{rapport.sabc|number_format(0, ',', '.')}} FCFA</td>   
-                                                          <td class="info">{{rapport.sabc1664|number_format(0, ',', '.')}} FCFA</td> 
+                                                          <td class="warning">{{rapport.sminoffRed|number_format(0, ',', '.')}} </td>
+                                                          <td class="warning">{{rapport.sminoffBlack|number_format(0, ',', '.')}} </td>
+                                                          <td class="danger">{{rapport.sminoffBlue|number_format(0, ',', '.')}} </td>
+                                                          <td class="info">{{rapport.heineken|number_format(0, ',', '.')}} </td>
+                                                          <td class="info">{{rapport.voodka|number_format(0, ',', '.')}} </td>
+                                                          <td class="info">{{rapport.boostrer|number_format(0, ',', '.')}} </td>
+                                                          <td class="info">{{rapport.sabc|number_format(0, ',', '.')}} </td>   
+                                                          <td class="info">{{rapport.sabc1664|number_format(0, ',', '.')}} </td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -64,6 +64,7 @@
                                 </div>
                                 <!-- /panel content -->
                     </div>
+        {% include 'legende.html.twig' %}                     
                  </div>
  {% endblock %}
 

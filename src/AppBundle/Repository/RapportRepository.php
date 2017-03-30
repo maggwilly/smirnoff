@@ -16,7 +16,7 @@ class RapportRepository extends EntityRepository
 	/**
 Nombre de point de vente visités
  */
-  public function findByTypeSales($region=null, $startDate=null, $endDate=null){
+  public function findByTypeSales($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){
@@ -31,6 +31,10 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
+
+          if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }    
            $qb->select('sum(r.posTarget) as posTarget')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
@@ -79,7 +83,7 @@ Nombre de point de vente visités
 
 
 
-   public function findByTypeShares($region=null, $startDate=null, $endDate=null){
+   public function findByTypeShares($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')->leftJoin('r.gagnants','g', 'WITH','g.object=\'Bouteille\'')
         ->join('r.pointVente','p')
@@ -103,6 +107,10 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
+
+        if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }   
              $qb->select('sum(bo.bnreBlle) as boostrer')
              ->addSelect('sum(he.bnreBlle) as heineken')
              ->addSelect('sum(vo.bnreBlle) as voodka')
@@ -120,7 +128,7 @@ Nombre de point de vente visités
    
   } 
 
-   public function findByTypePrices($region=null, $startDate=null, $endDate=null){
+   public function findByTypePrices($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')
         ->join('r.pointVente','p')
@@ -144,6 +152,9 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
+        if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }       
              $qb->select('avg(bo.price) as boostrer')
              ->addSelect('avg(he.price) as heineken')
              ->addSelect('avg(vo.price) as voodka')
@@ -161,7 +172,7 @@ Nombre de point de vente visités
   }
 
 
-     public function findSharesWeek($region=null, $startDate=null, $endDate=null){
+     public function findSharesWeek($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')
         ->join('r.pointVente','p')
@@ -177,6 +188,9 @@ Nombre de point de vente visités
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
           }
+          if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }      
 /**      if($startDate!=null){
            $qb->andWhere('r.date>=:startDate')
           ->setParameter('startDate', new \DateTime($startDate));
@@ -204,7 +218,7 @@ Nombre de point de vente visités
     /**
 Nombre de point de vente visités
  */
-  public function findSalesWeek($region=null, $startDate=null, $endDate=null){
+  public function findSalesWeek($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
         $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){
@@ -219,6 +233,10 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
+
+           if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }  
            $qb->select('sum(r.posTarget) as posTarget')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
@@ -231,7 +249,7 @@ Nombre de point de vente visités
  	   /**
   *Nombre visite effectue par utilisateur par journee
   */
-  public function findByType ($region=null, $startDate=null, $endDate=null){
+  public function findByType ($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
   
          $qb = $this->createQueryBuilder('r')->join('r.pointVente','p');
         if($region!=null){
@@ -246,7 +264,9 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-
+           if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }
  
           return $qb->getQuery()->getResult();
   } 

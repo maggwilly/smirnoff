@@ -8,21 +8,6 @@ pointvente_show:
     defaults: { _controller: "AppBundle:PointVente:show" }
     methods:  GET
 
-pointvente_eligibles:
-    path:     /eligibles
-    defaults: { _controller: "AppBundle:PointVente:eligibles"}
-    methods:  GET
-
-pointvente_eligibles_excel:
-    path:     /eligibles/excel
-    defaults: { _controller: "AppBundle:PointVente:eligibiliteExcel"}
-    methods:  GET
-
-pointvente_racking_excel:
-    path:     /racking/excel
-    defaults: { _controller: "AppBundle:PointVente:eligibiliteRackingExcel"}
-    methods:  GET
-
 pointvente_map:
     path:     /geo
     defaults: { _controller: "AppBundle:PointVente:map" }
