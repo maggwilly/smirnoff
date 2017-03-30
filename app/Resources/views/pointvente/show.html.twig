@@ -107,28 +107,8 @@
 {% block javascripts %}
        <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
       <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
-       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
-     <script>
-     function initMap() {
-  var myLatLng = {lat: {{pointVente.latitude}}, lng: {{pointVente.longitude}}};
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
-    center: myLatLng,
-   mapTypeId: google.maps.MapTypeId.HYBRID
-  });
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: '{{pointVente.nom}}\nTel: {{pointVente.telGerant}}'
-  });
- }
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDVCVll8mthbMy6rXkfJXF3FoqQTIqBw&callback=initMap">
-    </script> 
+       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script> 
     <script type="text/javascript">
-
      loadScript( "{{ asset('assets/Chart.min.js') }}", function() {
          var data = {
           labels: [
@@ -230,5 +210,28 @@ var data = {
                 data: data
             });
       });
-        </script>       
+        </script>
+     <script>
+     function initMap() {
+  var myLatLng = {lat: {{pointVente.latitude}}, lng: {{pointVente.longitude}}};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: myLatLng,
+   mapTypeId: google.maps.MapTypeId.HYBRID
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: '{{pointVente.nom}}\nTel: {{pointVente.telGerant}}'
+  });
+}
+
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDVCVll8mthbMy6rXkfJXF3FoqQTIqBw&callback=initMap">
+    </script>  
+
  {% endblock %}
