@@ -28,8 +28,12 @@
                    
                                 </div>
                                 <!-- /panel content -->
+
                     </div>
+
+
    </div>
+    
 {% endblock %}
        {% block javascripts %}
        <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
@@ -38,9 +42,12 @@
   <script>
    {% set first=pointVentes[0] %}
       var map;
+
       function initMap() {
+
           var features = [
           {% for pointVente in pointVentes if pointVente.latitude and pointVente.longitude %}
+
           {
             position: new google.maps.LatLng({{pointVente.latitude}}, {{pointVente.longitude}}),
              nom:'{{pointVente.nom}}',
@@ -103,3 +110,6 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDVCVll8mthbMy6rXkfJXF3FoqQTIqBw&callback=initMap">
     </script>
+
+
+       {% endblock %}
