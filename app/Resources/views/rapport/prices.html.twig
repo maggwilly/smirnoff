@@ -4,14 +4,14 @@
 
    <!-- page title -->
     <header id="page-header">
-    <h1>Prix par marque<a>{{app.session.get('region')}}</a></h1>
+    <h1>Historique des prix <a>{{app.session.get('region')}}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
 
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                            <span class="title elipsis">
-                        <strong>Prix moyens de la bouteille</strong>: En FCFA
+                        <strong>Historique des prix  d'une bouteille</strong> Sur la période : En FCFA
                         </span>
                             <!-- right options -->
                             <ul class="options pull-right list-inline">
@@ -47,10 +47,10 @@
                                                         <tr class="odd gradeX"> 
                                                         <td class="col-md-1">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
                                                         <td class="col-md-3">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
-                                                         <td >{{rapport.date| date('d/m/Y')}}</td> 
-                                                          <td class="success">{{rapport.pointVente.nom}}</td>
-                                                         <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
-                                                          <td class="success">{{rapport.pointVente.quartier}}</td>  
+                                                        <td >{{rapport.date| date('d/m/Y')}}</td> 
+                                                        <td class="success">{{rapport.pointVente.nom}}</td>
+                                                        <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
+                                                        <td class="success">{{rapport.pointVente.quartier}}</td>  
                                                         <td  class="col-md-1 warning">{{rapport.sminoffRed.price|number_format(0, ',', '.')}} </td>
                                                         <td  class="col-md-1 warning">{{rapport.sminoffBlack.price|number_format(0, ',', '.')}} </td>
                                                         <td  class="col-md-1 danger">{{rapport.sminoffBlue.price|number_format(0, ',', '.')}} </td>
