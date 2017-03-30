@@ -96,6 +96,41 @@ class Rapport
      */
     private $nbreConsomateur;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="etagerLigne", type="integer",nullable=true)
+     */
+    private $etagerLigne;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="etagerColonne", type="integer",nullable=true)
+     */
+    private $etagerColonne;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="frigoLigne", type="integer",nullable=true)
+     */
+    private $frigoLigne;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="frigoColonne", type="integer",nullable=true)
+     */
+    private $frigoColonne;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="disposition", type="string", length=255, options={"default" : "Droite"})
+     */
+       private $disposition;
+
    /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gagnant", mappedBy="rapport", cascade={"persist","remove"})
    */
@@ -152,6 +187,9 @@ class Rapport
      * @ORM\JoinColumn( nullable=true)
      */
     protected $sminoffBlack;
+
+
+
 
   /**
      * Constructor
@@ -669,5 +707,120 @@ class Rapport
     public function getRh()
     {
         return $this->rh;
+    }
+
+     /**
+     * Set etagerLigne
+     *
+     * @param integer $etagerLigne
+     * @return Merchandising
+     */
+    public function setEtagerLigne($etagerLigne)
+    {
+        $this->etagerLigne = $etagerLigne;
+
+        return $this;
+    }
+
+    /**
+     * Get etagerLigne
+     *
+     * @return integer 
+     */
+    public function getEtagerLigne()
+    {
+        return $this->etagerLigne;
+    }
+
+    /**
+     * Set etagerColonne
+     *
+     * @param integer $etagerColonne
+     * @return Merchandising
+     */
+    public function setEtagerColonne($etagerColonne)
+    {
+        $this->etagerColonne = $etagerColonne;
+
+        return $this;
+    }
+
+    /**
+     * Get etagerColonne
+     *
+     * @return integer 
+     */
+    public function getEtagerColonne()
+    {
+        return $this->etagerColonne;
+    }
+
+    /**
+     * Set frigoLigne
+     *
+     * @param integer $frigoLigne
+     * @return Merchandising
+     */
+    public function setFrigoLigne($frigoLigne)
+    {
+        $this->frigoLigne = $frigoLigne;
+
+        return $this;
+    }
+
+    /**
+     * Get frigoLigne
+     *
+     * @return integer 
+     */
+    public function getFrigoLigne()
+    {
+        return $this->frigoLigne;
+    }
+
+    /**
+     * Set frigoColonne
+     *
+     * @param integer $frigoColonne
+     * @return Merchandising
+     */
+    public function setFrigoColonne($frigoColonne)
+    {
+        $this->frigoColonne = $frigoColonne;
+
+        return $this;
+    }
+
+    /**
+     * Get frigoColonne
+     *
+     * @return integer 
+     */
+    public function getFrigoColonne()
+    {
+        return $this->frigoColonne;
+    }
+
+    /**
+     * Set disposition
+     *
+     * @param string $disposition
+     * @return Merchandising
+     */
+    public function setDisposition($disposition)
+    {
+        $this->disposition = $disposition;
+
+        return $this;
+    }
+
+    /**
+     * Get disposition
+     *
+     * @return string 
+     */
+    public function getDisposition()
+    {
+        return $this->disposition;
     }
 }

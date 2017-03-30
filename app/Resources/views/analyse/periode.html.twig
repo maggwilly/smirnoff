@@ -1,0 +1,179 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}On period{% endblock %}
+  {% block body %}
+   <!-- page title -->
+    <header id="page-header">
+    <h1>Overview on period<a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    </header>
+<div id="content" class="dashboard padding-20">
+
+                    <!-- BOXES -->
+                    <div class="row">
+
+                        <!-- Feedback Box -->
+                        <div class="col-md-2 col-sm-6">
+
+                            <!-- BOX -->
+                            <div class="box danger"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+            <h4><a>{{rapports|length}}  activations réalisées au total</a></h4>
+            <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+                                <div class="box-body text-center">
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+                        </div>
+
+                        <!-- Profit Box -->
+                        <div class="col-md-2 col-sm-6">
+
+                            <!-- BOX -->
+                            <div class="box warning"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{((sales|somme('posRealTarget'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real BA in POS vs  Target</h4>
+                                <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                        
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box default"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{((sales|somme('posRealDay'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real Day in POS vs  Target</h4>
+                               <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                        {% set fi=0%}
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box info"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{shares|somme('nbgagnants')}} : Bouteilles gratuites distribuées</h4>
+                          <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+{% set sminoffBlue=shares|somme('sminoffBlue') %}
+{% set sminoff=(shares|somme('sminoffRed')+shares|somme('sminoffBlack')+shares|somme('sminoffBlue')) %}
+{% set univers=(sminoff+shares|somme('heineken')+shares|somme('voodka')+shares|somme('boostrer')+shares|somme('sabc1664')+shares|somme('sabc')) %}
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box warning"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>{{(sminoffBlue*100/sminoff)|number_format(0, ',', '.') }}% : Part de SIBlue sur SI</h4>
+                          <small class="block"></small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+                                <div class="box-body text-center">
+
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+                        </div>
+                        <!-- Online Box -->
+                        <div class="col-md-2 col-sm-6">
+                            <!-- BOX -->
+                            <div class="box success"><!-- default, danger, warning, info, success -->
+
+                                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                                    <h4>
+                                    {{(sminoffBlue*100/univers)|number_format(0, ',', '.') }} %: Part de SIBlue sur l'univers
+                                    </h4>
+                           <small class="block"> </small>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                </div>
+
+                                <div class="box-body text-center">
+
+                                </div>
+
+                            </div>
+                            <!-- /BOX -->
+
+                        </div>
+
+                    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+ {% include 'analyse/parts/visibilities.html.twig' %} 
+        </div>
+        <div class="col-md-6">
+ {% include 'analyse/parts/promotions.html.twig' %} 
+        </div>  
+        <div class="col-md-6">
+ {% include 'analyse/parts/prices.html.twig' %} 
+        </div>
+        <div class="col-md-6">
+ {% include 'analyse/parts/shares.html.twig' %} 
+        </div>                          
+        </div> 
+     {% include 'legende.html.twig' %}                   
+                 </div>
+ {% endblock %}
+
+        {% block javascripts %}
+       <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
+       <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
+       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
+
+    <script type="text/javascript">
+      _toastr("Aperçu général","top-right","success",false);
+
+      /** SALES CHART
+      ******************************************* **/
+      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+
+
+
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      </script>
+       {% endblock %}

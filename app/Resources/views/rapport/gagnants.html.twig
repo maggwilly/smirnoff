@@ -15,17 +15,16 @@
                   <!-- tabs nav -->
                   <ul class="nav nav-tabs pull-right">
                     <li class="active"><!-- TAB 1 -->
-                      <a href="#ice_red" data-toggle="tab" aria-expanded="true">Free Ischu</a>
+                      <a href="#ice_red" data-toggle="tab" aria-expanded="true">Free issues</a>
                     </li>
                     <li class=""><!-- TAB 2 -->
-                      <a href="#ice_black" data-toggle="tab" aria-expanded="true">Review item</a>
+                      <a href="#ice_black" data-toggle="tab" aria-expanded="true">Rewards item</a>
                     </li>                                                                                                     
                   </ul>
-                            <!-- /right options -->
-
-                                </div>
+                  <!-- /right options -->
+                   </div>
                                 <!-- panel content -->
-                                <div class="panel-body">  
+                    <div class="panel-body">  
                       <!-- tabs content -->
                     <div class="tab-content transparent"> 
                       <div id="ice_red" class="tab-pane active"><!-- TAB 1 CONTENT -->                               
@@ -49,8 +48,8 @@
                                                             <td >{{gagnant.object}}</td>
                                                             <td >{{gagnant.rapport.date|date('d/m/Y')}}</td> 
                                                             <td class="success">{{gagnant.rapport.pointVente.nom}}</td> 
-                                                             <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
-                                                              <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
+                                                            <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
+                                                            <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -79,8 +78,8 @@
                                                             <td >{{gagnant.object}}</td>
                                                             <td >{{gagnant.rapport.date|date('d/m/Y')}}</td> 
                                                             <td class="success">{{gagnant.rapport.pointVente.nom}}</td> 
-                                                             <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
-                                                              <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
+                                                            <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
+                                                            <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -91,7 +90,7 @@
                                 <a class="btn btn-xs btn-info"  href="#">
                                                     <i class="fa fa-arrow-right"></i> 
                                                     Exporter vers (.xls)
-                                                </a>
+                                    </a>
                                 </div>
                                 <!-- /panel content -->
                     </div>

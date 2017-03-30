@@ -15,7 +15,7 @@ class SituationRepository extends EntityRepository
 		/*
 for mobile
 */
-  public function findApercu ($type=null, $startDate=null, $endDate=null){
+  public function findApercuPeriode ($type=null, $startDate=null, $endDate=null){
 
 	  $qb = $this->createQueryBuilder('s')->join('s.rapport','r')->join('r.pointVente','p');
         if($type!=null){
@@ -32,13 +32,35 @@ for mobile
            $qb->addSelect('count(s.frigo) as frigo'); 
            $qb->addSelect('count(s.affiche) as affiche'); 
            $qb->addSelect('count(s.potence) as potence'); 
+            $qb->addSelect('count(s.affichette) as affichette'); 
+           $qb->addSelect('count(s.autre) as autre');          
            $qb->addSelect('count(s.ncp) as ncp');
+           $qb->addSelect('count(s.tcp) as tcp');
            $qb->addSelect('count(s.inbar) as inbar'); 
            $qb->addSelect('count(s.id) as nombre'); 
            $qb->addSelect('sum(s.bnreBlle) as bnreblle'); 
            $qb->addSelect('max(s.price) as maxprice'); 
            $qb->addSelect('avg(s.price) as prixmoyen'); 
-          $qb->addGroupBy('s.marque');     
+           $qb->addGroupBy('s.marque');     
           return $qb->getQuery()->getArrayResult();
   }
+
+
+//situation comparee
+  public function findApercuDernier ($region=null, $startDate=null, $endDate=null){
+    $em = $this->_em;
+    $RAW_QUERY =($region!=null) ?'select s.marque as nom, sum(s.bnreBlle) as bnreblle,count(s.frigo) as frigo,count(s.affiche) as affiche,count(s.affichette) as affichette,count(s.autre) as autre,count(s.potence) as potence,count(s.ncp) as ncp,count(s.tcp) as tcp,count(s.inbar) as inbar,count(s.id) as nombre,max(s.price) as maxprice, avg(s.price) as prixmoyen  from (select v.id,v.date,u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ) as v join situation s on v.id=s.rapport_id  group by s.marque;'  : 'select s.marque as nom, sum(s.bnreBlle) as bnreblle,count(s.frigo) as frigo,count(s.affiche) as affiche,count(s.affichette) as affichette,count(s.autre) as autre,count(s.potence) as potence,count(s.ncp) as ncp,count(s.tcp) as tcp,count(s.inbar) as inbar,count(s.id) as nombre,max(s.price) as maxprice, avg(s.price) as prixmoyen  from (select v.id,v.date,u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ) as v join situation s on v.id=s.rapport_id  group by s.marque;'; 
+     $statement = $em->getConnection()->prepare($RAW_QUERY);
+        if($region!=null){
+    $statement->bindValue('region', $region);
+          }
+    $startDate=new \DateTime($startDate);
+    $endDate=new \DateTime($endDate);
+    $statement->bindValue('startDate', $startDate->format('Y-m-d'));
+    $statement->bindValue('endDate',  $endDate->format('Y-m-d'));
+    $statement->execute();
+
+     return  $result = $statement->fetchAll();
+  } 
+
 }

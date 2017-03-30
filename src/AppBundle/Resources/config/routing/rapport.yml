@@ -33,9 +33,14 @@ rapport_posrhs:
     defaults: { _controller: "AppBundle:Rapport:posRhs"}
     methods:  GET
 
-rapport_apercu:
-    path:     /apercu
-    defaults: { _controller: "AppBundle:Rapport:apercu"}
+rapport_apercu_periode:
+    path:     /apercu/periode
+    defaults: { _controller: "AppBundle:Rapport:apercuPeriode"}
+    methods:  GET
+
+rapport_apercu_dernier:
+    path:     /apercu/dernier
+    defaults: { _controller: "AppBundle:Rapport:apercuDernier"}
     methods:  GET
 
 rapport_show:

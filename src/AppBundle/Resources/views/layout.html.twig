@@ -26,18 +26,25 @@
 
                 <nav id="sideNav"><!-- MAIN MENU -->
                     <ul class="nav nav-list">
-                        <li><!-- dashboard -->
-                            <a class="dashboard" href="{{ path('rapport_apercu') }}"><!-- warning - url used by default by ajax (if eneabled) -->
-                                <i class="main-icon  fa fa-dashboard "></i> <span>Overview</span>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-menu-arrow pull-right"></i>
+                               <i class="main-icon fa fa-dashboard "></i><span>Overview</span>
                             </a>
-                        </li> 
+                            <ul><!-- submenus -->
+                                <li><a href="{{ path('rapport_apercu_dernier') }}">On the last repports</a></li>
+                                <li><a href="{{ path('rapport_apercu_periode') }}">On the period</a></li>
+
+                            </ul>
+                        </li>                        
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
                                <i class="main-icon fa fa-bar-chart-o"></i><span>Activities analysis</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('rapport_sales') }}">Sminoff Ice sales analisys</a></li>
+                                <li><a href="{{ path('rapport_sales') }}">Smirnoff Ice sales analisys</a></li>
                                 <li><a href="{{ path('rapport_shares') }}">Share of table</a></li>
                                 <li><a href="{{ path('rapport_prices') }}">Prices </a></li>
                             </ul>
@@ -53,6 +60,7 @@
                                 <li><a href="{{ path('rapport_index',{'section':'visibilitie'}) }}">Visibilities</a></li>
                                 <li><a href="{{ path('rapport_index',{'section':'prices'}) }}">prices</a></li>
                                  <li><a href="{{ path('rapport_index',{'section':'promotion'}) }}">Promotions</a></li>
+                                <li><a href="{{ path('rapport_index',{'section':'merchandising'}) }}">Merchandising</a></li>
                                  <li><a href="{{ path('rapport_gagnants') }}">Winers</a></li>
                             </ul>
                         </li>                                                                                                                                            

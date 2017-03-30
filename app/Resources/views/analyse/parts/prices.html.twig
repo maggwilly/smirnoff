@@ -1,0 +1,49 @@
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading">
+                           <span class="title elipsis">
+                        <strong>Prices analisys</strong> 
+                        </span>
+                            <ul class="options pull-right list-inline">
+                                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
+                                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
+                                <li class=""><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Close"><i class="fa fa-times"></i></a></li>
+                            </ul>
+                            <!-- /right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">  
+                                {% set total= marques|somme('bnreblle')%}
+                                           <table class="table table-striped table-bordered table-hover" id="datatable_sample">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-4">Marque</th>
+                                                            <th class="col-md-1">Prix moyen</th>
+                      
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for marque in marques if marque.nom starts  with 'Sminoff'%}
+                                                    <tr class="odd gradeX {% if marque.nom ends  with 'Blue' %}danger{% else %}warning {%endif%}">    
+                                                     <td class="">
+                                                     {{marque.nom}}
+                                                     </td>                                   
+                                                      <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>            
+                                                    </tr>
+                                                        {%endfor%}
+                                                    {% for marque in marques if not ( marque.nom starts  with 'Sminoff')%}
+                                                    <tr class="odd gradeX info ">    
+                                                     <td class="">
+                                                     {{marque.nom}}
+                                                     </td>                                   
+                                                      <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>                                                                                    
+                                                      </tr>
+                                                      {%endfor%}                                                        
+                                                    </tbody>
+                                                </table>
+                                                <a class="btn btn-xs btn-info"  href="#">
+                                                    <i class="fa fa-arrow-right"></i> 
+                                                    Exporter vers (.xls)
+                                          </a>
+                                </div>
+                        <!-- /panel content -->
+                    </div>

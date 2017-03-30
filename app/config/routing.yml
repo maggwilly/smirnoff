@@ -15,7 +15,7 @@ set_periode:
 
 user_homepage:
     path:     /v1/home
-    defaults: { _controller: "AppBundle:Rapport:apercu"}
+    defaults: { _controller: "AppBundle:Rapport:apercuDernier"}
     methods:  GET
     
 app_admin:
