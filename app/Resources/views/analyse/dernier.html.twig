@@ -1,6 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 {% block title %}On Last repports{% endblock %}
-  {% block body %}
+ {% set total= marques|somme('bnreblle')%}
+{% block body %}
    <!-- page title -->
     <header id="page-header">
     <h1>Overview On Last repports <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
@@ -134,42 +135,51 @@
  {% include 'analyse/parts/promotions.html.twig' %} 
         </div>  
         <div class="col-md-6">
- {% include 'analyse/parts/prices.html.twig' %} 
-        </div>
-        <div class="col-md-6">
  {% include 'analyse/parts/shares.html.twig' %} 
-        </div>                          
+        </div> 
+        <div class="col-md-6">
+ {% include 'analyse/parts/graph.html.twig' %} 
+        </div> 
+          </div>       
+    <div class="row">               
+        <div class="col-md-6">
+ {% include 'analyse/parts/prices.html.twig' %} 
+        </div>  
+        <div class="col-md-6">
+{% include 'legende.html.twig' %}  
+        </div>                                         
     </div>              
-     {% include 'legende.html.twig' %}                   
+                  
          </div>
  {% endblock %}
 
-        {% block javascripts %}
+{% block javascripts %}
        <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
        <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
        <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
+      <script type="text/javascript">
+     loadScript( "{{ asset('assets/Chart.min.js') }}", function() {
 
-    <script type="text/javascript">
-      _toastr("Aperçu général","top-right","success",false);
-
-      /** SALES CHART
-      ******************************************* **/
-      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
-        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
-          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
-            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
-              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
-                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
-                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
-
-
-
-                  });
+         var data = {
+          labels: [
+        {% for marque in marques %}
+          "{{marque.nom}}",
+         {%endfor%}
+           ],
+         datasets: [
+             {
+        data: [
+        {% if (total)>0 %}{% for marque in marques  %}{{(marque.bnreblle*100/total)|number_format(0, '.', ' ')}},{%endfor%}{%endif%}],
+        backgroundColor: [{% for color in colors  %}"{{ color}}",{%endfor%}],
+        hoverBackgroundColor: [{% for color in colors  %}"{{ color}}",{%endfor%}]
+        }]
+      };      
+    var ctx = document.getElementById("pieChartCanvas").getContext("2d");
+            new Chart(ctx,{
+                type: 'pie',
+               data: data
                 });
-              });
-            });
-          });
-        });
-      });
-      </script>
+                
+        });    
+        </script>
        {% endblock %}

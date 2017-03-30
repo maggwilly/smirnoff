@@ -136,10 +136,10 @@ public function posRhsAction()
         $marques = $em->getRepository('AppBundle:Situation')->findApercuPeriode($region, $startDate, $endDate);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
-        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
+        $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
         return $this->render('analyse/periode.html.twig', array(
-            'marques' => $marques,'sales' => $sales,'shares' => $shares,  'gagnants' => $gagnants, 'rapports' => $rapports,
+            'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors,   'rapports' => $rapports,
         ));
     }
 
@@ -154,10 +154,10 @@ public function posRhsAction()
         $marques = $em->getRepository('AppBundle:Situation')->findApercuDernier($region, $startDate, $endDate);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSalesDernier($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeSharesDernier($region, $startDate, $endDate);
-        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
+         $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
         return $this->render('analyse/dernier.html.twig', array(
-            'marques' => $marques,'sales' => $sales,'shares' => $shares,  'gagnants' => $gagnants, 'rapports' => $rapports,
+            'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors, 'rapports' => $rapports,
         ));
     }
 

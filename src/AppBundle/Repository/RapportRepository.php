@@ -177,7 +177,7 @@ Nombre de point de vente visités
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
           }
-      if($startDate!=null){
+/**      if($startDate!=null){
            $qb->andWhere('r.date>=:startDate')
           ->setParameter('startDate', new \DateTime($startDate));
           }
@@ -185,6 +185,7 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
+          **/
              $qb->select('avg(bo.bnreBlle) as boostrer')
              ->addSelect('avg(he.bnreBlle) as heineken')
              ->addSelect('avg(vo.bnreBlle) as voodka')
