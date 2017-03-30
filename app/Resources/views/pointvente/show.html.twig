@@ -215,7 +215,7 @@ var data = {
         </script>
      <script>
      function initMap() {
-  var myLatLng = {lat: {{pointVente.latitude}}, lng: {{pointVente.longitude}}};
+  var myLatLng = new google.maps.LatLng(-0.636558, 15.168308) ;
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
@@ -231,7 +231,6 @@ var data = {
 }
 
     </script>
-
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDVCVll8mthbMy6rXkfJXF3FoqQTIqBw&callback=initMap">
     </script>  
