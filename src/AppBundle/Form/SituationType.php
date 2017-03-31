@@ -18,6 +18,7 @@ class SituationType extends AbstractType
         ->add('affiche')
         ->add('potence')
         ->add('ncp')
+         ->add('tcp')
         ->add('inbar')
         ->add('nbreRh')
          ->add('marque')       
