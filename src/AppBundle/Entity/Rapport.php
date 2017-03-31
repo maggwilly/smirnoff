@@ -206,9 +206,9 @@ class Rapport
      $year=$this->date->format("Y");
     $date = new \DateTime();
     $date->setISODate($year, $this->week);
-    $startDate=$date->format('d/m/Y');
+    $startDate=$date->format('d/m');
     $date->modify('+6 days');
-    $endDate=$date->format('d/m/Y');
+    $endDate=$date->format('d/m');
     $this->weekText=$startDate.' - '.$endDate;
   }
 
