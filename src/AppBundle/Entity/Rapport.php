@@ -127,7 +127,7 @@ class Rapport
     /**
      * @var string
      *
-     * @ORM\Column(name="disposition", type="string", length=255, options={"default" : "Droite"})
+     * @ORM\Column(name="disposition", type="string", length=255, nullable=true)
      */
        private $disposition;
 

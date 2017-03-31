@@ -39,7 +39,7 @@
                 <li class="clearfix">
                  {% set percent=  (rapports|somme('posRealTarget'))/(rapports|somme('posTarget')) %}
                   <span class="stat-number">{{ rapports|somme('posRealTarget')}}</span>
-                  <span class="stat-title">POS Real BA </span>
+                  <span class="stat-title"><b>POS Real BA </b></span>
                   
                   <span class="easyPieChart" data-percent="{{percent*100}}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
 
@@ -50,7 +50,7 @@
                 <li class="clearfix">
                  {% set percent= (rapports|somme('posRealDay'))/(rapports|somme('posTarget')) %}
                   <span class="stat-number">{{ rapports|somme('posRealDay')}}</span>
-                  <span class="stat-title">POS Real Day </span>
+                  <span class="stat-title"><b>POS Real Day </b></span>
                   
                <span class="easyPieChart" data-percent="{{percent*100}}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
                     <span class="percent">{{percent*100}}</span>

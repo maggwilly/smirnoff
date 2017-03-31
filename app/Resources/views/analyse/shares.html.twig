@@ -14,12 +14,12 @@
 {% set univers=(sminoff+rapports|somme('heineken')+rapports|somme('voodka')+rapports|somme('boostrer')+rapports|somme('sabc1664')+rapports|somme('sabc')) %}
                 <li class="clearfix">
                   <span class="stat-number">{{ univers}}</span>
-                  <span class="stat-title">Bouteilles consommées</span>
+                  <span class="stat-title"><b>Bouteilles consommées</b></span>
                   <canvas height="60" width="60"></canvas></span> 
                 </li>
                 <li class="clearfix">
                   <span class="stat-number">{{sminoff }}</span>
-                  <span class="stat-title">Bouteilles SI</span>
+                  <span class="stat-title"><b>Bouteilles SI</b></span>
 
                   <span class="easyPieChart" data-percent="{{sminoff*100/univers }}" data-easing="easeOutBounce" data-barcolor="#F86C6B" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
                     <span class="percent">
@@ -29,7 +29,7 @@
                 </li>
                 <li class="clearfix">
                   <span class="stat-number">{{sminoffBlue }}</span>
-                  <span class="stat-title">Boutielles SIBlue</span>
+                  <span class="stat-title"><b>Boutielles SIBlue</b></span>
 
                   <span class="easyPieChart" data-percent="{{sminoffBlue*100/univers }}" data-easing="easeOutBounce" data-barcolor="#98AD4E" data-trackcolor="#dddddd" data-scalecolor="#dddddd" data-size="60" data-linewidth="4" style="width: 60px; height: 60px;">
                     <span class="percent">{{sminoffBlue*100/univers }}</span>
@@ -37,8 +37,7 @@
                 </li>
                 <li class="clearfix">
                   <span class="stat-number">{{(sminoffBlue*100/sminoff)|number_format(0, ',', '.') }}%</span>
-                  <span class="stat-title">SIBlue /SI</span>
-                 
+                  <span class="stat-title"><b>SIBlue /SI</b></span>
                   <canvas height="60" width="60"></canvas></span> 
                 </li>
               </ul>
