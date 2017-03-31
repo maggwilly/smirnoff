@@ -35,7 +35,7 @@
                             <div class="box warning"><!-- default, danger, warning, info, success -->
 
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4>{{((sales|somme('posRealTarget'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real BA in POS vs  Target</h4>
+                                    <h4>{{((sales|somme('posrealtarget'))/(sales|somme('postarget'))*100)|number_format(0, ',', '.')}}% :Real BA in POS vs  Target</h4>
                                 <small class="block"></small>
                                     <i class="fa fa-bar-chart-o"></i>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="box default"><!-- default, danger, warning, info, success -->
 
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4>{{((sales|somme('posRealDay'))/(sales|somme('posTarget'))*100)|number_format(0, ',', '.')}}% :Real Day in POS vs  Target</h4>
+                                    <h4>{{((sales|somme('posrealday'))/(sales|somme('postarget'))*100)|number_format(0, ',', '.')}}% :Real Day in POS vs  Target</h4>
                                <small class="block"></small>
                                     <i class="fa fa-bar-chart-o"></i>
                                 </div>
