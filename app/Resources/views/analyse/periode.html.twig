@@ -1,10 +1,10 @@
 {% extends 'AppBundle::layout.html.twig' %}
  {% set total= marques|somme('bnreblle')%}
-{% block title %}On period{% endblock %}
+{% block title %}All  period report{% endblock %}
   {% block body %}
    <!-- page title -->
     <header id="page-header">
-    <h1>Overview on period<a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    <h1>Overview of all period<a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
 

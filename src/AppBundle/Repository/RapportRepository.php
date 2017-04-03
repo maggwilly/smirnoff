@@ -232,7 +232,6 @@ Nombre de point de vente visités
            $qb->andWhere('r.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-
            if($pointVente!=null){
            $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
           }  
@@ -240,7 +239,7 @@ Nombre de point de vente visités
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
              ->addSelect('r.weekText')
-             ->groupBy('r.weekText');
+             ->groupBy('r.weekText')->orderBy('r.week','ASC');
          return $qb->getQuery()->getArrayResult();  
    
   }

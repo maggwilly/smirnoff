@@ -1,10 +1,10 @@
 {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}On Last repports{% endblock %}
+{% block title %}Last report{% endblock %}
  {% set total= marques|somme('bnreblle')%}
 {% block body %}
    <!-- page title -->
     <header id="page-header">
-    <h1>Overview On Last repports <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    <h1>Overview On Last reports <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
     </header>
 <div id="content" class="dashboard padding-20">
 
