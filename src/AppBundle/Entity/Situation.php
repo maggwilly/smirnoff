@@ -86,6 +86,21 @@ class Situation
      */
     private $inbar;
 
+
+     /**
+     * @var bool
+     *
+     * @ORM\Column(name="absent", type="boolean", nullable=true)
+     */
+    private $absent;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="enrupture", type="boolean", nullable=true)
+     */
+    private $enrupture;
+
     /**
      * @var int
      *
@@ -419,5 +434,51 @@ class Situation
     public function getAffichette()
     {
         return $this->affichette;
+    }
+
+    /**
+     * Set absent
+     *
+     * @param boolean $absent
+     * @return Situation
+     */
+    public function setAbsent($absent)
+    {
+        $this->absent = $absent;
+
+        return $this;
+    }
+
+    /**
+     * Get absent
+     *
+     * @return boolean 
+     */
+    public function getAbsent()
+    {
+        return $this->absent;
+    }
+
+    /**
+     * Set enrupture
+     *
+     * @param boolean $enrupture
+     * @return Situation
+     */
+    public function setEnrupture($enrupture)
+    {
+        $this->enrupture = $enrupture;
+
+        return $this;
+    }
+
+    /**
+     * Get enrupture
+     *
+     * @return boolean 
+     */
+    public function getEnrupture()
+    {
+        return $this->enrupture;
     }
 }

@@ -21,6 +21,8 @@ class SituationType extends AbstractType
          ->add('tcp')
         ->add('inbar')
         ->add('nbreRh')
+        ->add('absent')
+        ->add('enrupture')
          ->add('marque')       
         ->add('price')
         ->add('bnreBlle') ;
