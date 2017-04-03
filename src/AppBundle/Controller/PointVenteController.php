@@ -43,7 +43,7 @@ class PointVenteController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $marques = $em->getRepository('AppBundle:Situation')->findApercuDernier($region, $startDate, $endDate,$pointVente);
+        $marques = $em->getRepository('AppBundle:Situation')->findApercuPeriode($region, $startDate, $endDate,$pointVente);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSalesDernier($region, $startDate, $endDate,$pointVente);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeSharesDernier($region, $startDate, $endDate,$pointVente);
         $salesweek = $em->getRepository('AppBundle:Rapport')->findSalesWeek($region, $startDate, $endDate,$pointVente);

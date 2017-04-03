@@ -50,7 +50,7 @@ Nombre de point de vente visités
 //situation comparee
   public function findByTypeSalesDernier ($region=null, $startDate=null, $endDate=null){
     $em = $this->_em;
-    $RAW_QUERY =($region!=null) ?'select v.posTarget,v.posRealTarget, v.posRealDay  from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ;'  : 'select v.posTarget,v.posRealTarget, v.posRealDay  from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ;'; 
+    $RAW_QUERY =($region!=null) ?'select v.posTarget as postarget ,v.posRealTarget as posrealtarget, v.posRealDay as posrealday from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ;'  : 'select v.posTarget as postarget ,v.posRealTarget as posrealtarget, v.posRealDay as posrealday  from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) ;'; 
      $statement = $em->getConnection()->prepare($RAW_QUERY);
         if($region!=null){
     $statement->bindValue('region', $region);

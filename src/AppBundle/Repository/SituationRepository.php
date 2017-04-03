@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use AppBundle\Entity\PointVente;
 /**
  * StituationRepository
  *
@@ -15,7 +15,7 @@ class SituationRepository extends EntityRepository
 		/*
 for mobile
 */
-  public function findApercuPeriode ($type=null, $startDate=null, $endDate=null){
+  public function findApercuPeriode ($type=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
 	  $qb = $this->createQueryBuilder('s')->join('s.rapport','r')->join('r.pointVente','p');
         if($type!=null){
@@ -28,11 +28,15 @@ for mobile
           if($endDate!=null){
            $qb->andWhere('r.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
           }
+
+          if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          }   
            $qb->select('s.marque as nom'); 
            $qb->addSelect('count(s.frigo) as frigo'); 
            $qb->addSelect('count(s.affiche) as affiche'); 
            $qb->addSelect('count(s.potence) as potence'); 
-            $qb->addSelect('count(s.affichette) as affichette'); 
+           $qb->addSelect('count(s.affichette) as affichette'); 
            $qb->addSelect('count(s.autre) as autre');          
            $qb->addSelect('count(s.ncp) as ncp');
            $qb->addSelect('count(s.tcp) as tcp');
