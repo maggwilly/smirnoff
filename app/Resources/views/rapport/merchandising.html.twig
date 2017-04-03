@@ -26,28 +26,28 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                           <th>Superviseur</th>
-                                                           <th>BA</th>
-                                                           <th >Date rapport</th>
                                                            <th class="success">Nom du POS</th>
                                                            <th class="success">Categorie</th>
                                                            <th class="success">Quartier</th>
-                                                            <th class="warning">Disp</th>
-                                                            <th class="warning">NLEtagére</th>
+                                                            <th>Superviseur</th>
+                                                            <th>BA</th>
+                                                           <th >Date rapport</th>  
+                                                            <th class="warning">Position</th>                                                          
+                                                            <th class="warning">N° LEtagére</th>
                                                             <th class="warning">NCEtagére</th>
-                                                            <th class=" danger">NLFrigo</th>
+                                                            <th class=" danger">N° LFrigo</th>
                                                             <th class=" danger">NCFrigo</th>                             
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for rapport in rapports %}
-                                                        <tr class="odd gradeX">   
+                                                        <tr class="odd gradeX"> 
+                                                        <td class="success">{{rapport.pointVente.nom}}</td>
+                                                         <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
+                                                          <td class="success">{{rapport.pointVente.quartier}}</td>                                                           
                                                         <td class="col-md-2">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
                                                         <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
-                                                         <td >{{rapport.date| date('d/m/Y')}}</td> 
-                                                          <td class="success">{{rapport.pointVente.nom}}</td>
-                                                         <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
-                                                          <td class="success">{{rapport.pointVente.quartier}}</td>                                      
+                                                         <td >{{rapport.date| date('d/m/Y')}}</td>                                     
                                                           <td class="col-md-1  warning">{{rapport.disposition }}</td>
                                                           <td class="col-md-1 warning">{{rapport.etagerLigne |number_format(0, ',', '.')}}</td>
                                                           <td class="col-md-1 warning">{{rapport.etagerColonne |number_format(0, ',', '.')}}</td>
@@ -90,11 +90,14 @@
                             },
                              {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            },
+                             {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
                             },
                              {

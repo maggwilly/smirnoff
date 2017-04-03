@@ -8,9 +8,9 @@ app_point_vente:
     resource: "@AppBundle/Resources/config/routing/pointvente.yml"
     prefix:   /pointvente
 
-app_etape:
-    resource: "@AppBundle/Resources/config/routing/etape.yml"
-    prefix:   /etape
+app_gagnant:
+    resource: "@AppBundle/Resources/config/routing/gagnant.yml"
+    prefix:   /gagnant
 
 point_ventes:
     path:      /mobile/points/ventes

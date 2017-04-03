@@ -25,16 +25,16 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                   <thead>
                                                       <tr>
+                                                           <th class="success">Nom du POS</th>
+                                                           <th class="success">Cat</th>
+                                                           <th class="success">Qtier</th>
                                                             <th>Superviseur</th>
                                                             <th>BA</th>
-                                                           <th >Date </th>
-                                                           <th class="success">Nom du POS</th>
-                                                           <th class="success">Categorie</th>
-                                                           <th class="success">Quartier</th>
+                                                           <th >Date </th>                                                           
                                                            <th class="col-md-1 warning ">SIRed</th>
                                                            <th class="col-md-1 warning ">SIBlack</th> 
                                                            <th class="col-md-1 danger ">SIBlue</th>
-                                                           <th class="col-md-1 info ">Heineken</th>
+                                                           <th class="col-md-1 info ">Hei</th>
                                                            <th class="col-md-1 info ">VK</th> 
                                                            <th class="col-md-1 info ">BCola</th> 
                                                            <th class="col-md-1 info ">BCider</th>
@@ -48,12 +48,12 @@
                                                     {% for rapport in rapports %}
                                                     {% set sminoff=(rapport.sminoffRed.bnreBlle+rapport.sminoffBlue.bnreBlle+rapport.sminoffBlack.bnreBlle) %}
                                                     {% set univers=(sminoff+rapport.heineken.bnreBlle+rapport.voodka.bnreBlle+rapport.boostrer.bnreBlle+rapport.sabc1664.bnreBlle+rapport.sabc.bnreBlle) %}
-                                                          <td >{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
-                                                          <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
-                                                          <td >{{rapport.date| date('d/m/Y')}}</td> 
                                                           <td class="success">{{rapport.pointVente.nom}}</td>
                                                           <td  class=" success"><i>{{rapport.pointVente.type}}</i></td>
-                                                          <td class=" success">{{rapport.pointVente.quartier}}</td>                               
+                                                          <td class=" success">{{rapport.pointVente.quartier}}</td>                                                      
+                                                          <td >{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
+                                                          <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
+                                                          <td >{{rapport.date| date('d/m/Y')}}</td>                              
                                                           <td class="col-md-1 warning">{{rapport.sminoffRed.bnreBlle|number_format(0, ',', '.')}}</td>
                                                           <td class="col-md-1 warning">{{rapport.sminoffBlack.bnreBlle|number_format(0, ',', '.')}}</td>
                                                           <td class="col-md-1 danger">{{rapport.sminoffBlue.bnreBlle|number_format(0, ',', '.')}}</td>
@@ -123,23 +123,41 @@
                             },
                              {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            },
+                             {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
                                 "orderable": true
-                            }, {
+                            },
+                             {
                                 "orderable": true
-                            }, {
+                            }, 
+                            {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            }, 
+                            {
                                 "orderable": true
                             }],
                             "lengthMenu": [

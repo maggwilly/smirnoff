@@ -33,7 +33,7 @@
                                <i class="main-icon fa fa-dashboard "></i><span>Overview</span>
                             </a>
                             <ul><!-- submenus -->
-                                <li><a href="{{ path('rapport_apercu_dernier') }}">On the last repports</a></li>
+                                <li><a href="{{ path('rapport_apercu_dernier') }}">On last repports</a></li>
                                 <li><a href="{{ path('rapport_apercu_periode') }}">On the period</a></li>
 
                             </ul>
@@ -52,7 +52,7 @@
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon  fa fa-edit"></i><span>Repports</span>
+                               <i class="main-icon  fa fa-edit"></i><span>Activities repports</span>
                             </a>
                             <ul><!-- submenus -->
                                <li><a href="{{ path('rapport_index',{'section':'sales'}) }}">Sales of sminoff </a></li>
@@ -102,12 +102,11 @@ name="periode" data-format="dd/mm/yyyy"
                 <select class="" name="region" selected>
                    <option value="" {% if not app.session.get('region')  %}selected="true"{% endif %}>Toutes catégories</option>
                    <option value="Rdv des amis"  {% if app.session.get('region')=="Rdv des amis"  %}selected="true"{% endif %}>Rdv des amis</option>
-                   <option value="Boys bar" {% if  app.session.get('region')=="Boys bar"  %}selected="true"{% endif %}>Boy's bar</option>
+                   <option value="Full fun" {% if  app.session.get('region')=="Full fun"  %}selected="true"{% endif %}>Full fun</option>
               </select>
                 <button type="submit" class="btn btn-primary btn-sm">Afficher les données</button>
                 </form>
                 <nav>
-
                     <!-- OPTIONS LIST -->
                     <ul class="nav pull-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

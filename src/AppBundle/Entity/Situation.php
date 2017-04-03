@@ -125,7 +125,7 @@ class Situation
      * @return Stituation
      */
     public function setFrigo($frigo)
-    {
+    { if($frigo)
         $this->frigo = $frigo;
 
         return $this;
@@ -149,6 +149,7 @@ class Situation
      */
     public function setAffiche($affiche)
     {
+        if($affiche)
         $this->affiche = $affiche;
 
         return $this;
@@ -172,6 +173,7 @@ class Situation
      */
     public function setPotence($potence)
     {
+        if($potence)
         $this->potence = $potence;
 
         return $this;
@@ -195,6 +197,7 @@ class Situation
      */
     public function setNcp($ncp)
     {
+        if($ncp)
         $this->ncp = $ncp;
 
         return $this;
@@ -217,6 +220,7 @@ class Situation
      */
     public function setTcp($ncp)
     {
+         if($ncp)
         $this->tcp = $ncp;
 
         return $this;
@@ -239,6 +243,7 @@ class Situation
      */
     public function setInbar($inbar)
     {
+         if($inbar)
         $this->inbar = $inbar;
 
         return $this;
@@ -377,6 +382,7 @@ class Situation
      */
     public function setAutre($autre)
     {
+         if($autre)
         $this->autre = $autre;
 
         return $this;
@@ -399,7 +405,7 @@ class Situation
      * @return Situation
      */
     public function setAffichette($affichette)
-    {
+    { if($affichette)
         $this->affichette = $affichette;
 
         return $this;

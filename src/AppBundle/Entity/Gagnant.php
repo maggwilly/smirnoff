@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Gagnant
  *
@@ -41,11 +41,25 @@ class Gagnant
      */
     private $object;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rapport",inversedBy="gagnants")
-   * 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date",nullable=false)
+     */
+    private $date;
+
+    /**
+     * @var int
+     * @Assert\GreaterThanOrEqual( value = 18, message="Vous avez saisi un âge non autorisé.")
+     * @ORM\Column(name="age", type="integer")
+     */
+    private $age;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PointVente",inversedBy="gagnants")
+   * @ORM\JoinColumn(nullable=true)
    */
-    private $rapport;
+    private $pointVente;
     /**
      * Get id
      *
@@ -126,25 +140,71 @@ class Gagnant
     }
 
     /**
-     * Set rapport
+     * Set date
      *
-     * @param \AppBundle\Entity\Gagnant $rapport
-     * @return Gagnant
+     * @param \DateTime $date
+     * @return Rapport
      */
-    public function setRapport(\AppBundle\Entity\Rapport $rapport = null)
+    public function setDate($date)
     {
-        $this->rapport = $rapport;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get rapport
+     * Get date
      *
-     * @return \AppBundle\Entity\Gagnant 
+     * @return \DateTime 
      */
-    public function getRapport()
+    public function getDate()
     {
-        return $this->rapport;
+        return $this->date;
+    }
+
+    /**
+     * Set pointVente
+     *
+     * @param \AppBundle\Entity\PointVente $pointVente
+     * @return Rapport
+     */
+    public function setPointVente(\AppBundle\Entity\PointVente $pointVente)
+    {
+        $this->pointVente = $pointVente;
+
+        return $this;
+    }
+
+    /**
+     * Get pointVente
+     *
+     * @return \AppBundle\Entity\PointVente 
+     */
+    public function getPointVente()
+    {
+        return $this->pointVente;
+    } 
+
+    /**
+     * Set age
+     *
+     * @param integer $age
+     * @return Gagnant
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return integer 
+     */
+    public function getAge()
+    {
+        return $this->age;
     }
 }

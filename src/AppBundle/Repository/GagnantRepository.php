@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use AppBundle\Entity\PointVente;
 /**
  * GagnantRepository
  *
@@ -15,22 +15,27 @@ class GagnantRepository extends EntityRepository
  	   /**
   *Nombre visite effectue par utilisateur par journee
   */
-  public function findByType ($region=null, $startDate=null, $endDate=null){
+  public function findByType ($region=null, $startDate=null, $endDate=null, $fi=false,PointVente $pointVente=null){
   
-         $qb = $this->createQueryBuilder('g')->join('g.rapport','r')->join('r.pointVente','p');
+         $qb = $this->createQueryBuilder('g')->join('g.pointVente','p');
         if($region!=null){
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
           }
       if($startDate!=null){
-           $qb->andWhere('r.date>=:startDate')
+           $qb->andWhere('g.date>=:startDate')
           ->setParameter('startDate', new \DateTime($startDate));
           }
           if($endDate!=null){
-           $qb->andWhere('r.date<=:endDate')
+           $qb->andWhere('g.date<=:endDate')
           ->setParameter('endDate',new \DateTime($endDate));
           }
-
+          if($pointVente!=null){
+           $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+          } 
+           if($fi){
+              $qb->andWhere('g.object=\'Bouteille\'');
+          }          
           return $qb->getQuery()->getResult();
   } 
 

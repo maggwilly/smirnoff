@@ -26,12 +26,12 @@
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample">
                                                     <thead>
                                                         <tr>
-                                                           <th >Superviseur</th>
-                                                           <th>BA</th>
-                                                           <th >Date rapport</th>
                                                            <th class="success">Nom du POS</th>
                                                             <th class="success">Categorie</th>
-                                                            <th class="success">Quartier</th>          
+                                                            <th class="success">Quartier</th>   
+                                                           <th >Superviseur</th>
+                                                           <th>BA</th>
+                                                           <th >Date rapport</th>                                                                   
                                                             <th class="warning">SIRed</th>
                                                             <th class="warning">SIBlack</th>
                                                             <th class="warning">SIBlue</th>
@@ -45,12 +45,12 @@
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX"> 
+                                                        <td class="success">{{rapport.pointVente.nom}}</td>
+                                                        <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
+                                                        <td class="success">{{rapport.pointVente.quartier}}</td>                                                          
                                                         <td class="col-md-1">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
                                                         <td class="col-md-3">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
                                                         <td >{{rapport.date| date('d/m/Y')}}</td> 
-                                                        <td class="success">{{rapport.pointVente.nom}}</td>
-                                                        <td  class="col-md-1 success"><i>{{rapport.pointVente.type}}</i></td>
-                                                        <td class="success">{{rapport.pointVente.quartier}}</td>  
                                                         <td  class="col-md-1 warning">{{rapport.sminoffRed.price|number_format(0, ',', '.')}} </td>
                                                         <td  class="col-md-1 warning">{{rapport.sminoffBlack.price|number_format(0, ',', '.')}} </td>
                                                         <td  class="col-md-1 danger">{{rapport.sminoffBlue.price|number_format(0, ',', '.')}} </td>

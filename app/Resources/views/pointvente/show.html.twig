@@ -101,7 +101,15 @@
  {% include 'analyse/parts/promotions.html.twig' %} 
       </div>          
   </div>
-  {% include 'legende.html.twig' %}       
+    <div class="row">      
+          <div class="col-md-6">
+ {% include 'pointvente/winers.html.twig' %}
+        </div>
+        <div class="col-md-6">
+  {% include 'legende.html.twig' %}
+      </div>          
+  </div>  
+        
 </div>
 {% endblock %}
 {% block javascripts %}
@@ -235,4 +243,4 @@ var data = {
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDVCVll8mthbMy6rXkfJXF3FoqQTIqBw&callback=initMap">
     </script>  
 
- {% endblock %}
+       {% endblock %}

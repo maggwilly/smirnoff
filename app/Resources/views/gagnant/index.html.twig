@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gagnants list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Tel</th>
+                <th>Object</th>
+                <th>Date</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gagnant in gagnants %}
+            <tr>
+                <td><a href="{{ path('gagnant_show', { 'id': gagnant.id }) }}">{{ gagnant.id }}</a></td>
+                <td>{{ gagnant.nom }}</td>
+                <td>{{ gagnant.tel }}</td>
+                <td>{{ gagnant.object }}</td>
+                <td>{% if gagnant.date %}{{ gagnant.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ gagnant.age }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gagnant_show', { 'id': gagnant.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gagnant_edit', { 'id': gagnant.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gagnant_new') }}">Create a new gagnant</a>
+        </li>
+    </ul>
+{% endblock %}

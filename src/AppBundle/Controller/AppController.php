@@ -31,6 +31,20 @@ class AppController extends Controller
     }
 
 
+    /**
+     * Lists all etape entities.
+     *
+     */
+    public function homeAction()
+    {
+        if ($this->get('security.context')->isGranted('ROLE_SUPER')) {
+               return      $this->redirectToRoute('gagnant_new');
+            }
+         return $this->redirectToRoute('rapport_apercu_dernier');
+    }
+
+
+
    /* * Lists all etape entities.
      *
      */

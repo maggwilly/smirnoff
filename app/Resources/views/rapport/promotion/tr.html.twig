@@ -1,11 +1,10 @@
                                                         <tr class="odd gradeX">
-                                                       
-                                                        <td class="col-md-1">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
-                                                        <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
-                                                         <td class="col-md-1">{{rapport.date| date('d/m/Y')}}</td> 
                                                         <td class="col-md-1 success">{{rapport.pointVente.nom}}</td>
                                                          <td  class="success"><i>{{rapport.pointVente.type}}</i></td>
-                                                          <td class="success">{{rapport.pointVente.quartier}}</td>                                   
+                                                          <td class="success">{{rapport.pointVente.quartier}}</td>                                                        
+                                                        <td class="col-md-1">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
+                                                        <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
+                                                         <td class="col-md-1">{{rapport.date| date('d/m/Y')}}</td>                                  
                                <td>{% if value.inBar%}<i class="main-icon fa fa fa-check text-success"></i>{% else %}<i class="main-icon fa fa fa-times text-danger"></i>{% endif %}</td>
                                <td class="success">{{value.nbreRh}}</td> 
                                <td>{% if value.ncp%}<i class="main-icon fa fa fa-check text-success"></i>{% else %}<i class="main-icon fa fa fa-times text-danger"></i>{% endif %}</td>

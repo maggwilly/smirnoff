@@ -137,6 +137,12 @@ class PointVente
    *@ORM\OrderBy({"date" = "DESC"})
    */
     private $rapports;
+
+       /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gagnant", mappedBy="pointVente", cascade={"persist","remove"})
+   */
+    private $gagnants;
+
     
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="pointVentes")
@@ -160,6 +166,7 @@ class PointVente
       $this->createdAt=$createdAt;
       $this->nomGerant=$nomGerant;
       $this->ville=$ville;
+       $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -211,6 +218,16 @@ class PointVente
     public function getNomGerant()
     {
         return $this->nomGerant;
+    }
+
+        /**
+     * Get nomGerant
+     *
+     * @return string 
+     */
+    public function getAffichage()
+    {
+        return $this->nom.'> '.$this->type;
     }
     /**
      * Set type
@@ -536,8 +553,6 @@ class PointVente
  */
  public function prePersist(){
  
-    
-
  }
     /**
      * Set synchro
@@ -608,4 +623,40 @@ class PointVente
     {
         return $this->rapports;
     }
+
+
+  
+  /**
+     * Add gagnants
+     *
+     * @param \AppBundle\Entity\Gagnant $gagnants
+     * @return Rapport
+     */
+    public function addGagnant(\AppBundle\Entity\Gagnant $gagnants)
+    {
+        $gagnants->setPointVente($this);
+        $this->gagnants[] = $gagnants;
+
+        return $this;
+    }
+
+    /**
+     * Remove gagnants
+     *
+     * @param \AppBundle\Entity\Gagnant $gagnants
+     */
+    public function removeGagnant(\AppBundle\Entity\Gagnant $gagnants)
+    {
+        $this->gagnants->removeElement($gagnants);
+    }
+
+    /**
+     * Get gagnants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGagnants()
+    {
+        return $this->gagnants;
+    } 
 }

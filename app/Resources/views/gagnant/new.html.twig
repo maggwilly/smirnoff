@@ -1,0 +1,234 @@
+ {% extends 'AppBundle::layout.html.twig' %}
+{% block title %}Dtabase{% endblock %}
+
+  {% block fos_user_content %}
+        <!-- WRAPPER -->
+        <div id="wrapper">
+
+            <header id="header">
+                <!-- Mobile Button -->
+                <span class="logo pull-left">
+                    <img src="assets/images/logo_light.png" alt="AllReport" height="35">
+                </span>
+                <nav>
+
+                    <!-- OPTIONS LIST -->
+                    <ul class="nav pull-right">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <!-- USER OPTIONS -->
+                        <li class="dropdown pull-left">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img class="user-avatar" alt="" src="{{ asset('assets/images/noavatar.jpg') }}" height="34" /> 
+                                <span class="user-name">
+                                    <span class="hidden-xs">
+                                        {{  app.user.username }}<i class="fa fa-angle-down"></i>
+                                    </span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu hold-on-click">
+                                <li><!-- settings -->
+                                    <a href="#"><i class="fa fa-cogs"></i> Paramètres</a>
+                                </li>
+
+                                <li class="divider"></li>
+                                  
+                                <li><!-- logout -->
+                                    <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-power-off"></i>Deconnexion</a>
+                                </li>
+                                 
+                            </ul>
+                        </li>
+                        <!-- /USER OPTIONS -->
+                 {% endif %}
+                    </ul>
+                    <!-- /OPTIONS LIST -->
+
+                </nav>
+
+            </header>
+            <!-- /HEADER -->
+
+
+
+               {% block body %}
+    <div id="content" class="dashboard padding-20">
+           
+   <div class="panel panel-default ">
+                        <div class="panel-body">
+                            <b>Enregistrement des winers</b> 
+                            <br>
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+
+                                    <h4>Comment s'y prendre ?</h4>
+                                    <p><em>Le formulaire ci-contre permet d'enrégistrer les gagnants dans la base de données</em></p>
+                                    <hr />
+                                    <p>
+                                        Pour enrégistrer la liste des gagnants pour un point de vente donné, Choisissez le point de vente et la date correspondante.
+                                        Saisissez en suite les informations du gagnant en commençant par son nom. Certains champs du formulaire sont obligatoires. Si vous ne les remplissez pas, vous ne pourrez pas enrégistrer le formulaire.
+                                    </p>
+                                   <hr />
+                                    <p>
+                                        Vous pouvez enrégistrer plusieurs gagnants d'un point de vente à la fois. Pour se faire, Cliquer sur "Ajouter une ligne" pour ajouter une nouvelle ligne dans le formulaire.
+
+
+                                    </p>
+                                     <p><em>Cliquez en suite sur le bouton vert pour enrégistrer.</em></p>
+                                </div>
+                            </div>
+
+ 
+
+                        </div>
+                        <div class="col-md-9">
+                        
+                            <!-- ------ -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-heading-transparent">
+                                    <strong>FORM VALIDATION</strong>
+                                </div>
+
+                                <div class="panel-body">
+                                        {% for flashMessage in app.session.flashbag.get('error') %}
+                                        <div class="alert alert-danger margin-bottom-30"><!-- DANGER -->
+                                        <strong>Erreur !</strong> 
+                                                       {{ flashMessage }}
+                                         </div>               
+                                         {% endfor %}
+                                   
+                                        {% for flashMessage in app.session.flashbag.get('success') %}
+                                        <div class="alert alert-success margin-bottom-30"><!-- DANGER -->
+                                        <strong>OK !</strong> 
+                                                       {{ flashMessage }}
+                                         </div>               
+                                         {% endfor %}
+                                   
+                                        {{ form_start(form,{'attr':{'class':'validateg','data-toastr-position':'top-right'}}) }}
+                                         {{ form_errors(form) }}
+                                            <fieldset>
+                                                <!-- required [php action request] -->
+                                                <input type="hidden" name="action" value="contact_send" />
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8 col-sm-8">
+                                                           {{ form_label(form.pointVente, "Choisir un point de vente") }}
+                                                          {{ form_errors(form.pointVente) }}
+                                                           {{ form_widget(form.pointVente,{'attr':{'class':'form-control pointer required'}}) }}
+                                                        </div>
+                                                         <div class="col-md-3 col-sm-3">
+                                                           {{ form_label(form.date, "Saisir la date") }}
+                                                          {{ form_errors(form.date) }}
+                                          {{ form_widget(form.date,{'attr':{'class':'form-control datepicker required', 'data-format':'dd/mm/yyyy','data-lang':'fr','data-RTL':'false'}}) }}
+                                                        </div>      
+                                                    </div>
+                                                </div>
+                      
+                                            </fieldset>
+                                            <div >
+                                            <div class="row">
+                                                <div  class="col-md-12 margin-top-30">
+                                                      {{ form_label(form.gagnants, "Les gagnants") }}  <a href="#" id="ajout_categorie" class="btn btn-default btn-sm">Ajouter un gagnant</a>
+                                                        {{ form_errors(form.gagnants) }}
+                                                <div id="form_gagnants"  data-prototype="<div id=&quot;form_gagnants___name__&quot;  class=&quot;row&quot;><div class=&quot;col-md-3&quot;><label for=&quot;form_gagnants___name___nom&quot; >Nom du gagnant</label><input type=&quot;text&quot; id=&quot;form_gagnants___name___nom&quot; name=&quot;form[gagnants][__name__][nom]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control required&quot;/></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___tel&quot; class=&quot;required&quot;>Teléphone</label><input type=&quot;text&quot; id=&quot;form_gagnants___name___tel&quot; name=&quot;form[gagnants][__name__][tel]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control required&quot;/></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___age&quot; class=&quot;required&quot;>Age du gagnant</label><input type=&quot;number&quot; id=&quot;form_gagnants___name___age&quot; name=&quot;form[gagnants][__name__][age]&quot; required=&quot;required&quot; class=&quot;form-control required&quot; /></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___object&quot; class=&quot;required&quot;>Object gagné</label><select id=&quot;form_gagnants___name___object&quot; name=&quot;form[gagnants][__name__][object]&quot; class=&quot;form-control pointer required&quot;><option value=&quot;Bouteille&quot;>Une bouteille</option><option value=&quot;T-shirt&quot;>T-shirt</option><option value=&quot;Casquette&quot;>Casquette</option><option value=&quot;Reward 3&quot;>Reward 3</option><option value=&quot;Reward 4&quot;>Reward 4</option></select></div></div>">
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             </div >
+                                            <div class="row">
+                                                <div class="col-md-12 margin-top-30">
+                                                    <button type="submit" class="btn btn-3d btn-success ">
+                                                   ENREGISTRER DANS LA BASE
+                                                        
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    {{ form_widget(form._token) }}
+                                      </form>
+
+                                </div>
+
+                            </div>
+                            <!-- /----- -->
+
+                        </div>
+
+
+
+                    </div>
+
+
+    </div>
+  {% endblock %}
+
+
+
+</div>
+    
+{% endblock fos_user_content %}
+   {% block javascripts %}
+    {{parent()}}
+<script type="text/javascript">
+$(document).ready(function() {
+
+var $container = $('div#form_gagnants');
+
+var $lienAjout = $('#ajout_categorie');
+//$container.append($lienAjout);
+// On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $lienAjout.click(function(e) {
+     e.preventDefault(); 
+    ajouterCategorie($container);
+   // évite qu'un # apparaisse dans l'URL
+  return false;
+});
+// On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+var index = $container.find(':input').length;
+// On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+if (index == 0) {
+  ajouterCategorie($container);
+} else {
+// Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+
+$container.children('div').each(function() {
+   ajouterLienSuppression($(this));
+});
+} 
+
+// La fonction qui ajoute un formulaire Categorie
+
+function ajouterCategorie($container) {
+// Dans le contenu de l'attribut « data-prototype », onremplace :
+// - le texte "__name__label__" qu'il contient par le label du champ
+// - le texte "__name__" qu'il contient par le numéro du champ
+var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Gagnant n°' + (index+1)).replace(/__name__/g, index));
+// On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+ajouterLienSuppression($prototype);
+// On ajoute le prototype modifié à la fin de la balise <div>
+$container.append($prototype);
+// Enfin, on incrémente le compteur pour que le prochain ajou se fasse avec un autre numéro
+index++;
+} 
+
+// La fonction qui ajoute un lien de suppression d'une catégori
+function ajouterLienSuppression($prototype) {
+// Création du lien
+$lienSuppression = $('<div class="col-md-3"><label></label><br><a href="#" class="btn btn-danger">Supprimer la ligne</a></div>');
+// Ajout du lien
+$prototype.append($lienSuppression);
+// Ajout du listener sur le clic du lien
+$lienSuppression.click(function(e) {
+  $prototype.remove();
+  e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+}
+});
+</script>    
+ {% endblock %}

@@ -67,7 +67,7 @@ Nombre de point de vente visités
 //situation comparee
   public function findByTypeSharesDernier ($region=null, $startDate=null, $endDate=null){
     $em = $this->_em;
-    $RAW_QUERY =($region!=null) ?'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack ,u.pv,count(g.id) as nbgagnants from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id left join gagnant g on g.rapport_id=v.id and g.object=\'Bouteille\' group by u.pv;'  : 'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack, u.pv,count(g.id) as nbgagnants from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id left join gagnant g on g.rapport_id=v.id and g.object=\'Bouteille\' group by u.pv;'; 
+    $RAW_QUERY =($region!=null) ?'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack ,u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'  : 'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack, u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'; 
      $statement = $em->getConnection()->prepare($RAW_QUERY);
         if($region!=null){
     $statement->bindValue('region', $region);
@@ -85,7 +85,7 @@ Nombre de point de vente visités
 
    public function findByTypeShares($region=null, $startDate=null, $endDate=null, PointVente $pointVente=null){
 
-        $qb = $this->createQueryBuilder('r')->leftJoin('r.gagnants','g', 'WITH','g.object=\'Bouteille\'')
+        $qb = $this->createQueryBuilder('r')
         ->join('r.pointVente','p')
          ->join('r.boostrer','bo')
           ->join('r.heineken','he')
@@ -119,7 +119,6 @@ Nombre de point de vente visités
              ->addSelect('sum(sRed.bnreBlle) as sminoffRed')
              ->addSelect('sum(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('sum(sBlack.bnreBlle) as sminoffBlack')
-              ->addSelect('count(g.id) as nbgagnants')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
              ->addSelect('p.type')            

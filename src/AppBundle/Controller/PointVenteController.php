@@ -46,10 +46,11 @@ class PointVenteController extends Controller
         $marques = $em->getRepository('AppBundle:Situation')->findApercuDernier($region, $startDate, $endDate,$pointVente);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSalesDernier($region, $startDate, $endDate,$pointVente);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeSharesDernier($region, $startDate, $endDate,$pointVente);
-            $salesweek = $em->getRepository('AppBundle:Rapport')->findSalesWeek($region, $startDate, $endDate,$pointVente);
+        $salesweek = $em->getRepository('AppBundle:Rapport')->findSalesWeek($region, $startDate, $endDate,$pointVente);
+        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate,false,$pointVente);
          $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
         return $this->render('pointvente/show.html.twig', array(
-            'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors,'pointVente' => $pointVente,'salesweek' => $salesweek
+            'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors,'pointVente' => $pointVente,'salesweek' => $salesweek, 'gagnants' => $gagnants
         ));
     }
 

@@ -32,6 +32,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-2">Nom</th>
+                                                            <th>Age</th>
                                                             <th>Telephone</th>
                                                             <th>Objet</th>
                                                             <th>Date</th>
@@ -43,13 +44,14 @@
                                                     <tbody>
                                                     {% for gagnant in gagnants if gagnant.object=='Bouteille' %}
                                                         <tr class="odd gradeX">  
-                                                            <td >{{gagnant.nom}}</td>                                   
+                                                            <td >{{gagnant.nom}}</td>  
+                                                            <td >{{gagnant.age}}</td>                                 
                                                             <td >{{gagnant.tel}}</td>  
                                                             <td >{{gagnant.object}}</td>
-                                                            <td >{{gagnant.rapport.date|date('d/m/Y')}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.nom}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
+                                                            <td >{{gagnant.date|date('d/m/Y')}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.nom}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.type}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -62,6 +64,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-2">Nom</th>
+                                                            <th>Age</th>
                                                             <th>Telephone</th>
                                                             <th>Objet</th>
                                                             <th >Date</th>
@@ -73,13 +76,14 @@
                                                     <tbody>
                                                     {% for gagnant in gagnants if gagnant.object!='Bouteille'%}
                                                         <tr class="odd gradeX">  
-                                                            <td >{{gagnant.nom}}</td>                                   
+                                                            <td >{{gagnant.nom}}</td> 
+                                                            <td >{{gagnant.age}}</td>                                      
                                                             <td >{{gagnant.tel}}</td>  
                                                             <td >{{gagnant.object}}</td>
-                                                            <td >{{gagnant.rapport.date|date('d/m/Y')}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.nom}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.type}}</td> 
-                                                            <td class="success">{{gagnant.rapport.pointVente.quartier}}</td> 
+                                                            <td >{{gagnant.date|date('d/m/Y')}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.nom}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.type}}</td> 
+                                                            <td class="success">{{gagnant.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -109,7 +113,16 @@
             var table2 = jQuery('#datatable_sample2');
             var colums= [
                              {
-                                "orderable": false
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
                             },
                              {
                                 "orderable": true
@@ -143,10 +156,10 @@
                             },
                             "columnDefs": [{  // set default column settings
                                 'orderable': true,
-                                'targets': [0]
+                                'targets': [1]
                             }, {
                                 "searchable": true,
-                                "targets": [0]
+                                "targets": [1]
                             }],
                             "order": [
                                 [1, "asc"]
@@ -186,28 +199,5 @@
              });
             });
         </script>
-<!-- PAGE LEVEL SCRIPT -->
-    <script type="text/javascript">
-      _toastr("Liste des gagnants","top-right","success",false);
 
-      /** SALES CHART
-      ******************************************* **/
-      loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
-        loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
-          loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
-            loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
-              loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
-                loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
-                  loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
-
-
-
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-      </script>
        {% endblock %}

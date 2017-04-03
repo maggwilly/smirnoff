@@ -131,11 +131,6 @@ class Rapport
      */
        private $disposition;
 
-   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gagnant", mappedBy="rapport", cascade={"persist","remove"})
-   */
-    private $gagnants;
-
 
       /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
@@ -196,7 +191,7 @@ class Rapport
      */
     public function __construct()
     {
-        $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
+       
     }
 /**
 * @ORM\PrePersist
@@ -652,39 +647,7 @@ class Rapport
         return $this->synchro;
     }
   
-    /**
-     * Add gagnants
-     *
-     * @param \AppBundle\Entity\Gagnant $gagnants
-     * @return Rapport
-     */
-    public function addGagnant(\AppBundle\Entity\Gagnant $gagnants)
-    {
-        $gagnants->setRapport($this);
-        $this->gagnants[] = $gagnants;
 
-        return $this;
-    }
-
-    /**
-     * Remove gagnants
-     *
-     * @param \AppBundle\Entity\Gagnant $gagnants
-     */
-    public function removeGagnant(\AppBundle\Entity\Gagnant $gagnants)
-    {
-        $this->gagnants->removeElement($gagnants);
-    }
-
-    /**
-     * Get gagnants
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGagnants()
-    {
-        return $this->gagnants;
-    }
 
     /**
      * Set rh
