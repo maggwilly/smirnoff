@@ -239,7 +239,7 @@ Nombre de point de vente visités
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
              ->addSelect('r.weekText')
-             ->groupBy('r.weekText')->orderBy('r.week','ASC');
+             ->groupBy('r.weekText')->addGroupBy('r.week')->orderBy('r.week','ASC');
          return $qb->getQuery()->getArrayResult();  
    
   }
