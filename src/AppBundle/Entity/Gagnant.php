@@ -57,7 +57,7 @@ class Gagnant
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PointVente",inversedBy="gagnants")
-   * @ORM\JoinColumn(nullable=true)
+   * @ORM\JoinColumn(nullable=false)
    */
     private $pointVente;
     /**
