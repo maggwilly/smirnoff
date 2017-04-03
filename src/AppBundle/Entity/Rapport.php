@@ -44,7 +44,7 @@ class Rapport
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PointVente",inversedBy="rapports")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
   
     private $pointVente;

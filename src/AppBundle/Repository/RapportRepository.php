@@ -208,7 +208,7 @@ Nombre de point de vente visités
              ->addSelect('avg(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('avg(sBlack.bnreBlle) as sminoffBlack')
              ->addSelect('r.weekText')
-             ->groupBy('r.weekText');
+             ->groupBy('r.weekText')->addGroupBy('r.week')->orderBy('r.week','ASC');
          return $qb->getQuery()->getArrayResult();  
    
   } 
