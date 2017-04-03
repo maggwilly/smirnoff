@@ -28,10 +28,6 @@ rapport_gagnants:
     defaults: { _controller: "AppBundle:Rapport:gagnants"}
     methods:  GET
     
-rapport_posrhs:
-    path:     /posrhs
-    defaults: { _controller: "AppBundle:Rapport:posRhs"}
-    methods:  GET
 
 rapport_apercu_periode:
     path:     /apercu/periode

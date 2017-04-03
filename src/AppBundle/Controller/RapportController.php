@@ -76,7 +76,7 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByTypePrices($region, $startDate, $endDate);
         return $this->render('analyse/prices.html.twig', array(
             'rapports' => $rapports
         ));
@@ -97,18 +97,6 @@ class RapportController extends Controller
         ));
     }
 
-public function posRhsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $session = $this->getRequest()->getSession();
-        $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
-        $posrhs = $em->getRepository('AppBundle:PointVente')->findPosRhs($region, $startDate, $endDate);
-        return $this->render('rapport/posrhs.html.twig', array(
-            'posrhs' => $posrhs,
-        ));
-    }
 
 
   public function visibilitieAction()
