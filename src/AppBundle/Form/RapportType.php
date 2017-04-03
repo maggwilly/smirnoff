@@ -24,7 +24,6 @@ class RapportType extends AbstractType
         ->add('frigoLigne')
         ->add('frigoColonne') 
         ->add('disposition')               
-        ->add('gagnants', CollectionType::class, array('entry_type'=> GagnantType::class,'allow_add' => true))
         ->add('boostrer',SituationType::class, array())
         ->add('heineken',SituationType::class, array())
         ->add('voodka',SituationType::class, array())
