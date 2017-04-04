@@ -28,7 +28,7 @@ class Quartier
 
 
     /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="pointVentes")
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Synchro",inversedBy="quartiers")
    * 
    */
     private $synchro;

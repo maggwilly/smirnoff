@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="synchro")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SynchroRepository")
+  *@ORM\HasLifecycleCallbacks()
  */
 class Synchro
 {
@@ -70,6 +71,25 @@ class Synchro
        $this->quartiers = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
+
+
+    /**
+* @ORM\PrePersist
+*/
+ public function prePersist(){
+   foreach ($this->pointVentes as $key => $value) {
+      $value->setSynchro($this);
+   }
+
+      foreach ($this->rapports as $key => $value) {
+      $value->setSynchro($this);
+   }
+
+      foreach ($this->quartiers as $key => $value) {
+      $value->setSynchro($this);
+   }
+  }
+
     /**
      * Get id
      *

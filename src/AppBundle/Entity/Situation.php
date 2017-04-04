@@ -56,7 +56,7 @@ class Situation
 
   /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rapport")
-   * 
+   * @ORM\JoinColumn( nullable=true, onDelete="SET NULL")
    */
     private $rapport;
 
@@ -284,6 +284,7 @@ class Situation
      */
     public function setNbreRh($nbreRh)
     {
+          if($inbar)
         $this->nbreRh = $nbreRh;
 
         return $this;
@@ -306,7 +307,7 @@ class Situation
      * @return Stituation
      */
     public function setPrice($price)
-    {
+    {  if(!$this->absent && !$this->enrupture)
         $this->price = $price;
 
         return $this;
@@ -330,6 +331,7 @@ class Situation
      */
     public function setBnreBlle($bnreBlle)
     {
+         if(!$this->absent && !$this->enrupture)
         $this->bnreBlle = $bnreBlle;
 
         return $this;
