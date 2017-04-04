@@ -207,7 +207,6 @@ class Synchro
     public function addPointVente(\AppBundle\Entity\PointVente $pointVentes)
     {
           $pointVentes->setSynchro($this);
-         $pointVentes->setUser($this->user);
           $this->pointVentes[] =$pointVentes;
 
         return $this;
@@ -242,9 +241,8 @@ class Synchro
     public function addRapport(\AppBundle\Entity\Rapport $rapports)
     {
   
-         $rapports->setUser($this->user);
-        $this->rapports[] = $rapports;
         $rapports->setSynchro($this);
+        $this->rapports[] = $rapports;
         return $this;
     }
 

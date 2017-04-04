@@ -107,7 +107,7 @@ class PointVente
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", precision=10, scale=6, nullable=true)
+     * @ORM\Column(name="longitude",  type="string", length=255, nullable=true)
      */
     private $longitude;
 
@@ -166,7 +166,7 @@ class PointVente
       $this->createdAt=$createdAt;
       $this->nomGerant=$nomGerant;
       $this->ville=$ville;
-       $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
+      $this->gagnants = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 

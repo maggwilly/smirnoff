@@ -72,7 +72,7 @@ class Rapport
     /**
      * @var int
      *
-     * @ORM\Column(name="posTarget", type="integer")
+     * @ORM\Column(name="posTarget", type="integer",options={"default":72})
      */
     private $posTarget;
 
@@ -151,6 +151,20 @@ class Rapport
     protected $voodka;
 
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true)
+     */
+    protected $origine; 
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
+     * @ORM\JoinColumn( nullable=true)
+     */
+    protected $export;
+
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Situation", cascade={"persist","remove"})
      * @ORM\JoinColumn( nullable=true)
@@ -184,8 +198,6 @@ class Rapport
     protected $sminoffBlack;
 
 
-
-
   /**
      * Constructor
      */
@@ -197,7 +209,7 @@ class Rapport
 * @ORM\PrePersist
 */
  public function prePersist(){
-     $this->week =$this->date->format("W");
+    $this->week =$this->date->format("W");
      $year=$this->date->format("Y");
     $date = new \DateTime();
     $date->setISODate($year, $this->week);
@@ -785,5 +797,66 @@ class Rapport
     public function getDisposition()
     {
         return $this->disposition;
+    }
+
+    /**
+     * Set week
+     *
+     * @param integer $week
+     * @return Rapport
+     */
+    public function setWeek($week)
+    {
+        $this->week = $week;
+
+        return $this;
+    }
+
+    /**
+     * Set origine
+     *
+     * @param \AppBundle\Entity\Situation $origine
+     * @return Rapport
+     */
+    public function setOrigine(\AppBundle\Entity\Situation $origine = null)
+    {
+         $origine->setRapport($this);
+        $this->origine = $origine;
+
+        return $this;
+    }
+
+    /**
+     * Get origine
+     *
+     * @return \AppBundle\Entity\Situation 
+     */
+    public function getOrigine()
+    {
+        return $this->origine;
+    }
+
+    /**
+     * Set export
+     *
+     * @param \AppBundle\Entity\Situation $export
+     * @return Rapport
+     */
+    public function setExport(\AppBundle\Entity\Situation $export = null)
+    {
+         $export->setRapport($this);
+        $this->export = $export;
+
+        return $this;
+    }
+
+    /**
+     * Get export
+     *
+     * @return \AppBundle\Entity\Situation 
+     */
+    public function getExport()
+    {
+        return $this->export;
     }
 }

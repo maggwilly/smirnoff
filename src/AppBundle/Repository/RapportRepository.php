@@ -67,7 +67,7 @@ Nombre de point de vente visités
 //situation comparee
   public function findByTypeSharesDernier ($region=null, $startDate=null, $endDate=null){
     $em = $this->_em;
-    $RAW_QUERY =($region!=null) ?'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack ,u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'  : 'select sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack, u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'; 
+    $RAW_QUERY =($region!=null) ?'select sum(or.bnreBlle) as origine, sum(exp.bnreBlle) as export, sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack ,u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate and pv.type=:region group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation or  on v.origine_id=or.id join situation exp  on v.export_id=exp.id  join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'  : 'select sum(or.bnreBlle) as origine, sum(exp.bnreBlle) as export, sum(bo.bnreBlle) as boostrer,sum(he.bnreBlle) as heineken,sum(vo.bnreBlle) as voodka,sum(sa.bnreBlle) as sabc,sum(sa16.bnreBlle) as sabc1664,sum(sRed.bnreBlle) as sminoffred,sum(sBlue.bnreBlle) as sminoffblue,sum(sBlack.bnreBlle) as sminoffblack, u.pv from (select pv.id as pv , max(v.date) as date from point_vente pv join rapport v  on pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate  group by  pv.id order by pv.id) as u  join  rapport v on (u.pv=v.point_vente_id and u.date=v.date) join situation or  on v.origine_id=or.id join situation exp  on v.export_id=exp.id join situation bo  on v.boostrer_id=bo.id join situation he  on v.heineken_id=he.id join situation vo  on v.voodka_id=vo.id join situation sa  on v.sabc_id=sa.id join situation sa16  on v.sabc1664_id=sa16.id join situation sRed  on v.sminoff_red_id=sRed.id join situation sBlack  on v.sminoff_black_id=sBlack.id join situation sBlue  on v.sminoff_blue_id=sBlue.id  group by u.pv;'; 
      $statement = $em->getConnection()->prepare($RAW_QUERY);
         if($region!=null){
     $statement->bindValue('region', $region);
@@ -94,7 +94,9 @@ Nombre de point de vente visités
              ->join('r.sabc1664','sa16')
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
-                ->join('r.sminoffBlack','sBlack');
+                ->join('r.sminoffBlack','sBlack')
+                ->join('r.origine','origine')
+                ->join('r.export','export');
         if($region!=null){
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
@@ -119,6 +121,8 @@ Nombre de point de vente visités
              ->addSelect('sum(sRed.bnreBlle) as sminoffRed')
              ->addSelect('sum(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('sum(sBlack.bnreBlle) as sminoffBlack')
+              ->addSelect('sum(origine.bnreBlle) as origine')
+             ->addSelect('sum(export.bnreBlle) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
              ->addSelect('p.type')            
@@ -138,7 +142,9 @@ Nombre de point de vente visités
              ->join('r.sabc1664','sa16')
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
-                ->join('r.sminoffBlack','sBlack');
+                ->join('r.sminoffBlack','sBlack')
+                  ->join('r.origine','origine')
+                ->join('r.export','export');
         if($region!=null){
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
@@ -162,6 +168,8 @@ Nombre de point de vente visités
              ->addSelect('avg(sRed.price) as sminoffRed')
              ->addSelect('avg(sBlue.price) as sminoffBlue')
              ->addSelect('avg(sBlack.price) as sminoffBlack')
+            ->addSelect('avg(origine.price) as origine')
+             ->addSelect('avg(export.price) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
              ->addSelect('p.type')            

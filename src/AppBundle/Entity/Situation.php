@@ -52,6 +52,8 @@ class Situation
      * @ORM\Column(name="affichette", type="boolean", nullable=true)
      */
     private $affichette;
+
+
   /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rapport")
    * 
@@ -444,6 +446,9 @@ class Situation
      */
     public function setAbsent($absent)
     {
+        
+       if($absent) 
+    
         $this->absent = $absent;
 
         return $this;
@@ -467,6 +472,7 @@ class Situation
      */
     public function setEnrupture($enrupture)
     {
+         if($enrupture) 
         $this->enrupture = $enrupture;
 
         return $this;
