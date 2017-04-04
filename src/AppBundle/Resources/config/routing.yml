@@ -23,7 +23,7 @@ produits:
     methods:  GET
 
 create_point_ventes:
-    path:      /blocked/mobile/create/points/ventes
+    path:      /mobile/create/points/ventes
     defaults: { _controller: "AppBundle:Mobile:createPointVentes" }
     methods:  [POST,GET]
 

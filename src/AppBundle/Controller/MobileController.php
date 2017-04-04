@@ -212,13 +212,13 @@ private function getConnectedUser(){
     public function apkAction()
 {
   $request = $this->get('request');
-    $path = $this->get('kernel')->getRootDir(). "/../web/home/apk/allreport1.9.0.apk";
+    $path = $this->get('kernel')->getRootDir(). "/../web/home/apk/smirnoff_1.3.3.apk";
     $content = file_get_contents($path);
     $response = new Response();
 
     //set headers
     $response->headers->set('Content-Type', 'mime/type');
-    $response->headers->set('Content-Disposition', 'attachment;filename="allreport1.9.0.apk"');
+    $response->headers->set('Content-Disposition', 'attachment;filename="smirnoff_1.3.3.apk"');
 
     $response->setContent($content);
     return $response;
