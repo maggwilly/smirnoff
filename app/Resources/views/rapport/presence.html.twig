@@ -1,16 +1,27 @@
 {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Prices & promotions {% endblock %}
+{% block title %}Présence & rupture {% endblock %}
   {% block body %}
 
    <!-- page title -->
     <header id="page-header">
-    <h1>Prices & promotions <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    <h1>Présence et rupture de stock
+     <a>
+
+    {% if pointVente is defined and pointVente is not null %}
+        {{ pointVente.nom }} 
+    {% else %}
+    {% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}     
+    {% endif %}
+  
+    </a>
+
+    </h1>
     </header>
 <div id="content" class="dashboard padding-20">
      <div id="panel-2" class="panel panel-default">
             <div class="panel-heading">
                 <span class="title elipsis pull-left">
-                        <strong>Prices & promotions</strong> :Historique dans la période
+                        <strong>Présence & rupture</strong> :Historique dans la période
                         </span>           
                   <!-- tabs nav -->
                   <ul class="nav nav-tabs pull-right">
@@ -41,11 +52,11 @@
                     <div class="tab-content transparent"> 
                       <div id="ice" class="tab-pane active"><!-- TAB 1 CONTENT -->                               
                         <table class="table table-striped table-bordered table-hover" id="datatable_sample">
-                                {% include 'rapport/promotion/headers.html.twig' %}    
+                                {% include 'rapport/presence/headers.html.twig' %}    
                                     <tbody>
                                     {% for rapport in rapports %}
                                              {% set value=rapport.sminoffRed %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}                                       
                                                   </tbody>
                                                 </table>
@@ -53,22 +64,22 @@
 
                       <div id="heineken" class="tab-pane "><!-- TAB 2 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample4">
-                            {% include 'rapport/promotion/headers.html.twig' %}   
+                            {% include 'rapport/presence/headers.html.twig' %}   
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                              {% set value=rapport.heineken %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
                                    </div><!-- /TAB 1 CONTENT-->                                                                                                                         
                       <div id="boostrer" class="tab-pane "><!-- TAB 2 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample5">
-                      {% include 'rapport/promotion/headers.html.twig' %}   
+                      {% include 'rapport/presence/headers.html.twig' %}   
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                              {% set value=rapport.boostrer %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
@@ -76,11 +87,11 @@
 
                       <div id="voodka" class="tab-pane "><!-- TAB 2 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample6">
-               {% include 'rapport/promotion/headers.html.twig' %}   
+                       {% include 'rapport/presence/headers.html.twig' %}   
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                              {% set value=rapport.voodka %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
@@ -88,11 +99,11 @@
 
                       <div id="sabc1664" class="tab-pane "><!-- TAB 2 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample7">
-                                      {% include 'rapport/promotion/headers.html.twig' %}   
+                                      {% include 'rapport/presence/headers.html.twig' %}   
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                              {% set value=rapport.sabc1664 %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
@@ -100,11 +111,11 @@
 
                       <div id="sabc" class="tab-pane "><!-- TAB 2 CONTENT -->                               
                                            <table class="table table-striped table-bordered table-hover" id="datatable_sample8">
-                              {% include 'rapport/promotion/headers.html.twig' %}   
+                              {% include 'rapport/presence/headers.html.twig' %}   
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                              {% set value=rapport.sabc %} 
-                                            {% include 'rapport/promotion/tr.html.twig' %} 
+                                            {% include 'rapport/presence/tr.html.twig' %} 
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
@@ -129,17 +140,8 @@
          loadScript( plugin_path + "datatables/js/jquery.dataTables.min.js", function() {
              loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
             if (jQuery().dataTable) {
-            var columns=[
-                             {
+            var columns=[{
                                 "orderable": true
-                            },                    
-                             {
-                                "orderable": true
-                            },                    
-                             {
-                                "orderable": true
-                            },{
-                                "orderable": false
                             },
                              {
                                 "orderable": true

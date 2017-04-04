@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Rapport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use AppBundle\Entity\PointVente;
 
 /**
  * Rapport controller.
@@ -16,17 +16,17 @@ class RapportController extends Controller
      * Lists all rapport entities.
      *
      */
-    public function indexAction($section='sales')
+    public function indexAction($section='sales',PointVente $pointVente=null)
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
         $endDate=$session->get('endDate', date('Y').'-12-31');
-        $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
+        $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate,$pointVente);
 
         return $this->render('rapport/'.$section.'.html.twig', array(
-            'rapports' => $rapports,
+            'rapports' => $rapports,'pointVente' => $pointVente,
         ));
     }
     /**

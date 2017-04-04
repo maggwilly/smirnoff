@@ -111,10 +111,19 @@
                                                         {%endfor%}                                                        
                                                         </tbody>
                                                 </table>
+                                                {% if pointVente is defined %}
+                                                 {% set id=pointVente.id %} 
+                                                    {% else %}
+                                                {% set id='all' %}         
+                                                    {% endif %}
+                                                 <a class="btn btn-xs btn-success"  href="{{ path('rapport_index',{'section':'visibilitie','id':id}) }}">
+                                                    <i class="fa fa-eye"></i> 
+                                                    Voir les détails
+                                                </a>                                                
                                                 <a class="btn btn-xs btn-info"  href="#">
-                                                    <i class="fa fa-arrow-right"></i> 
+                                                    <i class="fa fa-file-excel-o"></i> 
                                                     Exporter vers (.xls)
-                                          </a>
+                                                </a>
                                 </div>
                         <!-- /panel content -->
                     </div>

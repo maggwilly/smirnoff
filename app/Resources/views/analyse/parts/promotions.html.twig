@@ -1,7 +1,7 @@
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                            <span class="title elipsis">
-                        <strong>Promotions</strong> 
+                        <strong>Prices & Promotions</strong> 
                         </span>
                             <ul class="options pull-right list-inline">
                                 <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
@@ -17,6 +17,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-4">Marque</th>
+                                                             <th class="col-md-2">Prix moyen</th>
                                                             <th class="col-md-1">NCP</th>
                                                             <th class="col-md-1">TCP</th>
                                                             <th class="col-md-1">IBP</th>                      
@@ -27,7 +28,8 @@
                                                         <tr class="odd gradeX {% if marque.nom ends  with 'Blue' %}danger{% else %}warning {%endif%}">    
                                                      <td class="">
                                                      {{marque.nom}}
-                                                     </td>                                   
+                                                     </td> 
+                                                    <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>    
                                                           <td>
                                                         {% if (marque.nombre)>0 %}
                                                           {{( marque.ncp/marque.nombre*100 )|number_format(0, ',', '.')}}%
@@ -81,10 +83,19 @@
                                                         {%endfor%}                                                        
                                                         </tbody>
                                                 </table>
+                                                {% if pointVente is defined %}
+                                                 {% set id=pointVente.id %} 
+                                                    {% else %}
+                                                {% set id='all' %}         
+                                                    {% endif %}
+                                                 <a class="btn btn-xs btn-success"  href="{{ path('rapport_index',{'section':'promotion','id':id}) }}">
+                                                    <i class="fa fa-eye"></i> 
+                                                    Voir les détails
+                                                </a>
                                                 <a class="btn btn-xs btn-info"  href="#">
-                                                    <i class="fa fa-arrow-right"></i> 
+                                                    <i class="fa fa-file-excel-o"></i> 
                                                     Exporter vers (.xls)
-                                                 </a>
+                                                </a>
                                 </div>
                         <!-- /panel content -->
                     </div>

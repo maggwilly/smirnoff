@@ -3,7 +3,19 @@
   {% block body %}
    <!-- page title -->
     <header id="page-header">
-    <h1>Shares of table <a>{% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}</a></h1>
+    <h1>Shares of table 
+
+     <a>
+
+    {% if pointVente is defined and pointVente is not null %}
+        {{ pointVente.nom }} 
+    {% else %}
+    {% if app.session.get('region') %}{{app.session.get('region')}}{% else %} Toutes catégories{% endif %}     
+    {% endif %}
+  
+    </a>
+
+    </h1>
     </header>
 <div id="content" class="dashboard padding-20">
 
@@ -28,7 +40,7 @@
                                                            <th class="success">Nom du POS</th>
                                                            <th class="success">Cat</th>
                                                            <th class="success">Qtier</th>
-                                                            <th>Superviseur</th>
+                                                            <th>Super.</th>
                                                             <th>BA</th>
                                                            <th >Date </th>                                                           
                                                            <th class="col-md-1 warning ">SIRed</th>

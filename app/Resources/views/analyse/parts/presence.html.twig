@@ -1,7 +1,7 @@
-     <div id="panel-2" class="panel panel-default">
+<div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                            <span class="title elipsis">
-                        <strong>Prices</strong> 
+                        <strong> Taux de présence et de rupture</strong> 
                         </span>
                             <ul class="options pull-right list-inline">
                                 <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Colapse"></a></li>
@@ -17,8 +17,8 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-4">Marque</th>
-                                                            <th class="col-md-1">Prix moyen</th>
-                      
+                                                            <th class="col-md-1">Présence</th>
+                                                            <th class="col-md-1">Rupture</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -27,15 +27,20 @@
                                                      <td class="">
                                                      {{marque.nom}}
                                                      </td>                                   
-                                                      <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>            
-                                                    </tr>
-                                                        {%endfor%}
-                                                    {% for marque in marques if not ( marque.nom starts  with 'Sminoff')%}
-                                                    <tr class="odd gradeX info ">    
-                                                     <td class="">
-                                                     {{marque.nom}}
-                                                     </td>                                   
-                                                      <td >{{marque.prixmoyen|number_format(0, ',', '.')}} fcfa</td>                                                                                    
+                                                          <td>
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{(100- marque.absent/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>
+                                                             <td >
+                                                        {% if (marque.nombre)>0 %}
+                                                          {{( marque.enrupture/marque.nombre*100 )|number_format(0, ',', '.')}}%
+                                                         {% else %}
+                                                           --
+                                                         {% endif %}
+                                                             </td>                                                                                    
                                                       </tr>
                                                       {%endfor%}                                                        
                                                     </tbody>
@@ -43,9 +48,9 @@
                                                 {% if pointVente is defined %}
                                                  {% set id=pointVente.id %} 
                                                     {% else %}
-                                                {% set id='all' %}         
+                                                {% set id='all' %}      
                                                     {% endif %}
-                                                 <a class="btn btn-xs btn-success"  href="{{ path('rapport_index',{'section':'prices','id':id}) }}">
+                                                 <a class="btn btn-xs btn-success"  href="{{ path('rapport_index',{'section':'presence','id':id}) }}">
                                                     <i class="fa fa-eye"></i> 
                                                     Voir les détails
                                                 </a>

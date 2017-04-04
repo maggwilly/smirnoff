@@ -1,6 +1,6 @@
 rapport_index:
-    path:     /?section={section}
-    defaults: { _controller: "AppBundle:Rapport:index", section:'sales'}
+    path:     /{id}?section={section}
+    defaults: { _controller: "AppBundle:Rapport:index", section:'sales', id:'all'}
     methods:  GET
 
 rapport_sales:
