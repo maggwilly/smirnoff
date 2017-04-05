@@ -19,7 +19,7 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
        $qb = $this->createQueryBuilder('u')->leftJoin('u.rapports','v')->leftJoin('v.pointVente','pv');
   
         if($region!=null){
-           $qb->where('pv.ville=:ville')
+           $qb->where('pv.type=:ville')
           ->setParameter('ville', $region);
           }
           if($startDate!=null){

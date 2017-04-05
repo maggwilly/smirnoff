@@ -12,6 +12,10 @@ app_gagnant:
     resource: "@AppBundle/Resources/config/routing/gagnant.yml"
     prefix:   /gagnant
 
+app_control:
+    resource: "@AppBundle/Resources/config/routing/etape.yml"
+    prefix:   /etape
+
 point_ventes:
     path:      /mobile/points/ventes
     defaults: { _controller: "AppBundle:Mobile:pointVentes" }

@@ -75,7 +75,11 @@
                                 <li><a href="{{ path('pointvente_map') }}">Mapping</a></li>
                             </ul>
                         </li> 
-                   
+                         <li><!-- dashboard -->
+                            <a class="dashboard" href="{{ path('etape_index') }}"><!-- warning - url used by default by ajax (if eneabled) -->
+                                <i class="main-icon fa fa-check-square"></i><span>Activity control</span>
+                            </a>
+                        </li>                    
                     </ul>
                 </nav>
                 <span id="asidebg"><!-- aside fixed background --></span>

@@ -27,11 +27,9 @@ class EtapeController extends Controller
          $endDate=$session->get('endDate', date('Y').'-12-31');
          $visitesParUser = $em->getRepository('AppBundle:Client')->visitesParUser($region,$startDate, $endDate);
          $synchrosParUser = $em->getRepository('AppBundle:Client')->synchrosParUser( $startDate, $endDate);
-         $etapesParUser = $em->getRepository('AppBundle:Etape')->etapesParUser(null, $startDate, $endDate);
         return $this->render('etape/index.html.twig', array(
             'visitesParUser' => $visitesParUser,
             'synchrosParUser' => $synchrosParUser,
-            'etapesParUser' => $etapesParUser,
         ));
     }
 
