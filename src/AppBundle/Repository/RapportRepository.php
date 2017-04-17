@@ -143,8 +143,8 @@ Nombre de point de vente visités
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
                 ->join('r.sminoffBlack','sBlack')
-                  ->join('r.origine','origine')
-                ->join('r.export','export');
+                  ->join('r.origine','or')
+                ->join('r.export','exp');
         if($region!=null){
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
@@ -168,8 +168,8 @@ Nombre de point de vente visités
              ->addSelect('avg(sRed.price) as sminoffRed')
              ->addSelect('avg(sBlue.price) as sminoffBlue')
              ->addSelect('avg(sBlack.price) as sminoffBlack')
-            ->addSelect('avg(origine.price) as origine')
-             ->addSelect('avg(export.price) as export')
+            ->addSelect('avg(or.price) as origine')
+             ->addSelect('avg(exp.price) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
              ->addSelect('p.type')            
