@@ -95,8 +95,8 @@ Nombre de point de vente visités
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
                 ->join('r.sminoffBlack','sBlack')
-                ->join('r.origine','origine')
-                ->join('r.export','export');
+                ->join('r.origine','or')
+                ->join('r.export','exp');
         if($region!=null){
            $qb->where('p.type=:type')
           ->setParameter('type', $region);
@@ -121,8 +121,8 @@ Nombre de point de vente visités
              ->addSelect('sum(sRed.bnreBlle) as sminoffRed')
              ->addSelect('sum(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('sum(sBlack.bnreBlle) as sminoffBlack')
-              ->addSelect('sum(origine.bnreBlle) as origine')
-             ->addSelect('sum(export.bnreBlle) as export')
+              ->addSelect('sum(or.bnreBlle) as origine')
+             ->addSelect('sum(exp.bnreBlle) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
              ->addSelect('p.type')            
