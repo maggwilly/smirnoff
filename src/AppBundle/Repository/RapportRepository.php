@@ -95,7 +95,7 @@ Nombre de point de vente visités
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
                 ->join('r.sminoffBlack','sBlack')
-                ->join('r.origine','or')
+                ->join('r.origine','ora')
                 ->join('r.export','exp');
         if($region!=null){
            $qb->where('p.type=:type')
@@ -121,7 +121,7 @@ Nombre de point de vente visités
              ->addSelect('sum(sRed.bnreBlle) as sminoffRed')
              ->addSelect('sum(sBlue.bnreBlle) as sminoffBlue')
              ->addSelect('sum(sBlack.bnreBlle) as sminoffBlack')
-              ->addSelect('sum(or.bnreBlle) as origine')
+              ->addSelect('sum(ora.bnreBlle) as origine')
              ->addSelect('sum(exp.bnreBlle) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
@@ -143,7 +143,7 @@ Nombre de point de vente visités
               ->join('r.sminoffRed','sRed')
                ->join('r.sminoffBlue','sBlue')
                 ->join('r.sminoffBlack','sBlack')
-                  ->join('r.origine','or')
+                  ->join('r.origine','ora')
                 ->join('r.export','exp');
         if($region!=null){
            $qb->where('p.type=:type')
@@ -168,7 +168,7 @@ Nombre de point de vente visités
              ->addSelect('avg(sRed.price) as sminoffRed')
              ->addSelect('avg(sBlue.price) as sminoffBlue')
              ->addSelect('avg(sBlack.price) as sminoffBlack')
-            ->addSelect('avg(or.price) as origine')
+            ->addSelect('avg(ora.price) as origine')
              ->addSelect('avg(exp.price) as export')
              ->addSelect('p.nom')
               ->addSelect('p.quartier')
