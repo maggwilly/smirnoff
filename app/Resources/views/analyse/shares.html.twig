@@ -11,7 +11,7 @@
 <ul class="easypiecharts list-unstyled">
 {% set sminoffBlue=rapports|somme('sminoffBlue') %}
 {% set sminoff=(rapports|somme('sminoffRed')+rapports|somme('sminoffBlack')+rapports|somme('sminoffBlue')) %}
-{% set univers=(sminoff+rapports|somme('heineken')+rapports|somme('voodka')+rapports|somme('boostrer')+rapports|somme('sabc1664')+rapports|somme('sabc')) %}
+{% set univers=(sminoff+rapports|somme('heineken')+rapports|somme('voodka')+rapports|somme('boostrer')+rapports|somme('sabc1664')+rapports|somme('sabc')+shares|somme('origine')+shares|somme('export')) %}
                 <li class="clearfix">
                   <span class="stat-number">{{ univers}}</span>
                   <span class="stat-title"><b>Bouteilles consommées</b></span>
