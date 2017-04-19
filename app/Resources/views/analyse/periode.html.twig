@@ -96,7 +96,14 @@
                             <div class="box warning"><!-- default, danger, warning, info, success -->
 
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4>{{(sminoffBlue*100/sminoff)|number_format(0, ',', '.') }}% : Part de SIBlue sur SI</h4>
+                                    <h4>
+                                    {% if shares is empty %}
+                                    --
+                                     {%else %}
+                                    {{(sminoffBlue*100/sminoff)|number_format(0, ',', '.') }}% 
+                                     {%endif %}
+                                    : Part de SIBlue sur SI
+                                    </h4>                              
                           <small class="block"></small>
                                     <i class="fa fa-bar-chart-o"></i>
                                 </div>
@@ -113,7 +120,12 @@
 
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
                                     <h4>
-                                    {{(sminoffBlue*100/univers)|number_format(0, ',', '.') }} %: Part de SIBlue sur l'univers
+                                     {% if shares is empty %}
+                                    --
+                                     {%else %}                                   
+                                    {{(sminoffBlue*100/univers)|number_format(0, ',', '.') }} %
+                                     {%endif %}
+                                    : Part de SIBlue sur l'univers
                                     </h4>
                            <small class="block"> </small>
                                     <i class="fa fa-bar-chart-o"></i>
