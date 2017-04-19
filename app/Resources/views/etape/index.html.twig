@@ -28,20 +28,20 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#Superviseur</th>
-                                                            <th>Nbre Rapport</th>
-                                                            <th>Derniere Rapport</th>
+                                                            <th>Nombre de Rapport</th>
+                                                            <th>Date du dernier</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for visiteParUser in visitesParUser %}
                                                         <tr>
                                                             <td><a  href="#">{{visiteParUser.nom}}</a></td>
-                                                            <td>{{visiteParUser.nombre}}</td>
+                                                            <td>{{visiteParUser.nombre}} rapport(s)</td>
                                                             <td>
                                                          {% if visiteParUser.date %}
                                                         {{visiteParUser.date |date('d/m/Y')}}
                                                          {% else %}
-                                                           Aucune visite
+                                                           Aucun rapport
                                                          {% endif %}
                                                             </td>
                                                         </tr>
