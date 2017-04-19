@@ -34,6 +34,7 @@ Nombre de point de vente visités
 
           if($pointVente!=null){
            $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
+           
           }    
            $qb->select('sum(r.posTarget) as posTarget')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')

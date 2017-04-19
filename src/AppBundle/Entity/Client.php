@@ -32,7 +32,11 @@ class Client extends BaseUser
      * @ORM\Column(name="ville", type="string", length=255,nullable=true)
      */
     private $ville;
-
+  /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=255,  options={"default" :"super"})
+     */
+    private $type;
      /**
      * @var string
      *
