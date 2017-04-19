@@ -21,8 +21,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate,$pointVente);
 
         return $this->render('rapport/'.$section.'.html.twig', array(
@@ -38,8 +38,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
         $salesweek = $em->getRepository('AppBundle:Rapport')->findSalesWeek($region, $startDate, $endDate);
         return $this->render('analyse/sales.html.twig', array(
@@ -56,8 +56,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $rapports = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
         $sharesweek = $em->getRepository('AppBundle:Rapport')->findSharesWeek($region, $startDate, $endDate);
         return $this->render('analyse/shares.html.twig', array(
@@ -74,8 +74,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $rapports = $em->getRepository('AppBundle:Rapport')->findByTypePrices($region, $startDate, $endDate);
         return $this->render('analyse/prices.html.twig', array(
             'rapports' => $rapports
@@ -89,8 +89,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
         return $this->render('rapport/gagnants.html.twig', array(
             'gagnants' => $gagnants,
@@ -104,8 +104,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
         return $this->render('rapport/visibilitie.html.twig', array(
             'rapports' => $rapports,
@@ -119,8 +119,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $marques = $em->getRepository('AppBundle:Situation')->findApercuPeriode($region, $startDate, $endDate);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
@@ -138,8 +138,8 @@ class RapportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
         $marques = $em->getRepository('AppBundle:Situation')->findApercuDernier($region, $startDate, $endDate);
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSalesDernier($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeSharesDernier($region, $startDate, $endDate);

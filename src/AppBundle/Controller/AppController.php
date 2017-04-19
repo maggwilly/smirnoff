@@ -53,8 +53,8 @@ class AppController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+        $startDate=$session->get('startDate',date('Y').'-04-20');
+        $endDate=$session->get('endDate', date('Y').'-07-30');
 
      //$concurents=array_column($situationsComparee, 'nomcon', 'id');
       $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
