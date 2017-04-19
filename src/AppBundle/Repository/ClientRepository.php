@@ -16,15 +16,10 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
   */
   public function visitesParUser ( $region=null, $startDate=null, $endDate=null){
 
-       $qb = $this->createQueryBuilder('u')->leftJoin('u.rapports','v');
-       $qb->where('u.type=:type')->setParameter('type','super');
-          if($startDate!=null){
-           $qb->andWhere('v.date is null or v.date>=:startDate')->setParameter('startDate', new \DateTime($startDate));
-          }
-          if($endDate!=null){
-           $qb->andWhere('v.date is null or v.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
-          }
-         
+       $qb = $this->createQueryBuilder('u')->leftJoin('u.rapports','v', 'WITH','(v.date is null or v.date>=:startDate) and (v.date is null or v.date<=:endDate)')
+       ->setParameter('startDate', new \DateTime($startDate))
+       ->setParameter('endDate',new \DateTime($endDate))
+      ->where('u.type=:type')->setParameter('type','super');
             $qb->select('max(v.date) as date');
             $qb->addSelect('u.id');
              $qb->addSelect('u.nom');
@@ -40,15 +35,10 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
   */
   public function synchrosParUser ($startDate=null, $endDate=null){
 
-       $qb = $this->createQueryBuilder('u')->leftJoin('u.synchros','s');
-         $qb->where('u.type=:type')->setParameter('type','super');
-          if($startDate!=null){
-           $qb->andWhere('s.date is null or s.date>=:startDate')->setParameter('startDate', new \DateTime($startDate));
-          }
-          if($endDate!=null){
-           $qb->andWhere('s.date is null or s.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
-          }
- 
+       $qb = $this->createQueryBuilder('u')->leftJoin('u.synchros','s', 'WITH','(s.date is null or s.date>=:startDate) and (s.date is null or s.date<=:endDate)')
+       ->setParameter('startDate', new \DateTime($startDate))
+       ->setParameter('endDate',new \DateTime($endDate))
+      ->where('u.type=:type')->setParameter('type','super');
             $qb->select('max(s.date) as date');
             $qb->addSelect('u.id');
              $qb->addSelect('u.nom');
