@@ -1,0 +1,35 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}{{rH.nom}}{% endblock %}
+  {% block body %}
+
+   <!-- page title -->
+    <header id="page-header">
+    <h1>{{rH.nom}} </h1>
+    </header>
+  <div id="content" class="dashboard padding-20">
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading"><span class="title elipsis">
+                        <strong>
+                        </span>
+                            <!-- right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ rH.nom }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ rH.tel }}</td>
+            </tr>
+        </tbody>
+    </table>
+ <a href="{{ path('rh_index') }}" class="btn btn-xs btn-info">Back to the list</a> <a href="{{ path('rh_edit', { 'id': rH.id }) }}" class="btn btn-xs btn-danger">Edit</a>
+                </div>
+                     <!-- /panel content -->
+                </div>
+   </div>  
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'AppBundle::layout_single.html.twig' %}
+{% block title %}BA{% endblock %}
+  {% block body %}
+
+   <!-- page title -->
+    <header id="page-header">
+    <h1>Liste des  BA </h1>
+    </header>
+<div id="content" class="dashboard padding-20">
+
+
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading">
+                                    <span class="title elipsis">
+                        <strong>
+                        </span>
+                            <!-- right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Tel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rH in rHs %}
+            <tr>
+                <td>{{ rH.nom }}</td>
+                <td>{{ rH.tel }}</td>
+                <td>
+   <a href="{{ path('rh_show', { 'id': rH.id }) }}" class="btn btn-xs btn-info">show</a><a href="{{ path('rh_edit', { 'id': rH.id }) }}" class="btn btn-xs btn-danger">edit 
+   <i class="fa fa-arrow-right"></i> </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  <a href="{{ path('rh_new') }}" class="btn btn-md btn-success">Create a new rH</a>
+                       </div>
+                     <!-- /panel content -->
+                    </div>
+   </div> 
+{% endblock %}

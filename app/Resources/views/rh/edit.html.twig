@@ -1,0 +1,28 @@
+{% extends 'AppBundle::layout_single.html.twig' %}
+{% block title %}{{rH.nom}}{% endblock %}
+  {% block body %}
+
+   <!-- page title -->
+    <header id="page-header">
+    <h1>{{rH.nom}}</h1>
+    </header>
+  <div id="content" class="dashboard padding-20">
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading"><span class="title elipsis">
+                        <strong>
+                        </span>
+                            <!-- right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+<a href="{{ path('rh_index') }}" class="btn btn-xs btn-info">Back to the list</a>
+      </div>
+         <!-- /panel content -->
+      </div>
+   </div> 
+{% endblock %}

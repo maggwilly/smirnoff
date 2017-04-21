@@ -1,0 +1,32 @@
+{% extends 'AppBundle::layout_single.html.twig' %}
+{% block title %}Nouveau BA{% endblock %}
+  {% block body %}
+
+   <!-- page title -->
+    <header id="page-header">
+    <h1>Nouveau BA </h1>
+    </header>
+  <div id="content" class="dashboard padding-20">
+
+
+     <div id="panel-2" class="panel panel-default">
+                         <div class="panel-heading">
+                                    <span class="title elipsis">
+                        <strong>
+                        </span>
+                            <!-- right options -->
+                                </div>
+                                <!-- panel content -->
+                                <div class="panel-body">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+ <a href="{{ path('rh_index') }}" class="btn btn-xs btn-info"> <i class="fa fa-arrow-left"></i>Back to the list</a>
+                </div>
+                     <!-- /panel content -->
+                </div>
+   </div>   
+{% endblock %}

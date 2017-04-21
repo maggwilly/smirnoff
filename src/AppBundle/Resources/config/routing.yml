@@ -11,6 +11,10 @@ app_point_vente:
 app_gagnant:
     resource: "@AppBundle/Resources/config/routing/gagnant.yml"
     prefix:   /gagnant
+    
+app_rh:
+    resource: "@AppBundle/Resources/config/routing/rh.yml"
+    prefix:   /rh
 
 app_control:
     resource: "@AppBundle/Resources/config/routing/etape.yml"

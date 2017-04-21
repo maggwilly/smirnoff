@@ -1,93 +1,16 @@
- {% extends 'AppBundle::layout.html.twig' %}
-{% block title %}Dtabase{% endblock %}
-
-  {% block fos_user_content %}
-        <!-- WRAPPER -->
-        <div id="wrapper">
-
-            <header id="header">
-                <!-- Mobile Button -->
-                <span class="logo pull-left">
-                    <img src="assets/images/logo_light.png" alt="AllReport" height="35">
-                </span>
-                <nav>
-
-                    <!-- OPTIONS LIST -->
-                    <ul class="nav pull-right">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <!-- USER OPTIONS -->
-                        <li class="dropdown pull-left">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img class="user-avatar" alt="" src="{{ asset('assets/images/noavatar.jpg') }}" height="34" /> 
-                                <span class="user-name">
-                                    <span class="hidden-xs">
-                                        {{  app.user.username }}<i class="fa fa-angle-down"></i>
-                                    </span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu hold-on-click">
-                                <li><!-- settings -->
-                                    <a href="#"><i class="fa fa-cogs"></i> Paramètres</a>
-                                </li>
-
-                                <li class="divider"></li>
-                                  
-                                <li><!-- logout -->
-                                    <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-power-off"></i>Deconnexion</a>
-                                </li>
-                                 
-                            </ul>
-                        </li>
-                        <!-- /USER OPTIONS -->
-                 {% endif %}
-                    </ul>
-                    <!-- /OPTIONS LIST -->
-
-                </nav>
-
-            </header>
-            <!-- /HEADER -->
-
-
+ {% extends 'AppBundle::layout_single.html.twig' %}
+{% block title %}Database{% endblock %}
 
                {% block body %}
-    <div id="content" class="dashboard padding-20">
-           
+    <div id="content" class="dashboard padding-20">    
    <div class="panel panel-default ">
                         <div class="panel-body">
                             <b>Enregistrement des winers</b> 
                             <br>
-                            
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-3">
-
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-
-                                    <h4>Comment s'y prendre ?</h4>
-                                    <p><em>Le formulaire ci-contre permet d'enrégistrer les gagnants dans la base de données</em></p>
-                                    <hr />
-                                    <p>
-                                        Pour enrégistrer la liste des gagnants pour un point de vente donné, Choisissez le point de vente et la date correspondante.
-                                        Saisissez en suite les informations du gagnant en commençant par son nom. Certains champs du formulaire sont obligatoires. Si vous ne les remplissez pas, vous ne pourrez pas enrégistrer le formulaire.
-                                    </p>
-                                   <hr />
-                                    <p>
-                                        Vous pouvez enrégistrer plusieurs gagnants d'un point de vente à la fois. Pour se faire, Cliquer sur "Ajouter une ligne" pour ajouter une nouvelle ligne dans le formulaire.
-
-
-                                    </p>
-                                     <p><em>Cliquez en suite sur le bouton vert pour enrégistrer.</em></p>
-                                </div>
-                            </div>
-
- 
-
-                        </div>
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                         
                             <!-- ------ -->
                             <div class="panel panel-default">
@@ -166,12 +89,6 @@
 
     </div>
   {% endblock %}
-
-
-
-</div>
-    
-{% endblock fos_user_content %}
    {% block javascripts %}
     {{parent()}}
 <script type="text/javascript">
