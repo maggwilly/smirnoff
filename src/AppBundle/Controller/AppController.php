@@ -99,8 +99,8 @@ class AppController extends Controller
     $highestRow  = $secteurs->getHighestRow(); // e.g. 10
     for ($row = 2; $row <= $highestRow; ++ $row) {
             $nom = $rhs->getCellByColumnAndRow(0, $row);
-            $numero = $secteurs->getCellByColumnAndRow(1, $row);
-            $rh=new RH( $ville->getValue(),$numero->getValue());
+            $numero = $rhs->getCellByColumnAndRow(1, $row);
+            $rh=new RH( $nom->getValue(),$numero->getValue());
             $manager->persist($rh);
     }
      $manager->flush();
