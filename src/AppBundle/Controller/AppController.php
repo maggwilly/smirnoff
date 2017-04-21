@@ -96,7 +96,7 @@ class AppController extends Controller
     $path = $this->get('kernel')->getRootDir(). "/../web/import/rhs.xlsx";
      $objPHPExcel = $this->get('phpexcel')->createPHPExcelObject($path);
     $rhs= $objPHPExcel->getSheet(0);
-    $highestRow  = $secteurs->getHighestRow(); // e.g. 10
+    $highestRow  = $rhs->getHighestRow(); // e.g. 10
     for ($row = 2; $row <= $highestRow; ++ $row) {
             $nom = $rhs->getCellByColumnAndRow(0, $row);
             $numero = $rhs->getCellByColumnAndRow(1, $row);
