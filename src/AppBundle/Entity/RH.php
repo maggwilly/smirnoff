@@ -91,4 +91,13 @@ class RH
     {
         return $this->tel;
     }
+
+        /**
+     * Constructor
+     */
+    public function __construct($nom=null, $tel=null)
+    {
+        $this->nom=$nom;
+        $this->tel=$tel;
+    }
 }

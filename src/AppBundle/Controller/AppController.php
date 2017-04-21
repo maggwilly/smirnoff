@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use AppBundle\Entity\Secteur;
 use AppBundle\Entity\Quartier;
+use AppBundle\Entity\RH;
 /**
  * Etape controller.
  *
@@ -88,5 +89,22 @@ class AppController extends Controller
     }
 
 
+   /*load secteurs from excel*/
+  public function loadrhAction()
+    {
+        $manager = $this->getDoctrine()->getManager();
+    $path = $this->get('kernel')->getRootDir(). "/../web/import/rhs.xlsx";
+     $objPHPExcel = $this->get('phpexcel')->createPHPExcelObject($path);
+    $rhs= $objPHPExcel->getSheet(0);
+    $highestRow  = $secteurs->getHighestRow(); // e.g. 10
+    for ($row = 2; $row <= $highestRow; ++ $row) {
+            $nom = $rhs->getCellByColumnAndRow(0, $row);
+            $numero = $secteurs->getCellByColumnAndRow(1, $row);
+            $rh=new RH( $ville->getValue(),$numero->getValue());
+            $manager->persist($rh);
+    }
+     $manager->flush();
+    return $this->redirectToRoute('user_homepage');      
+    }
 
 }

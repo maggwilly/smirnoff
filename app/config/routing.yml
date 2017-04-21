@@ -17,7 +17,12 @@ user_homepage:
     path:     /v1/home
     defaults: { _controller: "AppBundle:App:home"}
     methods:  GET
-    
+ 
+user_homepage:
+    path:     /v1/load/rh
+    defaults: { _controller: "AppBundle:App:loadrh"}
+    methods:  GET
+
 app_admin:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix: /v1
