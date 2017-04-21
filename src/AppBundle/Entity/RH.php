@@ -31,7 +31,7 @@ class RH
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=255)
+     * @ORM\Column(name="tel", type="string", length=255,nullable=true)
      */
     private $tel;
 
