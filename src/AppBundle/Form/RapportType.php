@@ -34,7 +34,8 @@ class RapportType extends AbstractType
         ->add('sminoffRed',SituationType::class, array())
         ->add('sminoffBlue',SituationType::class, array())
         ->add('sminoffBlack',SituationType::class, array())
-        ->add('rh', EntityType::class, array('class' => 'AppBundle:RH'))     
+        ->add('rh', EntityType::class, array('class' => 'AppBundle:RH'))  
+        ->add('rh1', EntityType::class, array('class' => 'AppBundle:RH'))    
         ->add('user', EntityType::class, array('class' => 'AppBundle:Client'))     
         ->add('date','datetime', array(
                 'widget' => 'single_text',

@@ -64,7 +64,7 @@
                                                           <td  class=" success"><i>{{rapport.pointVente.type}}</i></td>
                                                           <td class=" success">{{rapport.pointVente.quartier}}</td>                                                      
                                                           <td >{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
-                                                          <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}</td> 
+                                                          <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}{% if rapport.rh1%}<br>{{rapport.rh1.nom}}{% endif %}</td> 
                                                           <td >{{rapport.date| date('d/m/Y')}}</td>                              
                                                           <td class="col-md-1 warning">{{rapport.sminoffRed.bnreBlle|number_format(0, ',', '.')}}</td>
                                                           <td class="col-md-1 warning">{{rapport.sminoffBlack.bnreBlle|number_format(0, ',', '.')}}</td>

@@ -35,6 +35,13 @@ class Rapport
      */
     protected $rh;
 
+        /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\RH")
+     * @var User
+     */
+    protected $rh1;
+
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client",inversedBy="rapports")
     * @ORM\JoinColumn(nullable=true)
@@ -682,6 +689,29 @@ class Rapport
     public function getRh()
     {
         return $this->rh;
+    }
+
+        /**
+     * Set rh
+     *
+     * @param \AppBundle\Entity\RH $rh
+     * @return Rapport
+     */
+    public function setRh1(\AppBundle\Entity\RH $rh = null)
+    {
+        $this->rh1 = $rh;
+
+        return $this;
+    }
+
+    /**
+     * Get rh
+     *
+     * @return \AppBundle\Entity\RH 
+     */
+    public function getRh1()
+    {
+        return $this->rh1;
     }
 
      /**
