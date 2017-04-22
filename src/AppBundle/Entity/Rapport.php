@@ -79,7 +79,7 @@ class Rapport
     /**
      * @var int
      *
-     * @ORM\Column(name="posTarget", type="integer",options={"default":72})
+     * @ORM\Column(name="posTarget", type="integer", options={"default":72}, nullable=true)
      */
     private $posTarget;
 
