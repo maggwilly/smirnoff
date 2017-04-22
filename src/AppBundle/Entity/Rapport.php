@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rapport
 {
+
     /**
      * @var int
      *
@@ -226,6 +227,12 @@ class Rapport
     $this->weekText=$startDate.' - '.$endDate;
   }
 
+  /**
+  * @ORM\PrePersist
+ */
+ public function prePersist(){
+    $this->posTarget=72;
+ }
       /**
      * Get week
      *

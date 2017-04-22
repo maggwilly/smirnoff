@@ -552,7 +552,7 @@ class PointVente
   * @ORM\PrePersist
  */
  public function prePersist(){
- 
+
  }
     /**
      * Set synchro
