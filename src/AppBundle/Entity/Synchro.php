@@ -197,6 +197,7 @@ class Synchro
         return $this;
     }
 
+   
     /**
      * Remove quartiers
      *
@@ -232,6 +233,31 @@ class Synchro
         return $this;
     }
 
+     /**
+     * Add pointVentes
+     *
+     * @param \AppBundle\Entity\PointVente $pointVentes
+     * @return User
+     */
+    public function setPointVentes(\Doctrine\Common\Collections\ArrayCollection $pointVentes)
+    {
+          $this->pointVentes=$pointVentes;
+
+        return $this;
+    }
+
+     /**
+     * Add quartiers
+     *
+     * @param \AppBundle\Entity\Quartier $quartiers
+     * @return Secteur
+     */
+    public function setQuartiers(\Doctrine\Common\Collections\ArrayCollection  $quartiers)
+    {   
+        $this->quartiers= $quartiers;
+
+        return $this;
+    }
     /**
      * Remove pointVentes
      *
