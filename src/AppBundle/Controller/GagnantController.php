@@ -84,7 +84,7 @@ class GagnantController extends Controller
      $objPHPExcel = $this->get('phpexcel')->createPHPExcelObject($path);
      $winers= $objPHPExcel->getSheet(0);
      $highestRow  = $winers->getHighestRow(); // e.g. 10
-     for ($row = 2; $row <= $highestRow; ++ $row) {
+     for ($row = 1; $row <= $highestRow; ++ $row) {
             $nom = $winers->getCellByColumnAndRow(0, $row);
             $numero = $winers->getCellByColumnAndRow(1, $row);
             $quantite = $winers->getCellByColumnAndRow(2, $row);
