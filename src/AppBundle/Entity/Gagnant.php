@@ -31,13 +31,13 @@ class Gagnant
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=255)
+     * @ORM\Column(name="tel", type="string", length=255,nullable=true)
      */
     private $tel;
 
     /**
      * @var string
-     * @ORM\Column(name="object", type="string", length=255)
+     * @ORM\Column(name="object", type="string", length=255,nullable=true)
      */
     private $object;
 
@@ -50,11 +50,21 @@ class Gagnant
 
     /**
      * @var int
-     * @Assert\GreaterThanOrEqual( value = 18, message="Vous avez saisi un âge non autorisé.")
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="age", type="integer",nullable=true)
      */
     private $age;
 
+    /**
+     * @var int
+     * @ORM\Column(name="quantite", type="integer")
+     */
+    private $quantite;
+
+    /**
+     * @var int
+     * @ORM\Column(name="offert", type="integer")
+     */
+    private $offert;
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PointVente",inversedBy="gagnants")
    * @ORM\JoinColumn(nullable=false)
@@ -70,6 +80,17 @@ class Gagnant
         return $this->id;
     }
 
+
+        /**
+     * Constructor
+     */
+    public function __construct($nom=null, $tel=null,$quantite=null,$offert=null)
+    {
+        $this->nom=$nom;
+        $this->tel=$tel;
+         $this->quantite=$quantite;
+        $this->offert=$offert;
+    }
     /**
      * Set nom
      *
@@ -206,5 +227,51 @@ class Gagnant
     public function getAge()
     {
         return $this->age;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     * @return Gagnant
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer 
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set offert
+     *
+     * @param integer $offert
+     * @return Gagnant
+     */
+    public function setOffert($offert)
+    {
+        $this->offert = $offert;
+
+        return $this;
+    }
+
+    /**
+     * Get offert
+     *
+     * @return integer 
+     */
+    public function getOffert()
+    {
+        return $this->offert;
     }
 }

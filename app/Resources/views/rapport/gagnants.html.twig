@@ -32,31 +32,26 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-2">Nom</th>
-                                                            <th>Age</th>
                                                             <th>Telephone</th>
-                                                            <th>Objet</th>
+                                                            <th>Quantite</th>
+                                                            <th>FI</th>
                                                             <th>Date</th>
                                                             <th class="success">Nom du POS</th>
-                                                            <th class="success">Catégorie</th>
-                                                            <th class="success">Quartier</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for gagnant in gagnants if gagnant.object=='Bouteille' %}
                                                         <tr class="odd gradeX">  
-                                                            <td >{{gagnant.nom}}</td>  
-                                                            <td >{{gagnant.age}}</td>                                 
+                                                            <td >{{gagnant.nom}}</td>                                
                                                             <td >{{gagnant.tel}}</td>  
-                                                            <td >{{gagnant.object}}</td>
+                                                            <td >{{gagnant.quantite}}</td>
+                                                            <td >{{gagnant.offert}}</td>
                                                             <td >{{gagnant.date|date('d/m/Y')}}</td> 
                                                             <td class="success">{{gagnant.pointVente.nom}}</td> 
-                                                            <td class="success">{{gagnant.pointVente.type}}</td> 
-                                                            <td class="success">{{gagnant.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
-
                                     </div><!-- /TAB 1 CONTENT--> 
 
                       <div id="ice_black" class="tab-pane"><!-- TAB 1 CONTENT -->                               
@@ -64,26 +59,22 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-2">Nom</th>
-                                                            <th>Age</th>
                                                             <th>Telephone</th>
-                                                            <th>Objet</th>
-                                                            <th >Date</th>
+                                                            <th>Quantite</th>
+                                                            <th>FI</th>
+                                                            <th>Date</th>
                                                             <th class="success">Nom du POS</th>
-                                                            <th class="success">Catégorie</th>
-                                                            <th class="success">Quartier</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for gagnant in gagnants if gagnant.object!='Bouteille'%}
                                                         <tr class="odd gradeX">  
-                                                            <td >{{gagnant.nom}}</td> 
-                                                            <td >{{gagnant.age}}</td>                                      
+                                                            <td >{{gagnant.nom}}</td>                                
                                                             <td >{{gagnant.tel}}</td>  
-                                                            <td >{{gagnant.object}}</td>
+                                                            <td >{{gagnant.quantite}}</td>
+                                                            <td >{{gagnant.offert}}</td>
                                                             <td >{{gagnant.date|date('d/m/Y')}}</td> 
                                                             <td class="success">{{gagnant.pointVente.nom}}</td> 
-                                                            <td class="success">{{gagnant.pointVente.type}}</td> 
-                                                            <td class="success">{{gagnant.pointVente.quartier}}</td> 
                                                         </tr>
                                                         {%endfor%}
                                                     </tbody>
@@ -112,12 +103,6 @@
             var table = jQuery('#datatable_sample');
             var table2 = jQuery('#datatable_sample2');
             var colums= [
-                             {
-                                "orderable": true
-                            },
-                             {
-                                "orderable": true
-                            },
                              {
                                 "orderable": true
                             },

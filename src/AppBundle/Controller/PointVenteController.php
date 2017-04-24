@@ -107,7 +107,6 @@ class PointVenteController extends Controller
       
         // ask the service for a Excel5
        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
-
        $phpExcelObject->getProperties()->setCreator("AllReport")
            ->setLastModifiedBy("AllReport")
            ->setTitle("Liste des points de vente")

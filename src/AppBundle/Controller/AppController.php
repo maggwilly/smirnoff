@@ -92,7 +92,7 @@ class AppController extends Controller
    /*load secteurs from excel*/
   public function loadrhAction()
     {
-        $manager = $this->getDoctrine()->getManager();
+     $manager = $this->getDoctrine()->getManager();
     $path = $this->get('kernel')->getRootDir(). "/../web/import/rhs.xlsx";
      $objPHPExcel = $this->get('phpexcel')->createPHPExcelObject($path);
     $rhs= $objPHPExcel->getSheet(0);

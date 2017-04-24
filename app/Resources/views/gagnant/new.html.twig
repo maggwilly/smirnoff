@@ -40,12 +40,12 @@
                                                 <input type="hidden" name="action" value="contact_send" />
                                                 <div class="row">
                                                     <div class="form-group">
-                                                        <div class="col-md-8 col-sm-8">
+                                                        <div class="col-md-6 col-sm-8">
                                                            {{ form_label(form.pointVente, "Choisir un point de vente") }}
                                                           {{ form_errors(form.pointVente) }}
                                                            {{ form_widget(form.pointVente,{'attr':{'class':'form-control pointer required'}}) }}
                                                         </div>
-                                                         <div class="col-md-3 col-sm-3">
+                                                         <div class="col-md-4 col-sm-4">
                                                            {{ form_label(form.date, "Saisir la date") }}
                                                           {{ form_errors(form.date) }}
                                           {{ form_widget(form.date,{'attr':{'class':'form-control datepicker required', 'data-format':'dd/mm/yyyy','data-lang':'fr','data-RTL':'false'}}) }}
@@ -55,15 +55,22 @@
                       
                                             </fieldset>
                                             <div >
-                                            <div class="row">
-                                                <div  class="col-md-12 margin-top-30">
-                                                      {{ form_label(form.gagnants, "Les gagnants") }}  <a href="#" id="ajout_categorie" class="btn btn-default btn-sm">Ajouter un gagnant</a>
-                                                        {{ form_errors(form.gagnants) }}  
-                                                <div id="form_gagnants"  data-prototype="<div id=&quot;form_gagnants___name__&quot;  class=&quot;row&quot;><div class=&quot;col-md-3&quot;><label for=&quot;form_gagnants___name___nom&quot; >Nom du gagnant</label><input type=&quot;text&quot; id=&quot;form_gagnants___name___nom&quot; name=&quot;form[gagnants][__name__][nom]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control required&quot;/></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___tel&quot; class=&quot;required&quot;>Teléphone</label><input type=&quot;text&quot; id=&quot;form_gagnants___name___tel&quot; name=&quot;form[gagnants][__name__][tel]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; class=&quot;form-control required&quot;/></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___age&quot; class=&quot;required&quot;>Age du gagnant</label><input type=&quot;number&quot; id=&quot;form_gagnants___name___age&quot; name=&quot;form[gagnants][__name__][age]&quot; required=&quot;required&quot; class=&quot;form-control required&quot; /></div><div class=&quot;col-md-2&quot;><label for=&quot;form_gagnants___name___object&quot; class=&quot;required&quot;>Object gagné</label><select id=&quot;form_gagnants___name___object&quot; name=&quot;form[gagnants][__name__][object]&quot; class=&quot;form-control pointer required&quot;><option value=&quot;Bouteille&quot;>Une bouteille</option><option value=&quot;T-shirt&quot;>T-shirt</option><option value=&quot;Casquette&quot;>Casquette</option><option value=&quot;Reward 3&quot;>Reward 3</option><option value=&quot;Reward 4&quot;>Reward 4</option></select></div></div>">
-                                                        </div>
-                                                </div>
-                                            </div>
-                                             </div >
+
+  <div class="row">
+      <div class="form-group">
+        <div class="col-md-10">
+          <label>
+            Fichier joint 
+            <small class="text-muted">Importer la iste des winers</small>
+          </label>
+
+          <!-- custom file upload -->
+          {{ form_widget(form.file,{'attr':{'class':'custom-file-upload','data-btn-text':'Choisir un fichier'}}) }}
+          <small class="text-muted block">Max file size: 10Mb (.xls/.xlsx)</small>
+
+        </div>
+      </div>
+    </div>
                                             <div class="row">
                                                 <div class="col-md-12 margin-top-30">
                                                     <button type="submit" class="btn btn-3d btn-success ">
