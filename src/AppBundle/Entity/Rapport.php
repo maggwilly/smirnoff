@@ -225,7 +225,7 @@ class Rapport
     $date->modify('+6 days');
     $endDate=$date->format('d/m');
     $this->weekText=$startDate.' - '.$endDate;
-
+    $this->posRealDay=($this->posRealDay<$this->posRealTarget)?$this->posRealDay+$this->posRealTarget:$this->posRealDay;
     $this->posTarget=($this->getPointVente()->getType()=='Full fun')?120:72;
   }
 
