@@ -21,12 +21,12 @@ class PointVenteController extends Controller
     {
 
       $session = $this->getRequest()->getSession();
-       $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-04-20');
         $endDate=$session->get('endDate', date('Y').'-07-30');
-       $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
-       $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
+        $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
+        $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
         return $this->render('pointvente/index.html.twig', array(
             'pointVentes' => $pointVentes,  'nombrePointVente' => $nombrePointVente,
         ));
@@ -66,9 +66,9 @@ class PointVenteController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-04-20');
         $endDate=$session->get('endDate', date('Y').'-07-30');
-      $eligibles = $em->getRepository('AppBundle:PointVente')->eligibles($region,$startDate, $endDate);
-       $eligiblesranking = $em->getRepository('AppBundle:PointVente')->eligiblesranking($region,$startDate, $endDate);
-       $nombrePointVenteVisite = $em->getRepository('AppBundle:PointVente')->nombrePointVenteVisite($region,$startDate, $endDate);
+        $eligibles = $em->getRepository('AppBundle:PointVente')->eligibles($region,$startDate, $endDate);
+        $eligiblesranking = $em->getRepository('AppBundle:PointVente')->eligiblesranking($region,$startDate, $endDate);
+        $nombrePointVenteVisite = $em->getRepository('AppBundle:PointVente')->nombrePointVenteVisite($region,$startDate, $endDate);
         return $this->render('pointvente/eligibles.html.twig', array(
             'eligibles' => $eligibles,  
             'eligiblesranking' => $eligiblesranking,
@@ -100,8 +100,8 @@ class PointVenteController extends Controller
       $em = $this->getDoctrine()->getManager();
       $session = $this->getRequest()->getSession();
       $region=$session->get('region');
-        $startDate=$session->get('startDate',date('Y').'-04-20');
-        $endDate=$session->get('endDate', date('Y').'-07-30');
+      $startDate=$session->get('startDate',date('Y').'-04-20');
+      $endDate=$session->get('endDate', date('Y').'-07-30');
       $periode= $session->get('periode');
       $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
       
@@ -112,9 +112,9 @@ class PointVenteController extends Controller
            ->setLastModifiedBy("AllReport")
            ->setTitle("Liste des points de vente")
            ->setSubject("Liste des points de vente")
-           ->setDescription("Liste des points de vente")
-           ->setKeywords("Liste des points de vente")
-           ->setCategory("Rapports AllReport");
+            ->setDescription("Liste des points de vente")
+            ->setKeywords("Liste des points de vente")
+            ->setCategory("Rapports AllReport");
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A1', 'NOM')
                ->setCellValue('B1', 'MATRICULE')
