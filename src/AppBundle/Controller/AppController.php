@@ -84,7 +84,7 @@ class AppController extends Controller
         $session->set('periode',$periode);
         $session->set('end_date_formated',$endDate->format('d/m/Y'));
         $session->set('start_date_formated',$startDate->format('d/m/Y'));
-       $referer = $this->getRequest()->headers->get('referer');   
+        $referer = $this->getRequest()->headers->get('referer');   
          return new RedirectResponse($referer);
     }
 

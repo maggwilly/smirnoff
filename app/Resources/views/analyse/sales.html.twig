@@ -93,9 +93,9 @@
                                                             <td >{{rapport.nom}}</td> 
                                                             <td >{{rapport.type}}</td>    
                                                             <td >{{rapport.quartier}}</td>                                      
-                                                            <td class="warning ">{{rapport.posTarget |number_format(0, ',', '.')}}</td>
-                                                            <td class="col-md-1 info">{{rapport.posRealTarget |number_format(0, ',', '.')}}</td>
-                                                            <td>{{rapport.posRealDay |number_format(0, ',', '.')}}</td>
+                                                            <td class="warning ">{{rapport.posTarget }}</td>
+                                                            <td class="col-md-1 info">{{rapport.posRealTarget }}</td>
+                                                            <td>{{rapport.posRealDay }}</td>
                                                           <td class="col-md-1 danger">
                                                          {% if rapport.posTarget>0 %}
                                                           {{( rapport.posRealTarget*100/rapport.posTarget) |number_format(0, ',', '.')}}%
@@ -146,6 +146,10 @@
                                 "orderable": true
                             },
                              {
+                                "orderable": true
+                            }, {
+                                "orderable": true
+                            }, {
                                 "orderable": true
                             }, {
                                 "orderable": true

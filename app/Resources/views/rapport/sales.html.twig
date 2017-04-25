@@ -48,9 +48,9 @@
                                                         <td class="col-md-2">{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
                                                         <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}{% if rapport.rh1%}<br>{{rapport.rh1.nom}}{% endif %}</td> 
                                                          <td >{{rapport.date| date('d/m/Y')}}</td>                                      
-                                                          <td class="col-md-1  warning">{{rapport.posTarget |number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 info">{{rapport.posRealTarget |number_format(0, ',', '.')}}</td>
-                                                          <td  class="col-md-1">{{rapport.posRealDay |number_format(0, ',', '.')}}</td>
+                                                          <td class="col-md-1  warning">{{rapport.posTarget }}</td>
+                                                          <td class="col-md-1 info">{{rapport.posRealTarget}}</td>
+                                                          <td  class="col-md-1">{{rapport.posRealDay }}</td>
                                                           <td class="col-md-1 danger">
                                                          {% if rapport.posTarget>0 %}
                                                           {{( rapport.posRealTarget*100/rapport.posTarget) |number_format(0, ',', '.')}}%

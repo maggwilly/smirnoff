@@ -45,7 +45,7 @@
                                                            <th >Date </th>                                                           
                                                            <th class="col-md-1 warning ">SIRed</th>
                                                            <th class="col-md-1 warning ">SIBlack</th> 
-                                                           <th class="col-md-1 danger ">SIBlue</th>
+                                                           <th class="col-md-1 danger ">SIEG</th>
                                                            <th class="col-md-1 info ">Hei</th>
                                                            <th class="col-md-1 info ">VK</th> 
                                                            <th class="col-md-1 info ">BCola</th> 
@@ -66,14 +66,14 @@
                                                           <td >{% if rapport.user%}{{rapport.user.nom}}{% endif %}</td> 
                                                           <td class="col-md-2">{% if rapport.rh%}{{rapport.rh.nom}}{% endif %}{% if rapport.rh1%}<br>{{rapport.rh1.nom}}{% endif %}</td> 
                                                           <td >{{rapport.date| date('d/m/Y')}}</td>                              
-                                                          <td class="col-md-1 warning">{{rapport.sminoffRed.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 warning">{{rapport.sminoffBlack.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 danger">{{rapport.sminoffBlue.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 info">{{rapport.heineken.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 info">{{rapport.voodka.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 info">{{rapport.boostrer.bnreBlle|number_format(0, ',', '.')}}</td>
-                                                          <td class="col-md-1 info">{{rapport.sabc.bnreBlle|number_format(0, ',', '.')}}</td>   
-                                                          <td class="col-md-1 info">{{rapport.sabc1664.bnreBlle|number_format(0, ',', '.')}}</td> 
+                                                          <td class="col-md-1 warning">{{rapport.sminoffRed.bnreBlle}}</td>
+                                                          <td class="col-md-1 warning">{{rapport.sminoffBlack.bnreBlle}}</td>
+                                                          <td class="col-md-1 danger">{{rapport.sminoffBlue.bnreBlle}}</td>
+                                                          <td class="col-md-1 info">{{rapport.heineken.bnreBlle}}</td>
+                                                          <td class="col-md-1 info">{{rapport.voodka.bnreBlle}}</td>
+                                                          <td class="col-md-1 info">{{rapport.boostrer.bnreBlle}}</td>
+                                                          <td class="col-md-1 info">{{rapport.sabc.bnreBlle}}</td>   
+                                                          <td class="col-md-1 info">{{rapport.sabc1664.bnreBlle}}</td> 
                                                             <td class="col-md-1">
                                                         {% if sminoff>0 %}
                                                           {{( rapport.sminoffBlue.bnreBlle*100/sminoff) |number_format(0, ',', '.')}}%

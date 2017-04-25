@@ -86,14 +86,14 @@
                                                           <td >{{rapport.nom}}</td> 
                                                           <td >{{rapport.type}}</td>    
                                                           <td >{{rapport.quartier}}</td>                                   
-                                                          <td class="warning">{{rapport.sminoffRed|number_format(0, ',', '.')}}</td>
-                                                          <td class="warning">{{rapport.sminoffBlack|number_format(0, ',', '.')}}</td>
-                                                          <td class="danger">{{rapport.sminoffBlue|number_format(0, ',', '.')}}</td>
-                                                          <td class="info">{{rapport.heineken|number_format(0, ',', '.')}}</td>
-                                                          <td class="info">{{rapport.voodka|number_format(0, ',', '.')}}</td>
-                                                          <td class="info">{{rapport.boostrer|number_format(0, ',', '.')}}</td>
-                                                          <td class="info">{{rapport.sabc|number_format(0, ',', '.')}}</td>   
-                                                          <td class="info">{{rapport.sabc1664|number_format(0, ',', '.')}}</td> 
+                                                          <td class="warning">{{rapport.sminoffRed}}</td>
+                                                          <td class="warning">{{rapport.sminoffBlack}}</td>
+                                                          <td class="danger">{{rapport.sminoffBlue}}</td>
+                                                          <td class="info">{{rapport.heineken}}</td>
+                                                          <td class="info">{{rapport.voodka}}</td>
+                                                          <td class="info">{{rapport.boostrer}}</td>
+                                                          <td class="info">{{rapport.sabc}}</td>   
+                                                          <td class="info">{{rapport.sabc1664}}</td> 
                                                              <td>
                                                         {% if sminoff>0 %}
                                                           {{( rapport.sminoffBlue*100/sminoff) |number_format(0, ',', '.')}}%

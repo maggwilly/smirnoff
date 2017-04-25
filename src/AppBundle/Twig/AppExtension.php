@@ -84,6 +84,7 @@ class AppExtension extends \Twig_Extension
         return count($list)>0?number_format($somme*100/count($list), 0, '.', ','):0;
     } 
 
+
         public function percentPotenceFilter($list,$marque)
     {
         $somme=0;
@@ -120,6 +121,7 @@ class AppExtension extends \Twig_Extension
        }
         return count($list)>0?number_format($somme*100/count($list), 0, '.', ','):0;
     } 
+    
     
       public function percentAfficheFilter($list,$marque)
     {

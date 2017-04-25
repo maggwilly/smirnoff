@@ -91,9 +91,10 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-04-20');
         $endDate=$session->get('endDate', date('Y').'-07-30');
-        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
+        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);4
+        $findFreeIssue = $em->getRepository('AppBundle:Gagnant')->findFreeIssue($region, $startDate, $endDate);
         return $this->render('rapport/gagnants.html.twig', array(
-            'gagnants' => $gagnants,
+            'gagnants' => $gagnants,  'findFreeIssue' => $findFreeIssue,
         ));
     }
 
@@ -125,7 +126,7 @@ class RapportController extends Controller
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSales($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeShares($region, $startDate, $endDate);
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
-         $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate,true);
+         $gagnants = $em->getRepository('AppBundle:Gagnant')->findFreeIssue($region, $startDate, $endDate,true);
         $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
         return $this->render('analyse/periode.html.twig', array(
             'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors,   'rapports' => $rapports, 'gagnants' => $gagnants,
@@ -144,7 +145,7 @@ class RapportController extends Controller
         $sales = $em->getRepository('AppBundle:Rapport')->findByTypeSalesDernier($region, $startDate, $endDate);
         $shares = $em->getRepository('AppBundle:Rapport')->findByTypeSharesDernier($region, $startDate, $endDate);
         $rapports = $em->getRepository('AppBundle:Rapport')->findByType($region, $startDate, $endDate);
-          $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate,true);
+          $gagnants = $em->getRepository('AppBundle:Gagnant')->findFreeIssue($region, $startDate, $endDate,true);
          $colors=array("#FF6384","#36A2EB","#FFCE56","#F7464A","#FF5A5E","#46BFBD", "#5AD3D1","#FDB45C","#FFC870", "#5AE4D1","#FDB478","#FFD973");
         return $this->render('analyse/dernier.html.twig', array(
             'marques' => $marques,'sales' => $sales,'shares' => $shares, 'colors' => $colors, 'rapports' => $rapports, 'gagnants' => $gagnants,
