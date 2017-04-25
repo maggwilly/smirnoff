@@ -91,7 +91,7 @@ class RapportController extends Controller
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-04-20');
         $endDate=$session->get('endDate', date('Y').'-07-30');
-        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);4
+        $gagnants = $em->getRepository('AppBundle:Gagnant')->findByType($region, $startDate, $endDate);
         $findFreeIssue = $em->getRepository('AppBundle:Gagnant')->findFreeIssue($region, $startDate, $endDate);
         return $this->render('rapport/gagnants.html.twig', array(
             'gagnants' => $gagnants,  'findFreeIssue' => $findFreeIssue,
