@@ -25,7 +25,7 @@
                                                     {% for marque in marques if marque.nom starts  with 'Sminoff'%}
                                                     <tr class="odd gradeX {% if marque.nom ends  with 'Blue' %}danger{% else %}warning {%endif%}">    
                                                      <td class="">
-                                                     {{marque.nom|replace({'Sminoff': "Smirnoff"})}}
+                                                     {{(marque.nom|replace({'Sminoff': "Smirnoff"}))|replace({'Blue': "Electrique G."})}}
                                                      </td>                                   
                                                           <td>
                                                         {% if (marque.nombre)>0 %}
@@ -46,7 +46,7 @@
                                                     {% for marque in marques if not ( marque.nom starts  with 'Sminoff')%}
                                                     <tr class="odd gradeX info ">    
                                                      <td class="">
-                                                     {{marque.nom|replace({'Origine ': "Orijin "})}}
+                                                     {{marque.nom|replace({'Origine': "Orijin "})}}
                                                      </td>                                   
                                                           <td>
                                                         {% if (marque.nombre)>0 %}
