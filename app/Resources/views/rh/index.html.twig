@@ -8,7 +8,6 @@
     </header>
 <div id="content" class="dashboard padding-20">
 
-
      <div id="panel-2" class="panel panel-default">
                          <div class="panel-heading">
                                     <span class="title elipsis">
@@ -19,7 +18,7 @@
                                 <!-- panel content -->
                                 <div class="panel-body">
 
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover" id="datatable_sample">
         <thead>
             <tr>
                 <th>Nom</th>
@@ -46,3 +45,63 @@
                     </div>
    </div> 
 {% endblock %}
+       {% block javascripts %}
+       <script type="text/javascript"> var plugin_path = "{{ asset('assets/plugins/') }}";</script>
+       <script type="text/javascript" src="{{ asset('assets/plugins/jquery/jquery-2.2.3.min.js') }}"></script>
+       <script type="text/javascript"  src="{{ asset('assets/js/app.js') }}"></script>
+        <script type="text/javascript">
+            /**
+                Chart.js
+                http://www.chartjs.org/
+            **/
+         loadScript( plugin_path + "datatables/js/jquery.dataTables.min.js", function() {
+             loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
+            if (jQuery().dataTable) {
+            var table = jQuery('#datatable_sample');
+            table.dataTable({
+                    "columns": [
+                            {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            },
+                             {
+                                "orderable": true
+                            }],
+                            "lengthMenu": [
+                                [20, 50, 100, -1],
+                                [20, 50, 100, "Tous"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 20,            
+                            "pagingType": "bootstrap_full_number",
+                            "language": {
+                                "lengthMenu": "  _MENU_ records",
+                                "paginate": {
+                                    "previous":"Prev",
+                                    "next": "Next",
+                                    "last": "Last",
+                                    "first": "First"
+                                }
+                            },
+                            "columnDefs": [{  // set default column settings
+                                'orderable': true,
+                                'targets': [0]
+                            }, {
+                                "searchable": true,
+                                "targets": [0]
+                            }],
+                            "order": [
+                                [0, "asc"]
+                            ] // set first column as a default sort by asc
+                        });
+
+                        
+               }
+             });
+    
+            });
+        </script>
+
+       {% endblock %}
