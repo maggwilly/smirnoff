@@ -17,7 +17,15 @@
                               <canvas class="chartjs height-400" id="pieChartCanvas" width="450" height="400"></canvas>
 
                                 </div>
+                                <br>
                                 <!-- /panel content -->
-
+                                                {% if pointVente is defined %}
+                                                 {% set id=pointVente.id %} 
+                                                    {% else %}
+                                                {% set id='all' %}      
+                                                    {% endif %}
+                                                 <a class="btn btn-md btn-success"  href="{{ path('rapport_index',{'section':'sales','id':id}) }}">
+                                                    Sales of Smirnoff Ice Electric
+                                                </a>
                             </div>
                             <!-- /PANEL -->

@@ -177,7 +177,7 @@
          var data = {
           labels: [
         {% for marque in marques %}
-          "{{marque.nom}}",
+          "{{(marque.nom|replace({'Sminoff': "Smirnoff"}))|replace({'Blue': "Electrique G."})}}",
          {%endfor%}
            ],
          datasets: [

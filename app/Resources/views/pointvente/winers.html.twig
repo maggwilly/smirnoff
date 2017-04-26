@@ -23,22 +23,22 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-2">Nom</th>
-                                                             <th>Age</th>
+                                                           
                                                             <th>Telephone</th>
                                                              
-                                                            <th>Objet</th>
-                                                            <th>Date</th>
+                                                            <th>Quantite</th>
+                                                            <th>Offert</th>
+                                                             <th>Date</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for gagnant in gagnants if gagnant.object=='Bouteille' %}
                                                         <tr class="odd gradeX">  
                                                             <td >{{gagnant.nom}}</td>  
-                                                            <td >{{gagnant.age}}</td>                                 
-                                                            <td >{{gagnant.tel}}</td>  
-                                                            <td >{{gagnant.object}}</td>
+                                                            <td >{{gagnant.tel}}</td>                                 
+                                                            <td >{{gagnant.quantite}}</td>  
+                                                            <td >{{gagnant.offert}}</td>
                                                             <td >{{gagnant.date|date('d/m/Y')}}</td> 
-
                                                         {%endfor%}
                                                     </tbody>
                                                 </table>
