@@ -241,6 +241,16 @@ body.boxed #asidebg {
 		margin-left:15px;
 	}
 	
+	#aside .logo {
+		display:block;
+		height:40%;
+		width:100%;
+		max-width:170px;
+		line-height:80px;
+		margin-left:15px;
+		margin-top:15px;
+	}
+
 	#header form.search {
 		margin:0;
 		padding:0;
