@@ -36,8 +36,8 @@ Nombre de point de vente visités
            $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
            
           }    
-              $qb->select('sum(CASE WHEN r.posRealTarget<20 THEN 0 ELSE r.posTarget END) as posTarget')
-              ->addSelect('sum(CASE WHEN r.posRealTarget<20 THEN 1 ELSE 0 END) as rupture')
+              $qb->select('sum(CASE WHEN r.posRealTarget<16 THEN 0 ELSE r.posTarget END) as posTarget')
+              ->addSelect('sum(CASE WHEN r.posRealTarget<16 THEN 1 ELSE 0 END) as rupture')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
  
