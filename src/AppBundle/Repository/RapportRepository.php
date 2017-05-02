@@ -37,6 +37,7 @@ Nombre de point de vente visités
            
           }    
               $qb->select('sum(CASE WHEN r.posRealTarget<15 THEN 0 ELSE r.posTarget END) as posTarget')
+              ->addSelect('sum(CASE WHEN r.posRealTarget<15 THEN 1 ELSE 0 END) as rupture')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
  
@@ -244,8 +245,8 @@ Nombre de point de vente visités
            if($pointVente!=null){
            $qb->andWhere('p=:pointVente')->setParameter('pointVente',$pointVente);
           }  
-           $qb->select('sum(CASE WHEN r.posRealTarget<12 THEN 0 ELSE r.posTarget END) as posTarget')
-             ->addSelect('sum(CASE WHEN r.posRealTarget<12 THEN 1 ELSE 0 END) as rupture')
+           $qb->select('sum(CASE WHEN r.posRealTarget<15 THEN 0 ELSE r.posTarget END) as posTarget')
+             ->addSelect('sum(CASE WHEN r.posRealTarget<15 THEN 1 ELSE 0 END) as rupture')
              ->addSelect('sum(r.posRealTarget) as posRealTarget')
              ->addSelect('sum(r.posRealDay) as posRealDay')
              ->addSelect('r.weekText')

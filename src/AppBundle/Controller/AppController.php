@@ -41,7 +41,7 @@ class AppController extends Controller
         if ($this->get('security.context')->isGranted('ROLE_SUPER')) {
                return      $this->redirectToRoute('gagnant_new');
             }
-         return $this->redirectToRoute('rapport_apercu_dernier');
+         return $this->redirectToRoute('rapport_apercu_periode');
     }
 
 
