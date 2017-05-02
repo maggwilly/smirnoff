@@ -90,7 +90,11 @@
                                                     <tbody>
                                                     {% for rapport in rapports %}
                                                         <tr class="odd gradeX">   
-                                                            <td >{{rapport.nom}}</td> 
+                                                            <td >{{rapport.nom}}
+                                                             {% if rapport.rupture>0 %}
+                                                             <span class="label label-danger">{{rapport.rupture }} jr(s) de rupture</span>
+                                                              {% endif %}
+                                                             </td> 
                                                             <td >{{rapport.type}}</td>    
                                                             <td >{{rapport.quartier}}</td>                                      
                                                             <td class="warning ">{{rapport.posTarget }}</td>
