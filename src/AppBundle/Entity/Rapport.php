@@ -84,6 +84,13 @@ class Rapport
      */
     private $posTarget;
 
+        /**
+     * @var int
+     *
+     * @ORM\Column(name="freeIssue", type="integer", nullable=true)
+     */
+    private $freeIssue;
+
     /**
      * @var int
      *
