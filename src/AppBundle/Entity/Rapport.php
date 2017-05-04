@@ -900,4 +900,27 @@ class Rapport
     {
         return $this->export;
     }
+
+    /**
+     * Set freeIssue
+     *
+     * @param integer $freeIssue
+     * @return Rapport
+     */
+    public function setFreeIssue($freeIssue)
+    {
+        $this->freeIssue = $freeIssue;
+
+        return $this;
+    }
+
+    /**
+     * Get freeIssue
+     *
+     * @return integer 
+     */
+    public function getFreeIssue()
+    {
+        return $this->freeIssue;
+    }
 }
